@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+
+<head>
+    <base href="/" />
+    <title>Gêneros Literários - Libri</title>
+    {INCLUDE_CABECALHO}
+</head>
+
+<body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+
+            <!-- Menu -->
+            {INCLUDE_TOPO}
+            <!-- / Menu -->
+
+            <!-- Layout container -->
+            <div class="layout-page">
+
+                <!-- Navbar -->
+                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+                    id="layout-navbar">
+                    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+                        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                            <i class="bx bx-menu bx-sm"></i>
+                        </a>
+                    </div>
+                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+                        <ul class="navbar-nav flex-row align-items-center ms-auto">
+                            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
+                                data-bs-toggle="dropdown">
+                                <img src="{URL_IMG}/logo/logo-2.png" alt class="w-px-50 h-auto" />
+                            </a>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- / Navbar -->
+
+                <!-- Content wrapper -->
+                <div class="content-wrapper">
+                    <!-- Content -->
+
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Gêneros/</span> Ver todos
+                        </h4>
+
+                        <!-- Borderless Table -->
+                        <div class="card py-3">
+                            <!-- Button trigger modal -->
+
+                            <div class="d-flex justify-content-between align-items-center p-3">
+
+                                <div class="input-group input-group-merge w-50">
+                                    <span class="input-group-text" id="basic-addon-search31"><i
+                                            class="bx bx-search"></i>
+                                    </span>
+                                    <input type="text" class="form-control" placeholder="Buscar..."
+                                        aria-label="Buscar..." aria-describedby="basic-addon-search31" />
+                                </div>
+
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#modalCenter"
+                                    class="btn rounded-pill btn-primary d-inline-flex align-items-center">
+                                    <span class="tf-icons bx bx-plus me-1"></span>
+                                    Novo Gênero
+                                </button>
+
+                            </div>
+
+                            <div class="table-responsive text-nowrap">
+                                <table class="table table-borderless">
+                                    <thead>
+                                        <tr>
+                                            <th>Nome</th>
+                                            <th class="text-center">Gênero Principal</th>
+                                            <th class="text-end">Acões</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- BEGIN BLOCO_GENEROS -->
+                                        <tr>
+                                            <td>
+                                                <a href="{URL}/generos/editar/{GENERO->ID}" class="link-primary">
+                                                    <strong>
+                                                        {GENERO->NOME}
+                                                    </strong>
+                                                </a>
+                                            </td>
+                                            <td class="text-center">
+                                                {GENERO->GENERO_PAI->NOME}
+                                            </td>
+                                            <td>
+                                                <div class="text-end">
+                                                    <a href="{URL}/generos/editar/{GENERO->ID}" class="btn btn-icon btn-primary">
+                                                        <span class="tf-icons bx bx-edit-alt"></span>
+                                                    </a>
+                                                    <a id="excluir-{GENERO->ID}" data-url="{URL}/excluir/Genero/{GENERO->ID}"
+                                                        href="{URL}/excluir/Genero/{GENERO->ID}" class="btn btn-icon btn-danger">
+                                                        <span class="tf-icons bx bx-trash "></span>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <!-- END BLOCO_GENEROS -->
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--/ Borderless Table -->
+                    </div>
+                    <!-- / Content -->
+
+                    <!-- Footer -->
+                    {INCLUDE_RODAPE}
+                    <!-- / Footer -->
+
+                    <div class="content-backdrop fade"></div>
+                </div>
+                <!-- Content wrapper -->
+            </div>
+            <!-- / Layout page -->
+        </div>
+
+        <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalCenterTitle">Adicione um novo gênero</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="inserir" action="{URL}/Genero/salvar" method="POST">
+
+                            <div class="mb-3">
+                                <label class="form-label" for="genero_pai">Genero Principal</label>
+                                <div class="input-group input-group-merge">
+                                    <select class="form-select required" id="genero_pai" name="genero_pai"
+                                        aria-label="Select genero pai">
+                                        <option value="" disabled selected>Escolha o gênero principal</option>
+                                        <!-- BEGIN BLOCO_GENEROS_MODAL -->
+                                        <option value="{GENERO->ID}">{GENERO->NOME}</option>
+                                        <!-- END BLOCO_GENEROS_MODAL -->
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label required" for="nome">Nome</label>
+                                <div class="input-group input-group-merge">
+                                    <span id="nome2" class="input-group-text">
+                                        <i class="bx bx-text"></i>
+                                    </span>
+                                    <input type="text" id="nome" class="form-control"
+                                        placeholder="Digite o nome do gênero" name="nome"
+                                        aria-label="Digite o nome do gênero" aria-describedby="nome2" required />
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label" for="basic-icon-default-message">Descrição</label>
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-message2" class="input-group-text"><i
+                                            class="bx bx-comment"></i></span>
+                                    <textarea id="basic-icon-default-message" class="form-control"
+                                        placeholder="Digite a descrição do gênero" name="descricao"
+                                        aria-label="Digite a descrição do gênero"
+                                        aria-describedby="basic-icon-default-message2" required></textarea>
+                                </div>
+                            </div>
+
+                            <input type="hidden" name="csrf-token" value="{CSRF_TOKEN}" />
+
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-primary">Salvar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {INCLUDE_JAVASCRIPT}
+
+        <!-- Overlay -->
+        <div class="layout-overlay layout-menu-toggle"></div>
+
+    </div>
+    <!-- / Layout wrapper -->
+
+
+</body>
+
+</html>

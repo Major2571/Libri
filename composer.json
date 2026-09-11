@@ -1,0 +1,27 @@
+{
+    "authors": [
+        {
+            "name": "Caroline Tacats",
+            "email": "caroline.tacats62@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "caroline.tacats62@gmail.com"
+    },
+    "require": {
+        "php": ">=8.2",
+        "phpmailer/phpmailer": "^6.4",
+        "vlucas/phpdotenv": "^5.5",
+        "raelgc/template": "^2.2",
+        "gettext/gettext": "^5.7",
+        "guzzlehttp/guzzle": "^7.10",
+        "ipinfo/ipinfo": "^3.4",
+        "picqer/php-barcode-generator": "^3.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/"
+        }
+    }
+}
