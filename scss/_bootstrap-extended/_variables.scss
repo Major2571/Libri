@@ -14,7 +14,7 @@
 
 // scss-docs-start gray-color-variables
 $white: #fff !default;
-$black: #435971 !default;
+$black: #2E3B32 !default;
 $gray-25: rgba($black, 0.025) !default; // (C)
 $gray-50: rgba($black, 0.05) !default; // (C)
 $gray-100: rgba($black, 0.1) !default;
@@ -36,27 +36,27 @@ $grays: (
 // scss-docs-end gray-colors-map
 
 // scss-docs-start color-variables
-$blue: #007bff !default;
-$indigo: #6610f2 !default;
-$purple: #696cff !default;
-$pink: #e83e8c !default;
-$red: #ff3e1d !default;
-$orange: #fd7e14 !default;
-$yellow: #ffab00 !default;
-$green: #71dd37 !default;
-$teal: #20c997 !default;
-$cyan: #03c3ec !default;
+$blue: #4C7A82 !default;    // azul-poeira (tinta de carimbo)
+$indigo: #5C4A42 !default;  // couro escuro
+$purple: #B08D57 !default;  // latão — vira o $primary
+$pink: #9C5A54 !default;    // couro claro
+$red: #7A3F3B !default;     // vermelho-couro — vira o $danger
+$orange: #C77B3B !default;  // laranja-queimado
+$yellow: #D9A94D !default;  // dourado — vira o $warning
+$green: #5C7A62 !default;   // verde-sálvia — vira o $success
+$teal: #3F6659 !default;    // verde-pinho
+$cyan: #6E97A0 !default;    // azul-acinzentado — vira o $info
 // scss-docs-end color-variables
 
 // scss-docs-start theme-color-variables
 $primary: $purple !default;
-$secondary: #8592a3 !default;
+$secondary: #7C8A82 !default;
 $success: $green !default;
 $info: $cyan !default;
 $warning: $yellow !default;
 $danger: $red !default;
-$light: #fcfdfd !default;
-$dark: #233446 !default;
+$light: #F4EFE3 !default;
+$dark: #1B2620 !default;
 $gray: $gray-100 !default; // (C)
 // scss-docs-end theme-color-variables
 
@@ -119,7 +119,7 @@ $rgba-to-hex-bg-inverted: #000 !default; // (C)
 // * Body
 // *******************************************************************************
 
-$body-bg: #f5f5f9 !default;
+$body-bg: #EDEAE2 !default;
 $body-color: rgba-to-hex($gray-800, $rgba-to-hex-bg) !default;
 
 // * Links
@@ -200,10 +200,10 @@ $caret-spacing: 0.5em !default;
 // *******************************************************************************
 
 // scss-docs-start font-variables
-$font-family-sans-serif: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen', 'Ubuntu', 'Cantarell',
+$font-family-sans-serif: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen', 'Ubuntu', 'Cantarell',
   'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !default;
-$font-family-serif: Georgia, 'Times New Roman', serif !default; // (C)
-$font-family-monospace: 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace !default;
+$font-family-serif: 'Fraunces', Georgia, 'Times New Roman', serif !default; // (C)
+$font-family-monospace: 'IBM Plex Mono', 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace !default;
 // stylelint-enable value-keyword-case
 $font-family-base: var(--#{$variable-prefix}font-sans-serif) !default;
 $font-family-code: var(--#{$variable-prefix}font-monospace) !default;

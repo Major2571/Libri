@@ -3,11 +3,8 @@
 namespace App\Infraestrutura;
 
 //Definindo as classes usadas
-use App\Infraestrutura\Internacionalizacao;
 use App\Infraestrutura\Configuracao;
 use App\Infraestrutura\Autenticacao;
-use App\Infraestrutura\Metadata;
-use App\Infraestrutura\Fabrica;
 use App\Infraestrutura\Base;
 use App\Util\Util;
 
@@ -81,11 +78,6 @@ final class Pagina extends Base{
 			//Verificando a autenticação
 			$this->autenticado	= ( new Autenticacao( $this ) )->autenticado;
 
-		//Verificando se o projeto necessita de internacionalização
-		if( Configuracao::get( 'projeto.internacionalizacao' ) )
-			//Iniciando a internacionalização
-			new Internacionalizacao( $_SESSION[ 'lingua' ] ?? 'pt_BR' );
-
 		//Definindo o caminho do arquivo para exibição
 		$this->definirCaminho();
 
@@ -107,21 +99,6 @@ final class Pagina extends Base{
 		if( $this->tipo !== 'tratamento' )
 			//Definindo o arquivo caso exista
 			$this->cache	= Util::definirCache( $this->diretorio, $this );
-
-	}
-
-	/**
-	 * Definindo o cache da página caso exista
-	 *
-	 * @access private
-	 * @return void
-	 */
-	private function metadata(): void{
-
-		//Verificando
-		if( $this->tipo !== 'tratamento' )
-			//Definindo a metadata
-			$this->metadata	= ( new Metadata( $this ) )->metadata;
 
 	}
 

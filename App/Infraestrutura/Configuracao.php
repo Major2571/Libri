@@ -3,7 +3,6 @@
 namespace App\Infraestrutura;
 
 //Definindo as classes usadas
-use App\Infraestrutura\Enum\Status\Http;
 use App\Infraestrutura\Pagina;
 use App\Infraestrutura\Base;
 use App\Infraestrutura\Sessao;
@@ -72,10 +71,6 @@ final class Configuracao extends Base
                 'producao' => (bool) $_ENV['PRODUCAO'] ?? false,
                 //Ambiente fechado ou não
                 'fechado' => (bool) $_ENV['AMBIENTE_FECHADO'] ?? false,
-                //Projeto com internacionalização ou não
-                'internacionalizacao' => (bool) $_ENV['INTERNACIONALIZACAO'] ?? false,
-                //Projeto com busca do IP ou não
-                'ipinfo' => (bool) $_ENV['IPINFO'] ?? false,
                 //Nome do projeto
                 'nome' => $_ENV['NOME_PROJETO'] ?? null,
                 //HASH do projeto
@@ -84,21 +79,6 @@ final class Configuracao extends Base
                 'referencia' => $_ENV['REFERENCIA'] ?? '',
                 //Registros por página
                 'quantidade_paginacao' => 12,
-            ],
-
-            //Códigos
-            'codigo' => [
-
-                //Código do projeto
-                'projeto' => $_ENV['CODIGO_PROJETO'] ?? 1
-            ],
-
-            //Sistema
-            'sistema' => [
-
-                //Nome do sistema
-                'nome' => 'Controle - Grupo Caju'
-
             ],
 
             //Debug
@@ -149,15 +129,6 @@ final class Configuracao extends Base
                 'repositorio' => $_ENV['URL_REPOSITORIO'],
             ],
 
-            //Imagens
-            'imagem' => [
-
-                //URL da imagem de compartilhamento
-                'compartilhamento' => "{$url}/imagens/compartilhamento.webp",
-                //Favicon
-                'favicon' => "https://site.servhost.com.br/images/favicon.png"
-            ],
-
             //Banco de dados
             'banco' => [
 
@@ -171,35 +142,7 @@ final class Configuracao extends Base
                 'usuario' => $_ENV['BD_USUARIO'] ?? 'root',
                 //Senha
                 'senha' => $_ENV['BD_SENHA'] ?? null
-            ],
-
-            //Email
-            'email' => [
-
-                //Servidor
-                'servidor' => $_ENV['EMAIL_SERVIDOR'] ?? null,
-                //Porta
-                'porta' => $_ENV['EMAIL_PORTA'] ?? null,
-                //Tipo de segurança
-                'tipo_seguranca' => $_ENV['EMAIL_TIPO_SEGURANCA'] ?? null,
-                //Endereço
-                'endereco' => $_ENV['EMAIL'] ?? null,
-                //Senha
-                'senha' => $_ENV['EMAIL_SENHA'] ?? null,
-                //Nome do remetente
-                'nome_remetente' => $_ENV['NOME_PROJETO'] ?? null
-            ],
-
-            'genero' => [
-
-                //Masculino
-                'masculino' => 'M',
-                //Feminino
-                'feminino' => 'F',
-                //Outro/Não informado
-                'nao_informado' => 'NA'
-
-            ],
+            ]
 
         ];
 

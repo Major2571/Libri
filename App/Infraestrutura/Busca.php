@@ -10,7 +10,7 @@ use App\Util\Util;
  * Classe de busca
  *
  * @final
- * @author Joel Fragoso <joel.fragoso85@gmail.com>
+ * @author Caroline Tacats <caroline.tacats62@gmail.com>
  * @package App\Infraestrutura\Busca
  */
 final class Busca

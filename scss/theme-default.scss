@@ -2,7 +2,7 @@
 @import './_theme/common';
 @import './_theme/_theme';
 
-$primary-color: #696cff;
+$primary-color: #B08D57;
 
 @include template-common-theme($primary-color);
 
@@ -107,33 +107,33 @@ $primary-color: #696cff;
 }
 
 .colored-toast.swal2-icon-success {
-  background-color: #76d83e !important;
+  background-color: #5C7A62 !important; // verde-sálvia
 }
 
 .colored-toast.swal2-icon-error {
-  background-color: #da2929 !important;
+  background-color: #7A3F3B !important; // vermelho-couro
 }
 
 .colored-toast.swal2-icon-warning {
-  background-color: #f8bb86 !important;
+  background-color: #D9A94D !important; // dourado
 }
 
 .colored-toast.swal2-icon-info {
-  background-color: #3fc3ee !important;
+  background-color: #6E97A0 !important; // azul-acinzentado
 }
 
 .colored-toast.swal2-icon-question {
-  background-color: #87adbd !important;
+  background-color: #8C7A6B !important; // marrom-acinzentado, neutro entre os outros tons
 }
 
 .colored-toast .swal2-title {
-  color: white;
+  color: #F4EFE3; // papel envelhecido, em vez de branco puro
 }
 
 .colored-toast .swal2-close {
-  color: white;
+  color: #F4EFE3;
 }
 
 .colored-toast .swal2-html-container {
-  color: white;
+  color: #F4EFE3;
 }

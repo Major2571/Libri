@@ -18,7 +18,7 @@ use stdClass;
  * Herdada da classe base para auxílio nas chamadas
  *
  * @final
- * @author Lucas Dantas <lucas@mvoeon.dev>
+ * @author Caroline Tacats <caroline.tacats62@gmail.com>
  * @package App\Infraestrutura
  * @property \App\Modelo\Modelo $modelo Classe base do modelo
  */
@@ -58,11 +58,6 @@ final class Fabrica extends Base{
 
 		//Definindo os atributos
 		$this->definirAtributos();
-
-		//Verificando
-		if( Configuracao::get( 'projeto.internacionalizacao' ) )
-			//Definindo o domínio
-			Internacionalizacao::dominio( $this->modelo->configuracao[ 'dominio' ] ?? null );
 
 	}
 

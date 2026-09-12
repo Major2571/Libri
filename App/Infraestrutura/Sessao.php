@@ -7,7 +7,7 @@ namespace App\Infraestrutura;
  * Responsável por encapsular a sessão do PHP.
  *
  * @final
- * @author Joel Fragoso <joel.fragoso85@gmail.com>
+ * @author Caroline Tacats <caroline.tacats62@gmail.com>
  * @package App\Infraestrutura\Sessao
  */
 final class Sessao

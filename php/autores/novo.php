@@ -17,8 +17,8 @@ try {
     // Incluindo as variáveis
     require_once(Configuracao::get('dir.include') . '/variaveis.php');
 
-    $template->generos_ativo = 'active open';
-    $template->novo_genero_ativo = 'active';
+    $template->autores_ativo = 'active open';
+    $template->novo_autor_ativo = 'active';
 
 } catch (Exception $e) {
 }
@@ -29,13 +29,7 @@ try {
 
     if ($generos) {
 
-        $template->TOTAL_GENEROS = count($generos);
-
         foreach ($generos as $genero) {
-
-            if (!is_null($genero->genero_pai))
-                continue;
-
             $template->GENERO = $genero;
             $template->block('BLOCO_GENEROS');
         }

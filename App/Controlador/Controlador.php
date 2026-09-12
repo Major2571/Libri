@@ -181,23 +181,6 @@ abstract class Controlador extends Base
 
 	}
 
-	/**
-	 * Verificando a existência do domínio
-	 *
-	 * @uses App\Repositorio\Repositorio::dominio() Definindo o domínio para os métodos(chamada via _call)
-	 * @uses App\Repositorio\API\Dominio::verificar() Verificando a existência do domínio
-	 * @return mixed
-	 */
-	public function verificarDominio(): mixed
-	{
-
-		//Verificando e retornando a verificação do conteúdo
-		return $this->repositorio
-			->dominio($this->dominio)
-			->verificar();
-
-	}
-
 	/*
 	 * INSERÇÕES
 	 */
@@ -253,44 +236,6 @@ abstract class Controlador extends Base
 	}
 
 	/*
-	 * CONTAGEM
-	 */
-
-	/**
-	 * Contando a quantidade de conteúdos por email
-	 *
-	 * @uses App\Repositorio\BDR\Repositorio::email() Definindo o email para os métodos(chamada via _call)
-	 * @uses App\Repositorio\BDR\Repositorio::contar() Contando a quantidade de conteúdos
-	 * @return int
-	 */
-	public function contarPorEmail(): int
-	{
-
-		//Retornando a quantidade conteúdos
-		return $this->repositorio
-			->email($this->email)
-			->contar();
-
-	}
-
-	/**
-	 * Contando a quantidade de conteúdos por documento
-	 *
-	 * @uses App\Repositorio\BDR\Repositorio::documento() Definindo o documento para os métodos(chamada via _call)
-	 * @uses App\Repositorio\BDR\Repositorio::contar() Contando a quantidade de conteúdos
-	 * @return int
-	 */
-	public function contarPorDocumento(): int
-	{
-
-		//Retornando a quantidade conteúdos
-		return $this->repositorio
-			->documento($this->documento)
-			->contar();
-
-	}
-
-	/*
 	 * PROCURAS
 	 */
 
@@ -315,135 +260,9 @@ abstract class Controlador extends Base
 
 	}
 
-	/**
-	 * Procurando o conteúdo por projeto
-	 *
-	 * @uses App\Repositorio\Repositorio::projeto() Definindo o projeto para os métodos(chamada via _call)
-	 * @uses App\Repositorio\BDR\Repositorio::procurar() Procurando o conteúdo
-	 * @return mixed
-	 */
-	public function procurarPorProjeto(): mixed
-	{
-
-		//Retornando o conteúdo
-		return $this->complemento(
-			//Procurando o conteúdo
-			$this->repositorio
-				->projeto($this->projeto)
-				->procurar(),
-			$this->complemento
-		);
-
-	}
-
-	/**
-	 * Procurando o conteúdo por slug e status
-	 *
-	 * @uses App\Repositorio\Repositorio::projeto() Definindo o projeto para os métodos(chamada via _call)
-	 * @uses App\Repositorio\BDR\Repositorio::procurar() Procurando o conteúdo
-	 * @return mixed
-	 */
-	public function procurarPorStatusPorSlug(): mixed
-	{
-
-		//Retornando o conteúdo
-		return $this->complemento(
-			//Procurando o conteúdo
-			$this->repositorio
-				->slug($this->slug)
-				->status($this->status)
-				->procurar(),
-			$this->complemento
-		);
-
-	}
-
-	/**
-	 * Procurando o conteúdo por slug e status
-	 *
-	 * @uses App\Repositorio\Repositorio::projeto() Definindo o projeto para os métodos(chamada via _call)
-	 * @uses App\Repositorio\BDR\Repositorio::procurar() Procurando o conteúdo
-	 * @return mixed
-	 */
-	public function procurarPorSlug(): mixed
-	{
-
-		//Retornando o conteúdo
-		return $this->complemento(
-			//Procurando o conteúdo
-			$this->repositorio
-				->slug($this->slug)
-				->procurar(),
-			$this->complemento
-		);
-
-	}
-
-
-	public function procurarPorBeneficioEUsuario(): mixed
-	{
-
-		return $this->complemento(
-			$this->repositorio
-				->usuario($this->usuario)
-				->beneficio($this->beneficio)
-				->procurar(),
-			$this->complemento
-		);
-
-	}
-
 	/*
 	 * LISTAGENS
 	 */
-	/**
-	 * Listando os conteúdos por status, de forma ordenada e por quantidade
-	 *
-	 * @uses App\Repositorio\BDR\Repositorio::quantidade() Definindo a ordem para os métodos
-	 * @uses App\Repositorio\BDR\Repositorio::ordem() Definindo a ordem para os métodos
-	 * @uses App\Repositorio\Repositorio::status() Definindo o status para os métodos(chamada via _call)
-	 * @uses App\Repositorio\BDR\Repositorio::listar() Listando os conteúdos
-	 * @return mixed
-	 */
-	public function listarPorStatusOrdenadoPorQuantidade(): mixed
-	{
-
-		//Retornando os conteúdos
-		return $this->complemento(
-			//Listando os conteúdos
-			$this->repositorio
-				->quantidade($this->quantidade)
-				->ordem($this->ordem)
-				->status($this->status)
-				->listar(),
-			$this->complemento
-		);
-
-	}
-
-	/**
-	 * Listando os conteúdos por status e de forma ordenada
-	 *
-	 * @uses App\Repositorio\BDR\Repositorio::ordem() Definindo a ordem para os métodos
-	 * @uses App\Repositorio\Repositorio::status() Definindo o status para os métodos(chamada via _call)
-	 * @uses App\Repositorio\BDR\Repositorio::listar() Listando os conteúdos
-	 * @return mixed
-	 */
-	public function listarPorStatusOrdenado(): mixed
-	{
-
-		//Retornando os conteúdos
-		return $this->complemento(
-			//Listando os conteúdos
-			$this->repositorio
-				->ordem($this->ordem)
-				->status($this->status)
-				->listar(),
-			$this->complemento
-		);
-
-	}
-
 	/**
 	 * Listando os conteúdos de forma ordenada
 	 *
@@ -459,54 +278,6 @@ abstract class Controlador extends Base
 			//Listando os conteúdos
 			$this->repositorio
 				->ordem($this->ordem)
-				->listar(),
-			$this->complemento
-		);
-
-	}
-
-	/**
-	 * Listando os conteúdos pelo seu identificador
-	 *
-	 * @uses App\Repositorio\Repositorio::id() Definindo o identificador para os métodos(chamada via _call)
-	 * @uses App\Repositorio\BDR\Repositorio::listar() Listando os conteúdos de acordo com os parâmetros passados
-	 * @return mixed
-	 */
-	public function listarPorIdentificador(): mixed
-	{
-
-		//Listando e retornando os conteúdos
-		return $this->complemento(
-			//Listando os conteúdos
-			$this->repositorio
-				->id($this->id)
-				->listar(),
-			$this->complemento
-		);
-
-	}
-
-	/**
-	 * Listando os conteúdos por status, por termos, de forma ordenada e limitada
-	 *
-	 * @uses App\Repositorio\Repositorio::limitado() Definindo o limiteador para os módulos
-	 * @uses App\Repositorio\Repositorio::ordenadoPor() Definindo a ordenação para os métodos
-	 * @uses App\Repositorio\Repositorio::termos() Definindo os termos para os métodos
-	 * @uses App\Repositorio\Repositorio::status() Definindo o status para os métodos
-	 * @uses App\Repositorio\BDR\Repositorio::listar() Listando os conteúdos por status, por termos, de forma ordenada e limitada
-	 * @return mixed
-	 */
-	public function listarPorTermosOrdenadoPorQuantidadePorStatus(): mixed
-	{
-
-		//Listando e retornando os conteúdos
-		return $this->complemento(
-			//Listando os conteúdos
-			$this->repositorio
-				->quantidade($this->quantidade)
-				->ordem($this->ordem)
-				->termos($this->termos)
-				->status($this->status)
 				->listar(),
 			$this->complemento
 		);

@@ -13,7 +13,7 @@ use App\Util\Util;
  * Classe de verificação de autenticação do usuário
  *
  * @final
- * @author Lucas Dantas <lucas@caju.work>
+ * @author Caroline Tacats <caroline.tacats62@gmail.com>
  * @package App\Infraestrutura
  */
 final class Autenticacao
@@ -32,19 +32,6 @@ final class Autenticacao
         '404',
         'sucesso',
         'cadastro',
-        'avaliar-beneficio'
-    ];
-
-    /**
-     * Páginas permitidas para usuários com perfil incompleto.
-     *
-     * @var array
-     */
-    const PAGINAS_PERMITIDAS_PERFIL_INCOMPLETO = [
-        'meu-perfil',
-        'avaliar-beneficio',
-        'politica',
-        'sair'
     ];
 
     /**
@@ -79,13 +66,11 @@ final class Autenticacao
      */
     const MODELOS_AUTENTICADOS = [
         'dashboard',
-        'evento',
-        'home',
-        'meu-perfil',
-        'meus-beneficios',
-        'meus-eventos',
-        'meus-eventos',
-        'sucesso',
+        'generos',
+        'autores',
+        'livros',
+        'usuarios',
+        'emprestimos'
     ];
 
     /**
@@ -138,11 +123,8 @@ final class Autenticacao
             //Definindo se está autenticado
             $this->autenticado = true;
 
-            // Usuário autenticado com perfil incompleto só pode acessar "meu-perfil".
             if (
-                $pagina->tipo === 'pagina' &&
-                self::perfilIncompleto() &&
-                !in_array($pagina->diretorio, self::PAGINAS_PERMITIDAS_PERFIL_INCOMPLETO)
+                $pagina->tipo === 'pagina'
             ) {
                 Util::redirecionar(Http::FOUND->codigo(), Configuracao::get('url.padrao') . '/meu-perfil');
             } 
@@ -210,9 +192,6 @@ final class Autenticacao
                 return false;
             }
 
-            // Atualizando o perfil completo na sessão para controle de acesso a páginas
-			$_SESSION['usuario']['perfil_completo'] = Util::verificarPerfilCompleto($usuario);
-
         } catch (\Exception) {
 
             self::deslogar();
@@ -221,22 +200,6 @@ final class Autenticacao
         }
 
         return true;
-
-    }
-
-    /**
-     * Verificando se o perfil do usuário autenticado está incompleto.
-     *
-     * @static
-     * @return bool
-     */
-    private static function perfilIncompleto(): bool
-    {
-
-        // Verificando se o usuário está autenticado e se o perfil completo está definido na sessão
-        return isset($_SESSION['usuario']) && isset($_SESSION['usuario']['perfil_completo'])
-            ? !$_SESSION['usuario']['perfil_completo']
-            : false;
 
     }
 

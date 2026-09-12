@@ -24,7 +24,8 @@ final class Genero extends Modelo
 	 */
 	public array $configuracao = [
 
-		'nome' => 'Genero',
+		'nome' => 'Generos',
+		'diretorio' => 'generos',
 		'banco' => [
 			'tabela' => [
 				'nome' => 'genero'

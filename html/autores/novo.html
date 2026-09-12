@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+
+<head>
+    <base href="/" />
+    <title>Gêneros Literários - Libri</title>
+    {INCLUDE_CABECALHO}
+        <link rel="stylesheet" href="{URL_VENDOR}/css/autores.css" />
+        <link rel="stylesheet" href="{URL_VENDOR}/libs/apex-charts/apex-charts.css" />
+</head>
+
+<body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+
+            <!-- Menu -->
+            {INCLUDE_TOPO}
+            <!-- / Menu -->
+
+            <!-- Layout container -->
+            <div class="layout-page">
+
+                <!-- Navbar -->
+                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+                    id="layout-navbar">
+                    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+                        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                            <i class="bx bx-menu bx-sm"></i>
+                        </a>
+                    </div>
+                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+                        <ul class="navbar-nav flex-row align-items-center ms-auto">
+                            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
+                                data-bs-toggle="dropdown">
+                                <img src="{URL_IMG}/logo/logo.svg" alt class="w-px-75 h-auto" />
+                            </a>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- / Navbar -->
+
+                <!-- Content wrapper -->
+                <div class="content-wrapper">
+                    <!-- Content -->
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">
+                                <a href="{URL}/autores"> Autores </a>
+                                /</span> Novo
+                        </h4>
+
+                        <div class="row">
+                            <!-- Formulário -->
+                            <div class="col-lg-12 col-12 mb-4">
+                                <div class="card h-100">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0">Adicione um novo autor</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form id="inserir" action="{URL}/Autor/salvar" method="POST"
+                                            enctype="multipart/form-data">
+                                            <div class="row">
+                                                <div class="mb-3">
+                                                    <label class="form-label" for="genero">Gênero(s) Associado(s)</label>
+                                                    <div class="autor-generos" id="autor-generos">
+                                                        <div class="input-group input-group-merge autor-generos__control" role="button" tabindex="0" aria-controls="autor-generos-menu" aria-expanded="false">
+                                                            <div class="autor-generos__chips" id="autor-generos-chips">
+                                                                <span class="autor-generos__placeholder">Escolha um ou mais gêneros</span>
+                                                            </div>
+                                                        </div>
+                                                        <select class="form-select required autor-generos-select" id="genero" name="genero[]" aria-label="Gêneros associados" multiple>
+                                                            <!-- BEGIN BLOCO_GENEROS -->
+                                                            <option value="{GENERO->ID}">{GENERO->NOME}</option>
+                                                            <!-- END BLOCO_GENEROS -->
+                                                        </select>
+                                                        <div class="autor-generos__menu" id="autor-generos-menu" role="listbox" aria-multiselectable="true"></div>
+                                                    </div>
+                                                    <div class="form-text">Selecione todos os gêneros associados ao autor.
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-7 mb-3">
+                                                    <label class="form-label required" for="nome">Nome *</label>
+                                                    <div class="input-group input-group-merge">
+                                                        <span id="nome2" class="input-group-text"><i
+                                                                class="bx bx-user"></i></span>
+                                                        <input type="text" id="nome" class="form-control"
+                                                            placeholder="Nome completo do autor" name="nome"
+                                                            aria-label="Nome completo do autor" aria-describedby="nome2"
+                                                            required />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-5 mb-3">
+                                                    <label class="form-label" for="pseudonimo">Pseudônimo</label>
+                                                    <div class="input-group input-group-merge">
+                                                        <span id="pseudonimo2" class="input-group-text"><i
+                                                                class="bx bx-id-card"></i></span>
+                                                        <input type="text" id="pseudonimo" class="form-control"
+                                                            placeholder="Nome artístico" name="pseudonimo"
+                                                            aria-label="Pseudônimo" aria-describedby="pseudonimo2" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="form-label" for="data_nascimento">Data de nascimento</label>
+                                                    <div class="input-group input-group-merge">
+                                                        <span id="data_nascimento2" class="input-group-text"><i
+                                                                class="bx bx-calendar"></i></span>
+                                                        <input type="date" id="data_nascimento" class="form-control"
+                                                            name="data_nascimento" aria-label="Data de nascimento"
+                                                            aria-describedby="data_nascimento2" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="form-label" for="data_falecimento">Data de
+                                                        falecimento</label>
+                                                    <div class="input-group input-group-merge">
+                                                        <span id="data_falecimento2" class="input-group-text"><i
+                                                                class="bx bx-calendar-x"></i></span>
+                                                        <input type="date" id="data_falecimento" class="form-control"
+                                                            name="data_falecimento" aria-label="Data de falecimento"
+                                                            aria-describedby="data_falecimento2" />
+                                                    </div>
+                                                    <div class="form-text">Deixe em branco se o autor estiver vivo.
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label class="form-label" for="nacionalidade">Nacionalidade</label>
+                                                <div class="input-group input-group-merge">
+                                                    <span id="nacionalidade2" class="input-group-text"><i
+                                                            class="bx bx-flag"></i></span>
+                                                    <input type="text" id="nacionalidade" class="form-control"
+                                                        placeholder="Ex.: Brasileira" name="nacionalidade"
+                                                        aria-label="Nacionalidade" aria-describedby="nacionalidade2" />
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label class="form-label" for="biografia">Biografia</label>
+                                                <div class="input-group input-group-merge">
+                                                    <span id="biografia2" class="input-group-text"><i
+                                                            class="bx bx-book-content"></i></span>
+                                                    <textarea id="biografia" class="form-control" rows="4"
+                                                        placeholder="Um breve resumo sobre o autor" name="biografia"
+                                                        aria-label="Biografia" aria-describedby="biografia2"></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-4">
+                                                <label class="form-label required" for="status">Status *</label>
+                                                <select class="form-select required" id="status" name="status"
+                                                    aria-label="Status" required>
+                                                    <option value="" disabled selected>Selecione o status</option>
+                                                    <option value="1">Ativo</option>
+                                                    <option value="0">Inativo</option>
+                                                </select>
+                                            </div>
+
+                                            <!-- Foto -->
+                                                <div class="mb-4">
+                                                    <label class="form-label" for="imagem">Foto do autor</label>
+                                                    <div class="autor-imagem-dropzone" id="autor-imagem-dropzone" role="button" tabindex="0" aria-label="Escolher foto do autor">
+                                                        <img id="preview-imagem" src="{URL_IMG}/avatars/profile.png" alt="Pré-visualização da foto do autor" class="autor-imagem-dropzone__preview" />
+                                                        <div class="autor-imagem-dropzone__content">
+                                                            <div class="autor-imagem-dropzone__title">Arraste uma imagem aqui ou clique para selecionar</div>
+                                                            <div class="autor-imagem-dropzone__hint">PNG, JPG ou WEBP. Deixe em branco para usar um avatar padrão.</div>
+                                                        </div>
+                                                        <button type="button" class="autor-imagem-dropzone__remove" id="remover-imagem" aria-label="Remover foto">&times;</button>
+                                                        <input type="file" id="imagem" class="d-none" name="imagem" accept="image/png, image/jpeg, image/webp" aria-label="Foto do autor" />
+                                                    </div>
+                                            </div>
+
+                                            <input type="hidden" name="csrf-token" value="{CSRF_TOKEN}" />
+
+                                            <button type="submit" class="btn btn-primary">Salvar</button>
+                                            <a href="{URL}/autores" class="btn btn-label-secondary">Cancelar</a>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / Content -->
+
+                    <!-- Footer -->
+                    {INCLUDE_RODAPE}
+                    <!-- / Footer -->
+
+                    <div class="content-backdrop fade"></div>
+                </div>
+                <!-- Content wrapper -->
+            </div>
+            <!-- / Layout page -->
+        </div>
+
+        {INCLUDE_JAVASCRIPT}
+
+        <script src="{URL_JS}/autores.js"></script>
+        
+        <!-- Overlay -->
+        <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+
+</body>
+
+</html>

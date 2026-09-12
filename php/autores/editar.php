@@ -25,7 +25,7 @@ try {
 
 try {
 
-    $fachadaGenero = Fachada::instancia('Genero')->configurar(complemento: false);
+    $fachadaGenero = Fachada::instancia('Genero')->configurar(excecao: false, complemento: false);
 
     $genero = $fachadaGenero->procurarPorIdentificador($pagina->id);
 
@@ -42,11 +42,6 @@ try {
     }
 
 } catch (Exception $e) {
-
-    $pagina->definir404();
-    require_once $pagina->caminho;
-    exit;
-    
 }
 
 //Exibindo o template

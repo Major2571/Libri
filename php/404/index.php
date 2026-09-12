@@ -41,10 +41,11 @@ try {
 }
 
 //Definindo algumas variáveis
-$template->URL_VENDOR   = $pagina->config('url.vendor');
+$template->URL_VENDOR       = $pagina->config('url.vendor');
 $template->URL_CSS          = $pagina->config('url.css');
 $template->URL_CSS_VENDOR   = $pagina->config('url.css_vendor');
 $template->URL_IMG          = $pagina->config('url.imagem');
+$template->URL              = $pagina->config('url.padrao');
 
 //Exibindo o template
 $template->show();

@@ -17,25 +17,25 @@ try {
     // Incluindo as variáveis
     require_once(Configuracao::get('dir.include') . '/variaveis.php');
 
-    $template->generos_ativo = 'active open';
-    $template->ver_todos_genero_ativo = 'active';
+    $template->autores_ativo = 'active open';
+    $template->ver_todos_autores_ativo = 'active';
 
 } catch (Exception $e) {
 }
 
 try {
 
-    $generos = Fachada::instancia('Genero')->configurar(excecao: false)->listarOrdenado();
+    $autores = Fachada::instancia('Autor')->configurar(excecao: false)->listarOrdenado();
 
-    if ($generos) {
+    if ($autores) {
 
-        $template->TOTAL_GENEROS = count($generos);
-        $template->block('EXIBIR_TOTAL_GENEROS');
+        $template->TOTAL_AUTORES = count($autores);
+        $template->block('EXIBIR_TOTAL_AUTORES');
 
-        foreach ($generos as $genero) {
-            $template->GENERO = $genero;
-            $template->block('BLOCO_GENEROS');
-            $template->block('BLOCO_GENEROS_MODAL');
+        foreach ($autores as $autor) {
+            $template->AUTOR = $autor;
+            $template->block('BLOCO_AUTORES');
+            $template->block('BLOCO_AUTORES_MODAL');
         }
 
     }

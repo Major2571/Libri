@@ -3,7 +3,7 @@
 
 <head>
     <base href="/" />
-    <title>Gêneros Literários - Libri</title>
+    <title>Autores - Libri</title>
     {INCLUDE_CABECALHO}
 </head>
 
@@ -46,16 +46,16 @@
 
                         <div class="d-flex justify-content-between align-items-end flex-wrap gap-2 py-3 mb-4">
                             <div>
-                                <h4 class="fw-bold mb-1"><span class="text-muted fw-light">Gêneros/</span> Ver todos
+                                <h4 class="fw-bold mb-1"><span class="text-muted fw-light">Autores/</span> Ver todos
                                 </h4>
-                                <!-- BEGIN EXIBIR_TOTAL_GENEROS -->
-                                <p class="text-muted fst-italic fs-6 mb-0">{TOTAL_GENEROS} gêneros cadastrados no acervo
+                                <!-- BEGIN EXIBIR_TOTAL_AUTORES -->
+                                <p class="text-muted fst-italic fs-6 mb-0">{TOTAL_AUTORES} autores cadastrados no acervo
                                 </p>
-                                <!-- END EXIBIR_TOTAL_GENEROS -->
+                                <!-- END EXIBIR_TOTAL_AUTORES -->
                             </div>
                         </div>
 
-                        <!-- Tabela de gêneros -->
+                        <!-- Tabela de autors -->
                         <div class="card py-3">
 
                             <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 p-3">
@@ -63,7 +63,7 @@
                                 <div class="input-group input-group-merge" style="max-width: 360px;">
                                     <span class="input-group-text" id="basic-addon-search31"><i
                                             class="bx bx-search"></i></span>
-                                    <input type="text" id="busca-generos" class="form-control"
+                                    <input type="text" id="busca-autores" class="form-control"
                                         placeholder="Buscar por nome…" aria-label="Buscar..."
                                         aria-describedby="basic-addon-search31" />
                                 </div>
@@ -71,65 +71,60 @@
                                 <button type="button" data-bs-toggle="modal" data-bs-target="#modalCenter"
                                     class="btn rounded-pill btn-primary d-inline-flex align-items-center">
                                     <i class="bx bx-plus me-1"></i>
-                                    Novo Gênero
+                                    Novo Autor
                                 </button>
 
                             </div>
 
                             <div class="table-responsive text-nowrap">
-                                <table class="table table-borderless" id="tabela-generos">
+                                <table class="table table-borderless" id="tabela-autores">
                                     <thead>
                                         <tr>
                                             <th>Nome</th>
-                                            <th class="text-center">Gênero Principal</th>
                                             <th class="text-end">Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <!-- BEGIN BLOCO_GENEROS -->
+                                        <!-- BEGIN BLOCO_AUTORES -->
                                         <tr>
                                             <td>
-                                                <a href="{URL}/generos/editar/{GENERO->ID}"
+                                                <a href="{URL}/autores/editar/{AUTOR->ID}"
                                                     class="d-flex align-items-center gap-2 link-primary text-body">
-                                                    <strong>{GENERO->NOME}</strong>
+                                                    <strong>{AUTOR->NOME}</strong>
                                                 </a>
-                                            </td>
-                                            <td class="text-center">
-                                                <span
-                                                    class="badge rounded-pill px-3 bg-label-success">{GENERO->GENERO_PAI->NOME}</span>
                                             </td>
                                             <td>
                                                 <div class="text-end">
-                                                    <a href="{URL}/generos/editar/{GENERO->ID}"
+                                                    <a href="{URL}/autores/editar/{AUTOR->ID}"
                                                         class="btn btn-icon btn-label-primary rounded-pill"
-                                                        title="Editar gênero">
+                                                        title="Editar autor">
                                                         <i class="bx bx-edit-alt"></i>
                                                     </a>
-                                                    <a id="excluir-{GENERO->ID}"
-                                                        data-url="{URL}/excluir/Genero/{GENERO->ID}"
-                                                        href="{URL}/excluir/Genero/{GENERO->ID}"
+                                                    <a id="excluir-{AUTOR->ID}"
+                                                        data-url="{URL}/excluir/Autor/{AUTOR->ID}"
+                                                        href="{URL}/excluir/Autor/{AUTOR->ID}"
                                                         class="btn btn-icon btn-label-danger rounded-pill btn-excluir-genero"
-                                                        title="Excluir gênero">
+                                                        title="Excluir autor">
                                                         <i class="bx bx-trash"></i>
                                                     </a>
                                                 </div>
                                             </td>
                                         </tr>
-                                        <!-- END BLOCO_GENEROS -->
+                                        <!-- END BLOCO_AUTORES -->
                                         <tr>
                                             <td colspan="3" class="text-center py-5">
                                                 <i class="bx bx-category-alt bx-lg text-muted mb-2 d-block"></i>
-                                                <span class="fw-semibold d-block">Nenhum gênero cadastrado</span>
-                                                <span class="text-muted">Comece criando o primeiro gênero do
+                                                <span class="fw-semibold d-block">Nenhum autor cadastrado</span>
+                                                <span class="text-muted">Comece criando o primeiro autor do
                                                     acervo.</span>
                                             </td>
                                         </tr>
-                                        <!-- FINALLY BLOCO_GENEROS -->
+                                        <!-- FINALLY BLOCO_AUTORES -->
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                        <!--/ Tabela de gêneros -->
+                        <!--/ Tabela de autors -->
                     </div>
                     <!-- / Content -->
 
@@ -148,23 +143,23 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalCenterTitle">Adicione um novo gênero</h5>
+                        <h5 class="modal-title" id="modalCenterTitle">Adicione um novo autor</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="inserir" action="{URL}/Genero/salvar" method="POST">
+                        <form id="inserir" action="{URL}/Autor/salvar" method="POST">
 
                             <div class="mb-3">
-                                <label class="form-label" for="genero_pai">Genero Principal</label>
+                                <label class="form-label" for="genero_pai">Autor Principal</label>
                                 <div class="input-group input-group-merge">
                                     <select class="form-select required" id="genero_pai" name="genero_pai"
-                                        aria-label="Escolha o gênero principal" placeholder="Escolha o gênero principal">
-                                        <option value="" disabled selected>Escolha o gênero principal</option>
-                                        <!-- BEGIN BLOCO_GENEROS_MODAL -->
-                                        <option value="{GENERO->ID}">{GENERO->NOME}</option>
-                                        <!-- END BLOCO_GENEROS_MODAL -->
-                                        <option value="" disabled selected>Nenhum gênero encontrado</option>
-                                        <!-- FINALLY BLOCO_GENEROS_MODAL -->
+                                        aria-label="Escolha o autor principal" placeholder="Escolha o autor principal">
+                                        <option value="" disabled selected>Escolha o autor principal</option>
+                                        <!-- BEGIN BLOCO_AUTORES_MODAL -->
+                                        <option value="{AUTOR->ID}">{AUTOR->NOME}</option>
+                                        <!-- END BLOCO_AUTORES_MODAL -->
+                                        <option value="" disabled selected>Nenhum autor encontrado</option>
+                                        <!-- FINALLY BLOCO_AUTORES_MODAL -->
                                     </select>
                                 </div>
                             </div>
@@ -176,8 +171,8 @@
                                         <i class="bx bx-text"></i>
                                     </span>
                                     <input type="text" id="nome" class="form-control"
-                                        placeholder="Digite o nome do gênero" name="nome"
-                                        aria-label="Digite o nome do gênero" aria-describedby="nome2" required />
+                                        placeholder="Digite o nome do autor" name="nome"
+                                        aria-label="Digite o nome do autor" aria-describedby="nome2" required />
                                 </div>
                             </div>
 
@@ -187,8 +182,8 @@
                                     <span id="basic-icon-default-message2" class="input-group-text"><i
                                             class="bx bx-comment"></i></span>
                                     <textarea id="basic-icon-default-message" class="form-control"
-                                        placeholder="Digite a descrição do gênero" name="descricao"
-                                        aria-label="Digite a descrição do gênero"
+                                        placeholder="Digite a descrição do autor" name="descricao"
+                                        aria-label="Digite a descrição do autor"
                                         aria-describedby="basic-icon-default-message2" required></textarea>
                                 </div>
                             </div>
@@ -207,9 +202,9 @@
         {INCLUDE_JAVASCRIPT}
 
         <script>
-            document.getElementById('busca-generos')?.addEventListener('input', function (e) {
+            document.getElementById('busca-autores')?.addEventListener('input', function (e) {
                 const termo = e.target.value.toLowerCase();
-                document.querySelectorAll('#tabela-generos tbody tr').forEach(function (tr) {
+                document.querySelectorAll('#tabela-autores tbody tr').forEach(function (tr) {
                     tr.style.display = tr.textContent.toLowerCase().includes(termo) ? '' : 'none';
                 });
             });

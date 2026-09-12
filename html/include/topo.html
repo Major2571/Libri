@@ -16,7 +16,7 @@
     <ul class="menu-inner py-1">
         <!-- Dashboard -->
         <li class="menu-item {dashboard_ativo}">
-            <a href="index.html" class="menu-link">
+            <a href="{URL}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
             </a>
@@ -26,19 +26,19 @@
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Institucional</span>
         </li>
-        <li class="menu-item">
+        <li class="menu-item {autores_ativo}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div data-i18n="Autores">Autores</div>
             </a>
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="pages-account-settings-account.html" class="menu-link">
+            <ul class="menu-sub {autores_ativo}">
+                <li class="menu-item {novo_autor_ativo}">
+                    <a href="{URL}/autores/novo" class="menu-link">
                         <div data-i18n="Novo">Novo</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="pages-account-settings-notifications.html" class="menu-link">
+                <li class="menu-item {ver_todos_autores_ativo}">
+                    <a href="{URL}/autores" class="menu-link">
                         <div data-i18n="Ver Todos">Ver Todos</div>
                     </a>
                 </li>
@@ -70,12 +70,12 @@
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="pages-account-settings-account.html" class="menu-link">
+                    <a href="{URL}/livros/novo" class="menu-link">
                         <div data-i18n="Novo">Novo</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="pages-account-settings-notifications.html" class="menu-link">
+                    <a href="{URL}/livros" class="menu-link">
                         <div data-i18n="Ver Todos">Ver Todos</div>
                     </a>
                 </li>
@@ -88,7 +88,7 @@
             <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/" target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-file"></i>
-                <div data-i18n="Documentation">Documentacao</div>
+                <div data-i18n="Documentation">Documentação</div>
             </a>
         </li>
     </ul>
