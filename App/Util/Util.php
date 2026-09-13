@@ -14,6 +14,7 @@ use App\Infraestrutura\Pagina;
 use IntlDateFormatter;
 use DateTime;
 use Exception;
+use stdClass;
 
 /**
  * Classe de funções úteis para o projeto
@@ -22,7 +23,8 @@ use Exception;
  * @author Caroline Tacats <caroline.tacats62@gmail.com>
  * @package App\Util
  */
-final class Util{
+final class Util
+{
 
 	/*
 	 * VERIFICAÇÕES
@@ -35,19 +37,21 @@ final class Util{
 	 * @param null|int $tipo Tipo do erro
 	 * @return string
 	 */
-	public static function verificarTipoErroBancoDeDados( ?int $tipo = null ): string{
+	public static function verificarTipoErroBancoDeDados(?int $tipo = null): string
+	{
 
 		//Retornando
-		return match( $tipo ){
+		return match ($tipo) {
 
 			//Relacionamento
-			1451 	=> BancoDeDados::RELACIONAMENTO->texto(),
+			1451 => BancoDeDados::RELACIONAMENTO->texto(),
 			//inserção e edição
-			1452	=> BancoDeDados::INSERCAO_EDICAO->texto(),
+			1452 => BancoDeDados::INSERCAO_EDICAO->texto(),
 			//Registros duplicados
-			1062	=> BancoDeDados::DUPLICADO->texto(),
+			1062 => BancoDeDados::DUPLICADO->texto(),
 			//Padrão
-			default	=> BancoDeDados::PADRAO->texto() };
+			default => BancoDeDados::PADRAO->texto()
+		};
 
 	}
 
@@ -59,12 +63,13 @@ final class Util{
 	 * @throws ConteudoException
 	 * @return void
 	 */
-	public static function verificarRequisicao( string $tipo ): void{
+	public static function verificarRequisicao(string $tipo): void
+	{
 
 		//Verificando
-		if( $tipo !== $_SERVER[ 'REQUEST_METHOD' ] )
+		if ($tipo !== $_SERVER['REQUEST_METHOD'])
 			//Lançando a exceção
-			throw new ConteudoException( sprintf( Conteudo::TIPO_REQUISICAO->texto(), $_SERVER[ 'REQUEST_METHOD' ], $tipo ), Http::BAD_REQUEST->codigo() );
+			throw new ConteudoException(sprintf(Conteudo::TIPO_REQUISICAO->texto(), $_SERVER['REQUEST_METHOD'], $tipo), Http::BAD_REQUEST->codigo());
 
 	}
 
@@ -75,10 +80,11 @@ final class Util{
 	 * @uses App\Infraestrutura\Configuracao\Configuracao::get() Retornando a variável do projeto
 	 * @return bool
 	 */
-	public static function verificarReferencia(): bool{
+	public static function verificarReferencia(): bool
+	{
 
 		//Retornando
-		return isset( $_SERVER[ 'HTTP_REFERER' ] ) && strpos( $_SERVER[ 'HTTP_REFERER' ], Configuracao::get( 'projeto.referencia' ) ) !== false;
+		return isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], Configuracao::get('projeto.referencia')) !== false;
 
 	}
 
@@ -90,18 +96,19 @@ final class Util{
 	 * @throws ConteudoException
 	 * @return bool
 	 */
-	public static function verificarTokenCsrf( ?string $token = null ): bool{
+	public static function verificarTokenCsrf(?string $token = null): bool
+	{
 
 		//Verificando e lançando a exceção
-		$_SESSION ?? throw new ConteudoException( Conteudo::SESSAO_INEXISTENTE->texto(), Http::BAD_REQUEST->codigo() );
+		$_SESSION ?? throw new ConteudoException(Conteudo::SESSAO_INEXISTENTE->texto(), Http::BAD_REQUEST->codigo());
 
 		//Verificando e lançando a exceção
-		$_SESSION[ 'csrf-token' ] ?? throw new ConteudoException( Conteudo::TOKEN_INVALIDO->texto(), Http::BAD_REQUEST->codigo() );
+		$_SESSION['csrf-token'] ?? throw new ConteudoException(Conteudo::TOKEN_INVALIDO->texto(), Http::BAD_REQUEST->codigo());
 
 		//Verificando o token junto ao hash
-		if( !hash_equals( $_SESSION[ 'csrf-token' ], $token ?? '' ) )
+		if (!hash_equals($_SESSION['csrf-token'], $token ?? ''))
 			//Lançando a exceção
-			throw new ConteudoException( Conteudo::TOKEN_INVALIDO->texto(), Http::BAD_REQUEST->codigo() );
+			throw new ConteudoException(Conteudo::TOKEN_INVALIDO->texto(), Http::BAD_REQUEST->codigo());
 
 		//Retornando
 		return true;
@@ -119,10 +126,11 @@ final class Util{
 	 * @param mixed $valor Valor
 	 * @return string
 	 */
-	public static function formatarCaracteres( mixed $valor ): mixed{
+	public static function formatarCaracteres(mixed $valor): mixed
+	{
 
 		//Retornando
-		return !is_null( $valor ) ? stripslashes( htmlentities( $valor, ENT_QUOTES, 'UTF-8' ) ) : null;
+		return !is_null($valor) ? stripslashes(htmlentities($valor, ENT_QUOTES, 'UTF-8')) : null;
 
 	}
 
@@ -133,10 +141,11 @@ final class Util{
 	 * @param null|string String
 	 * @return string
 	 */
-	public static function formatarApenasNumeros( ?string $string ): string{
+	public static function formatarApenasNumeros(?string $string): string
+	{
 
 		//Retornando
-		return preg_replace( '/\D+/', '', $string ?? '' );
+		return preg_replace('/\D+/', '', $string ?? '');
 
 	}
 
@@ -149,50 +158,52 @@ final class Util{
 	 * @link https://unicode-org.github.io/icu/userguide/format_parse/datetime/#date-field-symbol-table Documentation
 	 * @return mixed
 	 */
-	public static function formatarData( ?string $data, string $tipo = 'padrão' ): mixed{
+	public static function formatarData(?string $data, string $tipo = 'padrão'): mixed
+	{
 
 		//Verificando
-		if( !is_null( $data ) ){
+		if (!is_null($data)) {
 
 			//Definindo
-			$formato	= match( $tipo ){
+			$formato = match ($tipo) {
 
-				'dia-da-semana'			=> "EEEE",
+				'dia-da-semana' => "EEEE",
 				//Banco de dados
-				'banco'					=> "yyyy-MM-dd HH:mm:ss",
+				'banco' => "yyyy-MM-dd HH:mm:ss",
 				//Banco de dados sem hora
-				'banco-sem-hora'		=> "yyyy-MM-dd",
+				'banco-sem-hora' => "yyyy-MM-dd",
 				//Dia e mês
-				'dia-mês'				=> "dd/MM",
+				'dia-mês' => "dd/MM",
 				//Hora
-				'hora'					=> "H:mm",
+				'hora' => "H:mm",
 				//Mês e ano
-				'mês-ano'				=> 'MMM/yyyy',
+				'mês-ano' => 'MMM/yyyy',
 				//Mês
-				'mês'					=> 'MMMM',
+				'mês' => 'MMMM',
 				//Ano
-				'ano'					=> 'yyyy',
+				'ano' => 'yyyy',
 				//Português sem hora
-				'pt-sem-hora'			=> "dd/MM/yyyy",
+				'pt-sem-hora' => "dd/MM/yyyy",
 				//Mês e ano por extenso
-				'mês-ano-extenso'	    => "MMMM 'de' yyyy",
+				'mês-ano-extenso' => "MMMM 'de' yyyy",
 				//Dia e mês por extenso
-				'dia-mês-ano-extenso'	=> "dd 'de' MMMM 'de' yyyy",
+				'dia-mês-ano-extenso' => "dd 'de' MMMM 'de' yyyy",
 				//Dia e mês por extenso
-				'dia-mês-extenso'		=> "dd 'de' MMMM",
+				'dia-mês-extenso' => "dd 'de' MMMM",
 				//Período do email
-				'período-email'			=> "dd/MM/yyyy - H:mm:ss",
+				'período-email' => "dd/MM/yyyy - H:mm:ss",
 				//Atualização das vendas
-				'atualizacao-vendas'	=> "dd/MM/yyyy '<span>&bull;</span>' HH:mm",
+				'atualizacao-vendas' => "dd/MM/yyyy '<span>&bull;</span>' HH:mm",
 				//Padrão
-				default					=> "dd/MM/yyyy à's' HH'h'mm" };
+				default => "dd/MM/yyyy à's' HH'h'mm"
+			};
 
-			$formatacao	= new IntlDateFormatter( 'pt_BR', IntlDateFormatter::FULL, IntlDateFormatter::NONE, 'America/Recife', IntlDateFormatter::GREGORIAN, $formato );
+			$formatacao = new IntlDateFormatter('pt_BR', IntlDateFormatter::FULL, IntlDateFormatter::NONE, 'America/Recife', IntlDateFormatter::GREGORIAN, $formato);
 
 			//Retornando
-			return str_replace( [ ' - 00:00:00', ' - 00:00' ], '', $formatacao->format( new DateTime( str_replace( '/', '-', str_replace( '-', '', $data ) ) ) ) );
+			return str_replace([' - 00:00:00', ' - 00:00'], '', $formatacao->format(new DateTime(str_replace('/', '-', str_replace('-', '', $data)))));
 
-		}else
+		} else
 			//Retornando
 			return null;
 
@@ -205,10 +216,11 @@ final class Util{
 	 * @static
 	 * @param string $string String
 	 */
-	public static function formatarStringParaUrl( string $string ): string{
+	public static function formatarStringParaUrl(string $string): string
+	{
 
 		//Retornando
-		return strtolower( str_replace( ' ', '-', self::removerCaracterEspecial( html_entity_decode( $string, ENT_QUOTES, 'UTF-8' ) ) ) );
+		return strtolower(str_replace(' ', '-', self::removerCaracterEspecial(html_entity_decode($string, ENT_QUOTES, 'UTF-8'))));
 
 	}
 
@@ -219,13 +231,14 @@ final class Util{
 	 * @param string $nomeArquivo Nome do arquivo
 	 * @return string
 	 */
-	public static function formatarNomeArquivo( string $nomeArquivo ): string{
+	public static function formatarNomeArquivo(string $nomeArquivo): string
+	{
 
 		//Definindo a extensão
-		$extensao	= pathinfo( $nomeArquivo, PATHINFO_EXTENSION );
+		$extensao = pathinfo($nomeArquivo, PATHINFO_EXTENSION);
 
 		//Formatando o nome do arquivo
-		return strtolower( preg_replace( '/[^\w\._]+/', '', pathinfo( $nomeArquivo, PATHINFO_FILENAME ) ) ) . '-' . str_replace( '.', '', microtime( true ) ) . ".{$extensao}";
+		return strtolower(preg_replace('/[^\w\._]+/', '', pathinfo($nomeArquivo, PATHINFO_FILENAME))) . '-' . str_replace('.', '', microtime(true)) . ".{$extensao}";
 
 	}
 
@@ -239,10 +252,10 @@ final class Util{
 	public static function definirCache(string $arquivo, Pagina $pagina): null|string
 	{
 
-		
+
 		//Verificando e definindo se é um arquivo de interna
-		$complemento = ( $pagina->acao === 'exibir' || $pagina->acao === 'cancelar-inscricao' ) && $arquivo !== 'bundle' ? '-interna' : null;
-		
+		$complemento = ($pagina->acao === 'exibir' || $pagina->acao === 'cancelar-inscricao') && $arquivo !== 'bundle' ? '-interna' : null;
+
 		//Definindo o caminho
 		$caminho = Configuracao::get('dir.js') . "/{$arquivo}{$complemento}.js";
 
@@ -257,20 +270,21 @@ final class Util{
 	 * @static
 	 * @return string
 	 */
-	public static function definirTokenCsrf(): string{
+	public static function definirTokenCsrf(): string
+	{
 
 		//Verificando a existência do token
-		if( empty( $_SESSION[ 'csrf-token' ] ) ){
+		if (empty($_SESSION['csrf-token'])) {
 
 			//Definindo
-			$token						= bin2hex( random_bytes( 32 ) );
+			$token = bin2hex(random_bytes(32));
 
 			//Definindo
-			$_SESSION[ 'csrf-token' ]	= $token;
+			$_SESSION['csrf-token'] = $token;
 
-		}else
+		} else
 			//Definindo o token
-			$token	= $_SESSION[ 'csrf-token' ];
+			$token = $_SESSION['csrf-token'];
 
 		//Retornando
 		return $token;
@@ -284,33 +298,35 @@ final class Util{
 	 * @param null|string $ordem Ordem
 	 * @return string
 	 */
-	public static function definirOrdemBancoDeDados( ?string $ordem = null ): string{
+	public static function definirOrdemBancoDeDados(?string $ordem = null): string
+	{
 
 		//Retornando
-		return match( $ordem ){
+		return match ($ordem) {
 
 			//Identificador
-			'id'					=> 'id',
-			'id-desc'				=> 'id DESC',
+			'id' => 'id',
+			'id-desc' => 'id DESC',
 			//Nome
-			'nome'					=> 'nome',
+			'nome' => 'nome',
 			//Sequência
-			'sequência'				=> 'ordem',
+			'sequência' => 'ordem',
 			//Data
-			'data'					=> 'data',
+			'data' => 'data',
 			//Dia
-			'dia'					=> 'dia',
+			'dia' => 'dia',
 			//Randômico
-			'randômico'				=> 'RAND()',
+			'randômico' => 'RAND()',
 			//Data de publicação DESC
-			'data-publicação-desc'	=> 'data_publicacao DESC',
-			'data-criacao-desc'	=> 'data_criacao DESC',
-			'data-criacao'	=> 'data_criacao',
-			'data-expiracao'	=> 'data_expiracao DESC',
+			'data-publicação-desc' => 'data_publicacao DESC',
+			'data-criacao-desc' => 'data_criacao DESC',
+			'data-criacao' => 'data_criacao',
+			'data-expiracao' => 'data_expiracao DESC',
 			//Valor
-			'valor'					=> 'valor',
+			'valor' => 'valor',
 			//Padrão
-			default					=> 'id DESC' };
+			default => 'id DESC'
+		};
 
 	}
 
@@ -323,10 +339,11 @@ final class Util{
 	 * @uses App\Infraestrutura\Configuracao\Configuracao::get() Retornando a variável do projeto
 	 * @return void
 	 */
-	public static function definirAmbiente( Template $template, Pagina $pagina ): void{
+	public static function definirAmbiente(Template $template, Pagina $pagina): void
+	{
 
 		//Definindo o complemento do css
-		$complemento = ( $pagina->acao === 'exibir' || $pagina->acao === 'cancelar-inscricao' ) && in_array($pagina->diretorio, Pagina::PAGINAS_COM_INTERNA) ? '-interna' : null;
+		$complemento = ($pagina->acao === 'exibir' || $pagina->acao === 'cancelar-inscricao') && in_array($pagina->diretorio, Pagina::PAGINAS_COM_INTERNA) ? '-interna' : null;
 
 		//Verificando se o projeto está em produção ou não
 		if (Configuracao::get('projeto.producao')) {
@@ -361,26 +378,27 @@ final class Util{
 	 * @param string $campo Campo
 	 * @return object
 	 */
-	public static function definirMetodoUnico( string $campo ): object{
+	public static function definirMetodoUnico(string $campo): object
+	{
 
 		//Definindo o objeto
-		$objeto	= new \stdClass();
+		$objeto = new \stdClass();
 
 		//Retornando o objeto
-		return match( $campo ){
+		return match ($campo) {
 
 			//Login
-			'login'	=> ( function( $objeto ){
+			'login' => (function ($objeto) {
 
-				//Definindo os parâmetros
-				$objeto->termo		= 'login';
-				$objeto->metodo		= 'contarPorLogin';
-				$objeto->excecao	= Conteudo::JA_EXISTE_POR_LOGIN->texto();
+					//Definindo os parâmetros
+					$objeto->termo = 'login';
+					$objeto->metodo = 'contarPorLogin';
+					$objeto->excecao = Conteudo::JA_EXISTE_POR_LOGIN->texto();
 
-				//Retornando o objeto
-				return $objeto;
+					//Retornando o objeto
+					return $objeto;
 
-			} )( $objeto ),
+				})($objeto),
 
 			//Email
 			'email' => (function ($objeto) {
@@ -407,7 +425,7 @@ final class Util{
 
 				})($objeto, $campo),
 
-			};
+		};
 
 	}
 
@@ -455,24 +473,25 @@ final class Util{
 	 * @param string $string String
 	 * @return string
 	 */
-	public static function removerCaracterEspecial( string $string ): string{
+	public static function removerCaracterEspecial(string $string): string
+	{
 
 		//Minimizando
-		$string	= strtolower( $string );
+		$string = strtolower($string);
 
 		//Removendo os acentos e caracteres
-		$string	= preg_replace( '/[áàãâä]/u', 'a', $string );
-		$string = preg_replace( '/[éèêë]/u', 'e', $string );
-		$string = preg_replace( '/[íìîï]/u', 'i', $string );
-		$string = preg_replace( '/[óòõôö]/u', 'o', $string );
-		$string = preg_replace( '/[úùûü]/u', 'u', $string );
-		$string = preg_replace( '/[ç]/u', 'c', $string );
-		$string = preg_replace( '/[ñ]/u', 'n', $string );
-		$string = preg_replace( '/[^a-z0-9\s-]/', '', $string );
-		$string = preg_replace( '/[\s-]+/', '-', $string );
+		$string = preg_replace('/[áàãâä]/u', 'a', $string);
+		$string = preg_replace('/[éèêë]/u', 'e', $string);
+		$string = preg_replace('/[íìîï]/u', 'i', $string);
+		$string = preg_replace('/[óòõôö]/u', 'o', $string);
+		$string = preg_replace('/[úùûü]/u', 'u', $string);
+		$string = preg_replace('/[ç]/u', 'c', $string);
+		$string = preg_replace('/[ñ]/u', 'n', $string);
+		$string = preg_replace('/[^a-z0-9\s-]/', '', $string);
+		$string = preg_replace('/[\s-]+/', '-', $string);
 
 		//Retornando
-		return trim( $string );
+		return trim($string);
 
 	}
 
@@ -487,22 +506,24 @@ final class Util{
 	 * @param string $pagina Página para redirecionamento
 	 * @return void
 	 */
-	public static function redirecionar( int $tipo, string $pagina ): void{
+	public static function redirecionar(int $tipo, string $pagina): void
+	{
 
 		//Definindo o cabeçalho
-		$cabecalho	= match( $tipo ){
+		$cabecalho = match ($tipo) {
 
-			301	=> 'HTTP/1.1 301 Moved Permanently',
-			302	=> 'HTTP/1.1 302 Found',
-			303	=> 'HTTP/1.1 303 See Other',
-			401	=> 'HTTP/1.1 401 Unauthorized',
-			403	=> 'HTTP/1.1 403 Forbidden',
-			404	=> 'HTTP/1.1 404 Not Found',
-    		503 => 'HTTP/1.1 503 Service Unavailable' };
+			301 => 'HTTP/1.1 301 Moved Permanently',
+			302 => 'HTTP/1.1 302 Found',
+			303 => 'HTTP/1.1 303 See Other',
+			401 => 'HTTP/1.1 401 Unauthorized',
+			403 => 'HTTP/1.1 403 Forbidden',
+			404 => 'HTTP/1.1 404 Not Found',
+			503 => 'HTTP/1.1 503 Service Unavailable'
+		};
 
 		//Definindo o cabeçalho e redirecionando
-		header( $cabecalho );
-		header( "Location: {$pagina}" );
+		header($cabecalho);
+		header("Location: {$pagina}");
 
 		//Finalizando o processo
 		die();
@@ -597,13 +618,13 @@ final class Util{
 	 * @return int ID decodificado se válido, ou lança exceção se inválido
 	 * @throws Exception Se o identificador for inválido
 	 */
-	public static function validarEDecodificarIdentificador( ?string $secureId, ?string $hashKey)
+	public static function validarEDecodificarIdentificador(?string $secureId, ?string $hashKey)
 	{
-		$hashLength 	= 64;
-		$hash 			= substr($secureId, 0, $hashLength);
-		$baseIdEncode 	= substr($secureId, $hashLength);
-		$id 			= base64_decode($baseIdEncode);
-		$validHash 		= hash_hmac('sha256', $id, $hashKey);
+		$hashLength = 64;
+		$hash = substr($secureId, 0, $hashLength);
+		$baseIdEncode = substr($secureId, $hashLength);
+		$id = base64_decode($baseIdEncode);
+		$validHash = hash_hmac('sha256', $id, $hashKey);
 
 		if (hash_equals($validHash, $hash)) {
 			return $id;
@@ -613,4 +634,60 @@ final class Util{
 
 	}
 
+	public static function definirAtalho(object $pagina): object
+	{
+
+		//Definindo o objeto
+		$objeto = new stdClass();
+
+		//Definindo o diretório
+		$objeto->diretorio = $pagina->diretorio;
+
+		//Definindo a ação
+		$pagina->acao = str_contains($pagina->acao, 'editar') ? 'editar' : $pagina->acao;
+
+		//Verificando a ação
+		switch ($pagina->acao) {
+
+			//Página de listagem
+			case 'index':
+
+				//Definindo o objeto
+				$objeto->titulo = 'Ver todos';
+				$objeto->atalho = $pagina->nome_modelo;
+
+				break;
+
+			//Página de inserção
+			case 'novo':
+
+				//Definindo o objeto
+				$objeto->titulo = 'Novo';
+				$objeto->atalho = $pagina->nome_modelo;
+
+				break;
+
+			//Página de edição
+			case 'editar':
+
+				//Definindo o objeto
+				$objeto->titulo = 'Editar';
+				$objeto->atalho = $pagina->nome_modelo;
+
+				break;
+
+			//Página de exibição
+			case 'exibir':
+
+				//Definindo o objeto
+				$objeto->titulo = 'Exibir';
+				$objeto->atalho = $pagina->nome_modelo;
+
+				break;
+		}
+
+		//Retornando
+		return $objeto;
+
+	}
 }

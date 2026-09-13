@@ -3,49 +3,26 @@
 
 <head>
     <base href="/" />
-    <title>Gêneros Literários - Libri</title>
+    <title>Editar Autor - Libri</title>
     {INCLUDE_CABECALHO}
 </head>
 
 <body>
-    <!-- Layout wrapper -->
+
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
 
-            <!-- Menu -->
             {INCLUDE_TOPO}
-            <!-- / Menu -->
 
-            <!-- Layout container -->
             <div class="layout-page">
 
-                <!-- Navbar -->
-                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-                    id="layout-navbar">
-                    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-                        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-                            <i class="bx bx-menu bx-sm"></i>
-                        </a>
-                    </div>
-                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-                        <ul class="navbar-nav flex-row align-items-center ms-auto">
-                            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                                <img src="{URL_IMG}/logo/logo.svg" alt class="w-px-75 h-auto" />
-                            </a>
-                        </ul>
-                    </div>
-                </nav>
-                <!-- / Navbar -->
+                {INCLUDE_NAVBAR}
 
-                <!-- Content wrapper -->
                 <div class="content-wrapper">
-                    <!-- Content -->
 
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">
-                            <a href="{URL}/generos"> Gêneros </a>
-                            /</span> Editar
-                        </h4>
+                        
+                        {INCLUDE_ATALHO}
 
                         <div class="card mb-4">
                             <div class="card-header d-flex justify-content-between align-items-center">
@@ -97,26 +74,16 @@
                             </div>
                         </div>
                     </div>
-                    <!-- / Content -->
 
-                    <!-- Footer -->
                     {INCLUDE_RODAPE}
-                    <!-- / Footer -->
-
-                    <div class="content-backdrop fade"></div>
+                    
                 </div>
-                <!-- Content wrapper -->
             </div>
-            <!-- / Layout page -->
         </div>
 
         {INCLUDE_JAVASCRIPT}
 
-        <!-- Overlay -->
-        <div class="layout-overlay layout-menu-toggle"></div>
     </div>
-    <!-- / Layout wrapper -->
-
 
 </body>
 

@@ -13,19 +13,43 @@ try {
     $dirHtml = $pagina->config('dir.html');
 
     //Incluindo o cabeçalho
-    $template->addFile('INCLUDE_CABECALHO', "{$dirHtml}/include/cabecalho.html");
+    $template->addFile('INCLUDE_CABECALHO', "{$dirHtml}/include/sistema/cabecalho.html");
 
     //Incluindo o topo
-    $template->addFile('INCLUDE_TOPO', "{$dirHtml}/include/topo.html");
+    $template->addFile('INCLUDE_TOPO', "{$dirHtml}/include/sistema/topo.html");
+
+    //Incluindo a barra de navegação
+    $template->addFile('INCLUDE_NAVBAR', "{$dirHtml}/include/sistema/navbar.html");
 
     //Incluindo o rodapé
-    $template->addFile('INCLUDE_RODAPE', "{$dirHtml}/include/rodape.html");
+    $template->addFile('INCLUDE_RODAPE', "{$dirHtml}/include/sistema/rodape.html");
 
     //Incluindo o script
-    $template->addFile('INCLUDE_JAVASCRIPT', "{$dirHtml}/include/javascript.html");
+    $template->addFile('INCLUDE_JAVASCRIPT', "{$dirHtml}/include/sistema/javascript.html");
 
     //Definindo o ambiente para produção ou desenvolvimento
     Util::definirAmbiente($template, $pagina);
+
+} catch (Exception $e) {
+}
+
+//Atalhos
+try {
+
+    //Verificando se não está no painel
+    if ($pagina->diretorio != 'dahsboard') {
+
+        //Incluindo o script
+        $template->addFile('INCLUDE_ATALHO', "{$dirHtml}/include/sistema/atalho.html");
+
+        //Definindo os atalhos
+        $atalho = Util::definirAtalho($pagina);
+
+        $template->TITULO_DO_ATALHO = $atalho->titulo;
+        $template->DIRETORIO_DO_ATALHO = $atalho->diretorio;
+        $template->ATALHO = $atalho->atalho;
+
+    }
 
 } catch (Exception $e) {
 }

@@ -7,6 +7,7 @@
 use App\Infraestrutura\Template;
 use App\Infraestrutura\Configuracao;
 use App\Infraestrutura\Fachada;
+use App\Util\Util;
 
 // Definindo a página
 try {
@@ -29,7 +30,7 @@ try {
 
     if ($generos) {
 
-        $template->TOTAL_GENEROS = count($generos);
+        $template->TOTAL = count($generos);
 
         foreach ($generos as $genero) {
 
@@ -42,7 +43,7 @@ try {
 
     }
 
-}catch (Exception $e) {
+} catch (Exception $e) {
 }
 
 try {
@@ -61,7 +62,7 @@ try {
 
     }
 
-}catch (Exception $e) {
+} catch (Exception $e) {
 }
 
 //Exibindo o template

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Libri — O acervo da sua biblioteca, organizado</title>
+    {INCLUDE_CABECALHO}
+    <link rel="stylesheet" href="{URL_VENDOR}/css/institucionais.css" />
+    <link rel="stylesheet" href="{URL_VENDOR}/css/home.css" />
+</head>
+
+<body>
+
+    {INCLUDE_MENU}
+
+    <!-- ===================== Hero ===================== -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <div>
+                <span class="eyebrow">gestão de biblioteca</span>
+                <h1>O acervo da sua biblioteca, <em>finalmente</em> organizado.</h1>
+                <p class="lead">
+                    Cadastre livros, autores e gêneros, controle empréstimos e devoluções, e acompanhe
+                    tudo em um painel só — sem planilha, sem ficha de papel perdida.
+                </p>
+                <div class="hero-actions">
+                    <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalCadastro">
+                        Criar conta grátis
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.4">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                    </button>
+                    <a href="#recursos" class="btn btn-outline btn-lg">Ver recursos</a>
+                </div>
+                <span class="hero-note">gratuito para bibliotecas escolares e universitárias</span>
+            </div>
+
+            <div>
+                <div class="mock-browser">
+                    <div class="mock-bar">
+                        <span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span>
+                    </div>
+                    <div class="mock-body">
+                        <div class="mock-kpis">
+                            <div class="mock-kpi"><span class="mk-label">Acervo</span><span class="mk-val">8.412</span>
+                            </div>
+                            <div class="mock-kpi"><span class="mk-label">Empréstimos</span><span
+                                    class="mk-val">342</span></div>
+                            <div class="mock-kpi"><span class="mk-label">Atrasados</span><span class="mk-val">27</span>
+                            </div>
+                        </div>
+                        <div class="mock-shelf">
+                            <div class="msp"></div>
+                            <div class="msp"></div>
+                            <div class="msp"></div>
+                            <div class="msp"></div>
+                            <div class="msp"></div>
+                            <div class="msp"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mock-caption">painel do libri — visão geral do acervo</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== Stats ===================== -->
+    <section class="stats">
+        <div class="container stats-grid">
+            <div class="stat"><b>+8k</b><span>livros por biblioteca em média</span></div>
+            <div class="stat"><b>-70%</b><span>tempo de catalogação manual</span></div>
+            <div class="stat"><b>100%</b><span>rastreio de empréstimos e devoluções</span></div>
+            <div class="stat"><b>0</b><span>planilhas necessárias</span></div>
+        </div>
+    </section>
+
+    <!-- ===================== Features ===================== -->
+    <section class="features" id="recursos">
+        <div class="container">
+            <div class="section-head">
+                <span class="eyebrow" style="justify-content:center;">recursos</span>
+                <h2>Tudo que uma biblioteca precisa, num só lugar</h2>
+                <p>Do cadastro de um livro novo ao relatório de fim de mês, sem sair do sistema.</p>
+            </div>
+
+            <div class="feat-grid">
+                <div class="feat-card">
+                    <div class="feat-icon" style="background:rgba(176,141,87,0.15);">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B08D57" stroke-width="2">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                        </svg>
+                    </div>
+                    <h3>Acervo completo</h3>
+                    <p>Cadastre livros, autores e gêneros com hierarquia, capa e descrição — tudo buscável em segundos.
+                    </p>
+                </div>
+
+                <div class="feat-card">
+                    <div class="feat-icon" style="background:rgba(92,122,98,0.15);">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5C7A62" stroke-width="2">
+                            <path d="M17 1l4 4-4 4" />
+                            <path d="M3 11V9a4 4 0 0 1 4-4h14" />
+                            <path d="M7 23l-4-4 4-4" />
+                            <path d="M21 13v2a4 4 0 0 1-4 4H3" />
+                        </svg>
+                    </div>
+                    <h3>Empréstimos e devoluções</h3>
+                    <p>Registre em poucos cliques, com alerta automático de atraso e histórico completo por membro.</p>
+                </div>
+
+                <div class="feat-card">
+                    <div class="feat-icon" style="background:rgba(110,151,160,0.18);">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6E97A0" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                    </div>
+                    <h3>Membros</h3>
+                    <p>Perfil de cada leitor com empréstimos ativos, atrasos e reservas — sem precisar cruzar planilhas.
+                    </p>
+                </div>
+
+                <div class="feat-card">
+                    <div class="feat-icon" style="background:rgba(122,63,59,0.13);">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7A3F3B" stroke-width="2">
+                            <path d="M3 3v18h18" />
+                            <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3" />
+                        </svg>
+                    </div>
+                    <h3>Relatórios e insights</h3>
+                    <p>Veja os títulos mais emprestados, picos de movimento e tendências de leitura ao longo do tempo.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== Como funciona ===================== -->
+    <section class="how" id="como-funciona">
+        <div class="container">
+            <div class="section-head">
+                <span class="eyebrow" style="justify-content:center;">como funciona</span>
+                <h2>Do zero ao acervo organizado em três passos</h2>
+            </div>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <h3>Cadastre o acervo</h3>
+                    <p>Adicione livros, autores e gêneros — com capa, biografia e hierarquia entre categorias.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <h3>Gerencie empréstimos</h3>
+                    <p>Registre quem pegou o quê, acompanhe prazos e receba avisos de devoluções atrasadas.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <h3>Acompanhe os relatórios</h3>
+                    <p>Entenda o que mais circula no acervo e tome decisões melhores sobre novas aquisições.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== Depoimentos ===================== -->
+    <section class="testimonials" id="depoimentos">
+        <div class="container">
+            <div class="section-head">
+                <span class="eyebrow" style="justify-content:center;">depoimentos</span>
+                <h2>Bibliotecas que já organizaram o acervo</h2>
+            </div>
+
+            <div class="test-grid">
+                <div class="test-card">
+                    <p>"Antes eu controlava os empréstimos numa planilha que só eu entendia. Com o Libri, qualquer
+                        estagiário novo consegue usar no primeiro dia."</p>
+                    <div class="test-person">
+                        <span class="test-avatar">MR</span>
+                        <div><span class="tp-name">Mariana R.</span><span class="tp-role">Bibliotecária escolar</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="test-card">
+                    <p>"O relatório de livros mais emprestados mudou como compramos títulos novos. A gente para de
+                        comprar no chute."</p>
+                    <div class="test-person">
+                        <span class="test-avatar">CD</span>
+                        <div><span class="tp-name">Carlos D.</span><span class="tp-role">Coordenador de acervo</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="test-card">
+                    <p>"Os alertas de atraso sozinhos já pagaram o tempo que a gente gastava correndo atrás de
+                        devolução."</p>
+                    <div class="test-person">
+                        <span class="test-avatar">JF</span>
+                        <div><span class="tp-name">Juliana F.</span><span class="tp-role">Bibliotecária
+                                universitária</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-note">depoimentos ilustrativos para fins de demonstração</div>
+        </div>
+    </section>
+
+    {INCLUDE_RODAPE}
+    
+    {INCLUDE_MODAL_LOGIN}
+    {INCLUDE_MODAL_CADASTRO}
+
+</body>
+
+</html>

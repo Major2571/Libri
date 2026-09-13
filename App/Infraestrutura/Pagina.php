@@ -16,7 +16,8 @@ use App\Util\Util;
  * @author Caroline Tacats <caroline.tacats62@gmail.com>
  * @package App\Infraestrutura
  */
-final class Pagina extends Base{
+final class Pagina extends Base
+{
 
 	/**
 	 * Definindo as constantes das propriedades vindo da query string
@@ -24,7 +25,7 @@ final class Pagina extends Base{
 	 * @access private
 	 * @var array Array com as propriedades
 	 */
-	private const PROPRIEDADES	= [
+	private const PROPRIEDADES = [
 
 		'id',
 		'slug',
@@ -32,7 +33,8 @@ final class Pagina extends Base{
 		'modelo',
 		'diretorio',
 		'tipo-conteudo',
-		'diretorio-tratamento' ];
+		'diretorio-tratamento'
+	];
 
 	/**
 	 * Definindo as constantes das páginas com interna
@@ -40,9 +42,14 @@ final class Pagina extends Base{
 	 * @access private
 	 * @var array Array com as páginas
 	 */
-	public const PAGINAS_COM_INTERNA	= [
+	public const PAGINAS_COM_INTERNA = [
 		'eventos',
 		'meus-beneficios'
+	];
+
+	private const MODULOS = [
+		'Genero' => 'generos',
+		'Autor' => 'autores',
 	];
 
 	/**
@@ -52,31 +59,32 @@ final class Pagina extends Base{
 	 * @uses App\Infraestrutura\Configuracao::carregar() Carregando as configurações
 	 * @uses App\Infraestrutura\Configuracao::get() Retornando a variável do projeto
 	 */
-	public function __construct( array $queryString ){
+	public function __construct(array $queryString)
+	{
 
 		//Carregando as configurações
 		Configuracao::carregar();
 
 		//Verificando se é produção para mostrar os erros ou não
-		if( Configuracao::get( 'projeto.producao' ) )
+		if (Configuracao::get('projeto.producao'))
 			//Escondendo os erros em caso de produção
-			error_reporting( 0 );
+			error_reporting(0);
 
 		//Listando as propriedades da página
-		foreach( self::PROPRIEDADES as $propriedade )
+		foreach (self::PROPRIEDADES as $propriedade)
 			//Verificando
-			if( array_key_exists( $propriedade, $queryString ) )
+			if (array_key_exists($propriedade, $queryString))
 				//Definindo as propriedades
-				$this->$propriedade	= $this->formatarQueryString( $queryString, $propriedade );
+				$this->$propriedade = $this->formatarQueryString($queryString, $propriedade);
 
 		//Definindo a ação
-		$this->acao	= $queryString[ 'acao' ] ?? 'index';
-		$this->tipo	= $queryString[ 'tipo' ] ?? 'pagina';
+		$this->acao = $queryString['acao'] ?? 'index';
+		$this->tipo = $queryString['tipo'] ?? 'pagina';
 
 		//Verificando se o projeto necessita de autenticação
-		if( Configuracao::get( 'projeto.fechado' ) )
+		if (Configuracao::get('projeto.fechado'))
 			//Verificando a autenticação
-			$this->autenticado	= ( new Autenticacao( $this ) )->autenticado;
+			$this->autenticado = (new Autenticacao($this))->autenticado;
 
 		//Definindo o caminho do arquivo para exibição
 		$this->definirCaminho();
@@ -93,12 +101,13 @@ final class Pagina extends Base{
 	 * @uses App\Util\Util::definirCache() Definindo o cache do arquivo
 	 * @return void
 	 */
-	private function cache(): void{
+	private function cache(): void
+	{
 
 		//Verificando
-		if( $this->tipo !== 'tratamento' )
+		if ($this->tipo !== 'tratamento')
 			//Definindo o arquivo caso exista
-			$this->cache	= Util::definirCache( $this->diretorio, $this );
+			$this->cache = Util::definirCache($this->diretorio, $this);
 
 	}
 
@@ -108,12 +117,13 @@ final class Pagina extends Base{
 	 * @access private
 	 * @return void
 	 */
-	private function configuracao(): void{
+	private function configuracao(): void
+	{
 
 		//Verificando
-		if( $this->tipo !== 'tratamento' )
+		if ($this->tipo !== 'tratamento')
 			//Definindo as configurações
-			$this->configuracao	= ( new Configuracao( $this ) )->configuracao;
+			$this->configuracao = (new Configuracao($this))->configuracao;
 
 	}
 
@@ -128,7 +138,7 @@ final class Pagina extends Base{
 	{
 
 		//Retornando
-		return (new Configuracao( $this ))->get($chave, $padrao);
+		return (new Configuracao($this))->get($chave, $padrao);
 
 	}
 
@@ -144,15 +154,20 @@ final class Pagina extends Base{
 	 * @param mixed $query Tipo da querystring
 	 * @return string
 	 */
-	private function formatarQueryString( array $queryString, string $query ): string{
+	private function formatarQueryString(array $queryString, string $query): string
+	{
 
 		//Verificando se é do tipo módulo
-		if( $query == 'modelo' )
+		if ($query == 'modelo')
 			//Retornando
-			return str_replace( '-', '\\', $queryString[ $query ] ?? '' );
+			return str_replace('-', '\\', $queryString[$query] ?? '');
+		//Verificando se é do tipo diretório
+		else if ($query == 'diretorio')
+			//Configurando o diretório
+			$this->configurarDiretorio($queryString['diretorio']);
 
 		//Retornando
-		return $queryString[ $query ];
+		return $queryString[$query];
 
 	}
 
@@ -168,22 +183,23 @@ final class Pagina extends Base{
 	 * @uses App\Util\Util::redirecionar() Redirecionando
 	 * @return void
 	 */
-	private function definirCaminho(): void{
+	private function definirCaminho(): void
+	{
 
 		//Definindo o diretório do PHP
-		$dirPhp	= Configuracao::get( 'dir.php' );
+		$dirPhp = Configuracao::get('dir.php');
 
 		//Definindo o caminho
-		$this->caminho	= match( $this->tipo ){
+		$this->caminho = match ($this->tipo) {
 
 			//Tipo tratamento
-			'tratamento'	=> Configuracao::get( 'dir.requisicao' ) . "/{$this->diretorio}/{$this->{'diretorio-tratamento'}}/{$this->acao}.php",
+			'tratamento' => Configuracao::get('dir.requisicao') . "/{$this->diretorio}/{$this->{'diretorio-tratamento'} }/{$this->acao}.php",
 			//Padrão
-			default			=> ( !is_null( $this->diretorio ) && !is_null( $this->acao ) ) ? "{$dirPhp}/{$this->diretorio}/{$this->acao}.php" : "{$dirPhp}/{$this->diretorio}/index.php" };
+			default => (!is_null($this->diretorio) && !is_null($this->acao)) ? "{$dirPhp}/{$this->diretorio}/{$this->acao}.php" : "{$dirPhp}/{$this->diretorio}/index.php"
+		};
 
 		//Verificando
-		if( !realpath( $this->caminho ) || !file_exists( $this->caminho ) )
-		{
+		if (!realpath($this->caminho) || !file_exists($this->caminho)) {
 			//Carregando a página de erro internamente para preservar a URL original
 			self::definir404();
 		}
@@ -204,13 +220,37 @@ final class Pagina extends Base{
 		http_response_code(404);
 
 		// Definindo as propriedades da página de erro 404
-		$this->id 			= null;
-		$this->slug 		= null;
-		$this->pagina 		= null;
-		$this->modelo 		= null;
-		$this->diretorio 	= '404';
-		$this->acao 		= 'index';
-		$this->caminho 		= Configuracao::get('dir.php') . '/404/index.php';
+		$this->id = null;
+		$this->slug = null;
+		$this->pagina = null;
+		$this->modelo = null;
+		$this->diretorio = '404';
+		$this->acao = 'index';
+		$this->caminho = Configuracao::get('dir.php') . '/404/index.php';
+
+	}
+
+	/**
+	 * Configurando o diretório
+	 *
+	 * @access private
+	 * @param string $diretorio Diretório a ser configurado
+	 * @return void
+	 */
+	private function configurarDiretorio(string $diretorio): void
+	{
+
+		$modelo = array_search($diretorio, self::MODULOS) ?? null;
+
+		if (!empty($modelo)) {
+
+			$objeto = (new Fabrica($modelo))->repositorio;
+
+			$modelo = $objeto->propriedades['modelo'] ?? null;
+
+			$this->nome_modelo = $modelo->configuracao['nome'];
+
+		}
 
 	}
 

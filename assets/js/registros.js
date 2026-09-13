@@ -124,7 +124,9 @@
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Excluir',
-      cancelButtonText: 'Cancelar'
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#7A3F3B',
+      cancelButtonColor: '#5C7A62', 
     });
 
     if (confirmacao.isConfirmed) {

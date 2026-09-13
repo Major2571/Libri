@@ -29,8 +29,8 @@ try {
 
     if ($generos) {
 
-        $template->TOTAL_GENEROS = count($generos);
-        $template->block('EXIBIR_TOTAL_GENEROS');
+        $template->TOTAL = count($generos);
+        $template->block('EXIBIR_TOTAL');
 
         foreach ($generos as $genero) {
             $template->GENERO = $genero;

@@ -29,8 +29,8 @@ try {
 
     if ($autores) {
 
-        $template->TOTAL_AUTORES = count($autores);
-        $template->block('EXIBIR_TOTAL_AUTORES');
+        $template->TOTAL = count($autores);
+        $template->block('EXIBIR_TOTAL');
 
         foreach ($autores as $autor) {
             $template->AUTOR = $autor;

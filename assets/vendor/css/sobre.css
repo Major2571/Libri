@@ -1,0 +1,278 @@
+/* ---------- Hero ---------- */
+.page-hero {
+  padding: 64px 0 56px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.page-hero::before {
+  content: '';
+  position: absolute;
+  top: -160px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(176, 141, 87, 0.14), transparent 70%);
+}
+
+.page-hero h1 {
+  font-size: 40px;
+  font-weight: 500;
+  margin: 14px 0 14px;
+  position: relative;
+}
+
+.page-hero h1 em {
+  font-style: italic;
+  color: var(--brass);
+}
+
+.page-hero p {
+  max-width: 560px;
+  margin: 0 auto;
+  color: rgba(27, 38, 32, 0.62);
+  font-size: 15.5px;
+  line-height: 1.65;
+  position: relative;
+}
+
+/* ---------- Layout com sumário lateral ---------- */
+.doc-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 56px;
+  padding: 20px 0 100px;
+  align-items: start;
+}
+
+.toc {
+  position: sticky;
+  top: 100px;
+}
+
+.toc-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11.5px;
+  color: rgba(27, 38, 32, 0.4);
+  margin-bottom: 14px;
+  display: block;
+}
+
+.toc a {
+  display: block;
+  font-size: 13.5px;
+  padding: 7px 0;
+  color: rgba(27, 38, 32, 0.55);
+  border-left: 2px solid transparent;
+  padding-left: 12px;
+  margin-left: -13px;
+  transition: all 0.15s ease;
+}
+
+.toc a:hover {
+  color: var(--ink);
+}
+
+.toc a.active {
+  color: var(--brass);
+  border-left-color: var(--brass);
+  font-weight: 600;
+}
+
+.doc-section {
+  margin-bottom: 64px;
+  scroll-margin-top: 96px;
+}
+
+.doc-section h2 {
+  font-size: 26px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.doc-section > p {
+  color: rgba(27, 38, 32, 0.65);
+  font-size: 14.5px;
+  line-height: 1.75;
+  max-width: 640px;
+}
+
+/* funcionalidades */
+.feat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.feat-card {
+  background: #fff;
+  border: 1px solid var(--paper-dim);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.feat-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.feat-card h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.feat-card p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(27, 38, 32, 0.6);
+  margin: 0;
+}
+
+/* tecnologias */
+.tech-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.tech-pill {
+  background: #fff;
+  border: 1px solid var(--paper-dim);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tech-pill .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+/* ficha técnica */
+.fact-grid {
+  background: #fff;
+  border: 1px solid var(--paper-dim);
+  border-radius: 14px;
+  padding: 8px 24px;
+  margin-top: 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.fact-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--paper-dim);
+  font-size: 14px;
+}
+
+.fact-row:last-child {
+  border-bottom: none;
+}
+
+.fact-row .fk {
+  color: rgba(27, 38, 32, 0.5);
+}
+
+.fact-row .fv {
+  font-weight: 600;
+}
+
+.fact-row .fv a {
+  color: var(--brass);
+}
+
+/* FAQ (accordion do bootstrap, com skin do libri) */
+.accordion-item {
+  background: #fff;
+  border: 1px solid var(--paper-dim) !important;
+  border-radius: 12px !important;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.accordion-button {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 14.5px;
+  color: var(--ink);
+  background: #fff;
+  padding: 16px 20px;
+}
+
+.accordion-button:not(.collapsed) {
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: none;
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+  border-color: var(--paper-dim);
+}
+
+.accordion-button::after {
+  filter: sepia(1) saturate(2) hue-rotate(0deg) brightness(0.8);
+}
+
+.accordion-body {
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: rgba(27, 38, 32, 0.65);
+  padding: 0 20px 18px;
+}
+
+/* crédito */
+.credit-card {
+  background: #fff;
+  border: 1px solid var(--paper-dim);
+  border-radius: 14px;
+  padding: 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: var(--shadow-sm);
+  margin-top: 20px;
+}
+
+.credit-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 11px;
+  background: var(--paper-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--ink);
+  flex-shrink: 0;
+}
+
+.credit-card a {
+  color: var(--brass);
+  font-weight: 600;
+}
+

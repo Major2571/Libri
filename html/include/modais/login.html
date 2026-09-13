@@ -1,0 +1,19 @@
+<div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="modalLoginLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            <h3 class="modal-title" id="modalLoginLabel">Entrar no Libri</h3>
+            <p class="modal-sub">Acesse o painel do acervo da sua biblioteca.</p>
+            <form action="{URL}/login" method="POST">
+                <div class="field"><label for="login-email">E-mail</label><input type="email" id="login-email"
+                        name="email" placeholder="voce@biblioteca.com" required></div>
+                <div class="field"><label for="login-senha">Senha</label><input type="password" id="login-senha"
+                        name="senha" placeholder="••••••••" required></div>
+                <input type="hidden" name="csrf-token" value="{CSRF_TOKEN}">
+                <button type="submit" class="btn btn-primary">Entrar</button>
+            </form>
+            <div class="modal-switch">Ainda não tem conta? <a data-bs-toggle="modal"
+                    data-bs-target="#modalCadastro">Criar conta</a></div>
+        </div>
+    </div>
+</div>

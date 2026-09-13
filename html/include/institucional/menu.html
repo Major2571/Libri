@@ -1,0 +1,41 @@
+<header>
+    <div class="nav-wrap">
+        <a href="{URL}" class="brand">
+            <img src="{URL_IMG}/logo/logo.svg" alt="Libri" class="w-px-100 h-auto" />
+        </a>
+
+        <nav class="nav-links">
+            <a href="{URL}#recursos">Recursos</a>
+            <a href="{URL}#como-funciona">Como funciona</a>
+            <a href="{URL}#depoimentos">Depoimentos</a>
+            <a href="{URL}#contato">Contato</a>
+        </nav>
+
+        <div class="nav-actions">
+            <button class="btn btn-ghost" data-bs-toggle="modal" data-bs-target="#modalLogin">Entrar</button>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCadastro">Criar
+                conta</button>
+        </div>
+
+        <button class="menu-toggle" onclick="document.getElementById('mobile-nav').classList.toggle('open')">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="4" y1="7" x2="20" y2="7" />
+                <line x1="4" y1="12" x2="20" y2="12" />
+                <line x1="4" y1="17" x2="20" y2="17" />
+            </svg>
+        </button>
+    </div>
+
+    <div id="mobile-nav" style="display:none; flex-direction:column; gap:2px; padding:0 24px 16px;">
+        <a href="#recursos" style="padding:10px 0; font-size:14px;">Recursos</a>
+        <a href="#como-funciona" style="padding:10px 0; font-size:14px;">Como funciona</a>
+        <a href="#depoimentos" style="padding:10px 0; font-size:14px;">Depoimentos</a>
+        <a href="#contato" style="padding:10px 0; font-size:14px;">Contato</a>
+        <div style="display:flex; gap:10px; padding-top:10px;">
+            <button class="btn btn-outline" style="flex:1; justify-content:center;" data-bs-toggle="modal"
+                data-bs-target="#modalLogin">Entrar</button>
+            <button class="btn btn-primary" style="flex:1; justify-content:center;" data-bs-toggle="modal"
+                data-bs-target="#modalCadastro">Criar conta</button>
+        </div>
+    </div>
+</header>

@@ -6,7 +6,10 @@
 
   #{$parent} {
     background-color: map-get($colors, bg) !important;
-    color: map-get($colors, color);
+    font-family: var(--bs-font-monospace);
+    font-size: 12px;
+    letter-spacing: 0.2px;
+    color: rgba(27, 38, 32, 0.45);
 
     .footer-link {
       color: map-get($colors, color);
@@ -21,8 +24,9 @@
       }
     }
 
+    // copyright/créditos herdam a cor apagada do rodapé, não a cor de "ativo" dos links
     .footer-text {
-      color: map-get($colors, active-color);
+      color: inherit;
     }
 
     .show > .footer-link,

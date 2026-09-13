@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Libri — Sobre o projeto</title>
+    {INCLUDE_CABECALHO}
+    <link rel="stylesheet" href="{URL_VENDOR}/css/institucionais.css" />
+    <link rel="stylesheet" href="{URL_VENDOR}/css/sobre.css" />
+</head>
+
+<body>
+
+    {INCLUDE_MENU}
+
+    <!-- ===================== Hero da página ===================== -->
+    <section class="page-hero">
+        <div class="container">
+            <span class="eyebrow" style="justify-content:center;">sobre o projeto</span>
+            <h1>Conheça o <em>Libri</em> por dentro</h1>
+            <p>
+                O que o sistema faz, como foi construído e o que está por trás do gerenciamento
+                do acervo da sua biblioteca.
+            </p>
+        </div>
+    </section>
+
+    <!-- ===================== Conteúdo com sumário ===================== -->
+    <div class="container">
+        <div class="doc-layout">
+
+            <!-- Sumário -->
+            <aside class="toc">
+                <span class="toc-label">nesta página</span>
+                <a href="#sobre">Sobre o projeto</a>
+                <a href="#funcionalidades">Funcionalidades</a>
+                <a href="#tecnologias">Tecnologias</a>
+                <a href="#ficha-tecnica">Ficha técnica</a>
+                <a href="#faq">Perguntas frequentes</a>
+            </aside>
+
+            <!-- Conteúdo -->
+            <div>
+
+                <div class="doc-section" id="sobre">
+                    <h2>Sobre o projeto</h2>
+                    <p>
+                        O Libri é um sistema de gestão de acervo desenvolvido como projeto acadêmico,
+                        pensado para organizar o dia a dia de uma biblioteca: cadastro de livros, autores
+                        e gêneros, controle de empréstimos e devoluções, gestão de membros e relatórios
+                        de uso do acervo — tudo em um único painel.
+                    </p>
+                </div>
+
+                <div class="doc-section" id="funcionalidades">
+                    <h2>Funcionalidades</h2>
+                    <p>O que já está disponível no sistema hoje.</p>
+                    <div class="feat-grid">
+                        <div class="feat-card">
+                            <div class="feat-icon" style="background:rgba(176,141,87,0.15);">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B08D57"
+                                    stroke-width="2">
+                                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3>Acervo</h3>
+                                <p>Cadastro de livros com autor, gênero, capa e descrição.</p>
+                            </div>
+                        </div>
+                        <div class="feat-card">
+                            <div class="feat-icon" style="background:rgba(110,151,160,0.18);">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6E97A0"
+                                    stroke-width="2">
+                                    <path
+                                        d="M20.59 13.41L13.42 20.6a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
+                                    <line x1="7" y1="7" x2="7.01" y2="7" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3>Gêneros</h3>
+                                <p>Categorias com hierarquia entre gênero principal e subgêneros.</p>
+                            </div>
+                        </div>
+                        <div class="feat-card">
+                            <div class="feat-icon" style="background:rgba(122,63,59,0.13);">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7A3F3B"
+                                    stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                    <circle cx="12" cy="7" r="4" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3>Autores</h3>
+                                <p>Dados biográficos, nacionalidade e status de cada autor.</p>
+                            </div>
+                        </div>
+                        <div class="feat-card">
+                            <div class="feat-icon" style="background:rgba(92,122,98,0.15);">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5C7A62"
+                                    stroke-width="2">
+                                    <path d="M17 1l4 4-4 4" />
+                                    <path d="M3 11V9a4 4 0 0 1 4-4h14" />
+                                    <path d="M7 23l-4-4 4-4" />
+                                    <path d="M21 13v2a4 4 0 0 1-4 4H3" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3>Empréstimos</h3>
+                                <p>Registro de empréstimo e devolução, com alerta de atraso.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doc-section" id="tecnologias">
+                    <h2>Tecnologias</h2>
+                    <p>Stack utilizada no desenvolvimento do sistema.</p>
+                    <div class="tech-pills">
+                        <span class="tech-pill">
+                            <span class="dot" style="background:#B08D57;"></span>
+                            PHP 8.2
+                        </span>
+                        <span class="tech-pill">
+                            <span class="dot" style="background:#5C7A62;"></span>
+                            HTML, CSS &amp; JS
+                        </span>
+                        <span class="tech-pill">
+                            <span class="dot" style="background:#6E97A0;"></span>
+                            Bootstrap 5
+                        </span>
+                        <span class="tech-pill">
+                            <span class="dot" style="background:#7A3F3B;"></span>
+                            MySQL 8
+                        </span>
+                    </div>
+                </div>
+
+                <div class="doc-section" id="ficha-tecnica">
+                    <h2>Ficha técnica</h2>
+                    <div class="fact-grid">
+                        <div class="fact-row"><span class="fk">Instituição</span>
+                            <span class="fv">Faculdade Impacta</span>
+                        </div>
+                        <div class="fact-row"><span class="fk">Disciplina</span>
+                            <span class="fv">Software Product: Analysis, Specification, Project & Implementation</span>
+                        </div>
+                        <div class="fact-row"><span class="fk">Repositório</span>
+                            <span class="fv"><a href="https://github.com/Major2571/Libri" target="_blank"
+                                    rel="noopener noreferrer">GitHub</a>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="credit-card">
+                        <span class="credit-avatar">CT</span>
+                        <div>
+                            <span style="display:block; font-weight:600; font-size:14px;">Desenvolvido por</span>
+                            <a href="https://github.com/Major2571" target="_blank"
+                                rel="noopener noreferrer">Caroline Tacats</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doc-section" id="faq" style="margin-bottom:0;">
+                    <h2>Perguntas frequentes</h2>
+                    <div class="accordion" id="accordionFaq" style="margin-top:20px;">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#faq1">
+                                    Pergunta 1
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#accordionFaq">
+                                <div class="accordion-body">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus
+                                    tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices
+                                    diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#faq2">
+                                    Pergunta 2
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#accordionFaq">
+                                <div class="accordion-body">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus
+                                    tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices
+                                    diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#faq3">
+                                    Pergunta 3
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#accordionFaq">
+                                <div class="accordion-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus
+                                tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices
+                                diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi.
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    {INCLUDE_RODAPE}
+
+    {INCLUDE_MODAL_LOGIN}
+    {INCLUDE_MODAL_CADASTRO}
+
+    <script>
+        // Marca o item ativo do sumário lateral conforme a rolagem
+        const sections = document.querySelectorAll('.doc-section');
+        const tocLinks = document.querySelectorAll('.toc a');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(sec => {
+                if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
+            });
+            tocLinks.forEach(link => {
+                link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+            });
+        });
+    </script>
+
+</body>
+
+</html>

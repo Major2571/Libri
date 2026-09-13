@@ -6,7 +6,6 @@
 //Definindo as classes
 use App\Infraestrutura\Template;
 use App\Infraestrutura\Configuracao;
-use App\Infraestrutura\Fachada;
 
 // Definindo a página
 try {
@@ -16,6 +15,9 @@ try {
 
     // Incluindo as variáveis
     require_once(Configuracao::get('dir.include') . '/variaveis.php');
+
+    //Incluindo a barra de navegação
+    $template->addFile('INCLUDE_MANUTENCAO', "{$dirHtml}/include/sistema/manutencao.html");
 
     $template->dashboard_ativo = 'active';
 

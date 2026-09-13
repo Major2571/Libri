@@ -5,7 +5,7 @@ RewriteEngine On
 ErrorDocument 404 /404
 
 #Login, cadastro e esqueci minha senha
-RewriteRule ^\/?$ requisicao/index.php?diretorio=dashboard [NC,QSA]
+RewriteRule ^\/?$ requisicao/index.php?diretorio=home [NC,QSA]
 
 #Treatmentos
 RewriteRule ^verificar-dominio\/?$ requisicao/index.php?acao=verificar&diretorio-tratamento=dominio&tipo=tratamento [NC,L]
