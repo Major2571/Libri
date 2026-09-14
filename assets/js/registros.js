@@ -75,7 +75,7 @@
 
     await mensagem;
 
-    if (sucesso && (limparFormulario && modal || elemento.id.startsWith('excluir'))) {
+    if (sucesso && (limparFormulario || elemento.id.startsWith('excluir'))) {
       window.location.reload();
     }
   }
