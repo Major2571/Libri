@@ -14,7 +14,7 @@ O **Libri** tem como objetivo fornecer uma aplicação web para gerenciamento de
 
 * [x] Cadastro de gêneros
 * [x] Hierarquia entre gêneros através de gênero pai
-* [x] Cadastro de autores
+* [ ] Cadastro de autores
 * [ ] Cadastro de livros
 * [ ] Cadastro de usuários
 
@@ -23,9 +23,9 @@ O **Libri** tem como objetivo fornecer uma aplicação web para gerenciamento de
 * [x] Listagem de gêneros
 * [x] Edição de gêneros
 * [x] Exclusão de gêneros
-* [x] Listagem de autores
-* [x] Edição de autores
-* [x] Exclusão de autores
+* [ ] Listagem de autores
+* [ ] Edição de autores
+* [ ] Exclusão de autores
 * [ ] Associação de livros a autores e gêneros
 * [ ] Controle de disponibilidade dos livros
 
@@ -64,7 +64,7 @@ Antes de iniciar o projeto, certifique-se de possuir:
 Clone o repositório:
 
 ```bash
-git clone <URL_DO_REPOSITORIO>
+git clone https://github.com/Major2571/Libri.git
 ```
 
 Acesse a pasta do projeto:
@@ -86,27 +86,17 @@ No Windows, o arquivo também pode ser copiado manualmente.
 Configure no `.env` as informações de conexão com o banco de dados:
 
 ```bash
-DB_HOST=localhost
-DB_NAME=libri
-DB_USER=root
-DB_PASSWORD=
+BD_ENDERECO="localhost"
+BD_BASE="libri"
+BD_PORTA=3306
+BD_USUARIO=root
+BD_SENHA=""
 ```
 
-Também é necessário ajustar as variáveis DIR, DIR_RAIZ e URL conforme o diretório em que o projeto foi instalado.
+Também é necessário ajustar as variáveis `DIR`, `DIR_RAIZ` e `URL` conforme o diretório em que o projeto foi instalado.
+.
 
-> O arquivo .env contém configurações específicas do ambiente e não deve ser versionado. Utilize o .env.example como referência para sua configuração local.
-
-### 3. Criar o banco de dados
-
-Crie um banco de dados chamado `libri`:
-
-```sql
-CREATE DATABASE libri
-CHARACTER SET utf8mb4
-COLLATE utf8mb4_unicode_ci;
-```
-
-### 4. Importar a estrutura do banco
+### 3. Configurar o banco de dados
 
 O projeto disponibiliza o arquivo SQL em:
 
@@ -114,25 +104,35 @@ O projeto disponibiliza o arquivo SQL em:
 database/libri.sql
 ```
 
-Esse arquivo contém a estrutura necessária para configurar o banco de dados.
+Esse arquivo já contém a criação do banco de dados `libri`, além da estrutura necessária para o funcionamento do projeto.
 
 #### Pelo phpMyAdmin
 
 1. Acesse o phpMyAdmin.
-2. Selecione o banco `libri`.
-3. Acesse **Importar**.
-4. Selecione `database/libri.sql`.
-5. Execute a importação.
+2. Acesse **Importar**.
+3. Selecione o arquivo:
 
-### 5. Instalar as dependências
+```text
+database/libri.sql
+```
+
+4. Execute a importação.
+5. Após a importação, o banco `libri` e suas tabelas estarão disponíveis.
+
+### 4. Instalar as dependências
 
 Na raiz do projeto, execute:
 
 ```bash
 npm install
 ```
+ou
 
-### 6. Compilar os assets
+```bash
+npm i
+```
+
+### 5. Compilar os assets
 
 Execute:
 
@@ -140,7 +140,7 @@ Execute:
 gulp
 ```
 
-### 7. Executar o projeto
+### 6. Executar o projeto
 
 Com o Apache e o MySQL em execução, acesse o projeto pelo navegador:
 
