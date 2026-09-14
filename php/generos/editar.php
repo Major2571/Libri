@@ -35,6 +35,10 @@ try {
 
     if ($generos) {
         foreach ($generos as $gen) {
+            
+            if (!is_null($gen->genero_pai))
+                continue;
+
             $template->GENERO_SELECT = $gen;
             $template->genero_selecionado = ($gen->id == $genero->genero_pai) ? 'selected' : '';
             $template->block('BLOCO_GENEROS');

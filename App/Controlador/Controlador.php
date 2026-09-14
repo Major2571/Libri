@@ -284,4 +284,12 @@ abstract class Controlador extends Base
 
 	}
 
+	public function contar(): int
+	{
+
+		//Retornando a contagem
+		return $this->repositorio->contar();
+		
+	}
+
 }
