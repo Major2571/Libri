@@ -4,66 +4,32 @@ RewriteEngine On
 #404
 ErrorDocument 404 /404
 
-#Login, cadastro e esqueci minha senha
+#Home
 RewriteRule ^\/?$ requisicao/index.php?diretorio=home [NC,QSA]
 
-#Treatmentos
-RewriteRule ^verificar-dominio\/?$ requisicao/index.php?acao=verificar&diretorio-tratamento=dominio&tipo=tratamento [NC,L]
-RewriteRule ^autenticar\/?$ requisicao/index.php?acao=autenticar&diretorio-tratamento=usuario&tipo=tratamento [NC,L]
-RewriteRule ^editar-perfil\/?$ requisicao/index.php?acao=editar-perfil&diretorio-tratamento=usuario&tipo=tratamento [NC,L]
-RewriteRule ^redefinir-senha\/?$ requisicao/index.php?acao=esqueci-minha-senha&diretorio-tratamento=usuario&tipo=tratamento [NC,L]
-RewriteRule ^novo-usuario\/?$ requisicao/index.php?acao=novo-usuario&diretorio-tratamento=usuario&tipo=tratamento [NC,L]
+# Exibindo a página de edição
+RewriteRule ^([a-z_-]+)\/(editar)\/([0-9]+)\/?$ requisicao/index.php?acao=$2&diretorio=$1&id=$3 [NC,L,QSA]
 
-
-
+#Salvando registros
 RewriteRule ^([a-z_-]+)\/salvar\/?$ requisicao/index.php?modelo=$1&acao=novo&diretorio-tratamento=acoes&tipo=tratamento [NC,L]
-RewriteRule ^([a-z_-]+)\/editar\/?$ requisicao/index.php?modelo=$1&acao=novo&diretorio-tratamento=acoes&tipo=tratamento [NC,L]
 
-
-RewriteRule ^editar\/([a-z_-]+)\/([0-9]+)\/?$ requisicao/index.php?modelo=$1&id=$2&acao=editar&diretorio-tratamento=acoes&tipo=tratamento [NC,L]
-RewriteRule ^excluir\/([a-z_-]+)\/([0-9]+)\/?$ requisicao/index.php?modelo=$1&id=$2&acao=excluir&diretorio-tratamento=acoes&tipo=tratamento [NC,L]
-
-
-
-
-
-
-
-
-#Inscrições
-RewriteRule ^inscricao-eventos\/?$ requisicao/index.php?acao=inscricao&diretorio-tratamento=eventos&tipo=tratamento [NC,L]
-RewriteRule ^cancelar-inscricao\/?$ requisicao/index.php?modelo=$1&acao=cancelar-inscricao&diretorio-tratamento=eventos&tipo=tratamento [NC,L]
-
-#Avaliações
-RewriteRule ^enviar-avaliacao\/?$ requisicao/index.php?acao=enviar-avaliacao&diretorio-tratamento=avaliacao&tipo=tratamento [NC,L]
-
-
-RewriteRule ^([a-z_-]+)/(novo|remover-selecionados|verificar-slug)/?$ requisicao/index.php?acao=$2&diretorio=$1 [NC,L,QSA]
-RewriteRule ^([a-z_-]+)\/(remover|editar-status|editar)\/([0-9]+)\/?$ requisicao/index.php?acao=$2&diretorio=$1&id=$3 [NC,L,QSA]
-
+#Excluindo e editando registros
+RewriteRule ^(editar|excluir)/([a-z_-]+)/([0-9]+)/?$ requisicao/index.php?modelo=$2&id=$3&acao=$1&diretorio-tratamento=acoes&tipo=tratamento [NC,L]
 
 # Paginacao
 RewriteRule ^paginacao\/([a-z]+)\/?$ requisicao/index.php?modelo=$1&acao=paginacao&diretorio-tratamento=paginacao&pagina=$2&tipo=tratamento [NC,L,QSA]
-
-#Meu Perfil
-RewriteRule ^meu-perfil\/(cadastro)\/?$ requisicao/index.php?diretorio=meu-perfil&acao=$1 [NC,L,QSA]
-RewriteRule ^desativar-conta\/?$ requisicao/index.php?acao=desativar-conta&diretorio-tratamento=usuario&tipo=tratamento [NC,L]
-
-#Eventos
-RewriteRule ^(eventos|meus-beneficios)\/([a-z0-9_-]+)\/?$ requisicao/index.php?diretorio=$1&acao=exibir&slug=$2 [NC,L,QSA]
-RewriteRule ^(eventos)\/([a-z0-9_-]+)\/cancelar-inscricao\/?$ requisicao/index.php?diretorio=$1&acao=cancelar-inscricao&slug=$2 [NC,L,QSA]
 
 #Módulo, ação e identificador
 RewriteRule ^([a-z0-9_-]+)\/?$ requisicao/index.php?diretorio=$1 [NC,L,QSA]
 RewriteRule ^([a-z0-9_-]+)\/([a-z0-9_-]+)\/?$ requisicao/index.php?diretorio=$1&acao=$2 [NC,L,QSA]
 
 #Redirects
-RewriteRule ^php/([a-z,0-9,_-]+)\/([a-z,0-9,_.-]+)\/?$ https://dev.caju.codes/plaza-mais [R=301,NC]
-RewriteRule ^php/([a-z,0-9,_-]+)\/?$ https://dev.caju.codes/plaza-mais [R=301,NC]
-RewriteRule ^html/([a-z,0-9,_-]+)\/([a-z,0-9,_.-]+)\/?$ https://dev.caju.codes/plaza-mais [R=301,NC]
-RewriteRule ^html/([a-z,0-9,_-]+)\/?$ https://dev.caju.codes/plaza-mais [R=301,NC]
-RewriteRule ^submit/([a-z,0-9,_-]+)\/?$ https://dev.caju.codes/plaza-mais [R=301,NC]
-RewriteRule ^submit/([a-z,0-9,_-]+)\/([a-z,0-9,_.-]+)\/?$ https://dev.caju.codes/plaza-mais [R=301,NC]
+RewriteRule ^php/([a-z,0-9,_-]+)\/([a-z,0-9,_.-]+)\/?$ https://github.com/Major2571/Libri [R=301,NC]
+RewriteRule ^php/([a-z,0-9,_-]+)\/?$ https://github.com/Major2571/Libri [R=301,NC]
+RewriteRule ^html/([a-z,0-9,_-]+)\/([a-z,0-9,_.-]+)\/?$ https://github.com/Major2571/Libri [R=301,NC]
+RewriteRule ^html/([a-z,0-9,_-]+)\/?$ https://github.com/Major2571/Libri [R=301,NC]
+RewriteRule ^submit/([a-z,0-9,_-]+)\/?$ https://github.com/Major2571/Libri [R=301,NC]
+RewriteRule ^submit/([a-z,0-9,_-]+)\/([a-z,0-9,_.-]+)\/?$ https://github.com/Major2571/Libri [R=301,NC]
 
 #Fallback para rotas não mapeadas
 RewriteCond %{REQUEST_FILENAME} !-f

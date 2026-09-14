@@ -37,6 +37,22 @@ try {
 try {
 
     //Verificando se não está no painel
+    if ($pagina->diretorio) {
+
+        //Definindo os atalhos
+        $atalho = Util::definirAtalho($pagina);
+
+        $template->TITULO_DA_PAGINA = ($pagina->diretorio == 'dashboard') ? ' Dashboard ' : $atalho->atalho . ' - ' . $atalho->titulo;
+
+    }
+
+} catch (Exception $e) {
+}
+
+//Atalhos
+try {
+
+    //Verificando se não está no painel
     if ($pagina->diretorio != 'dahsboard') {
 
         //Incluindo o script

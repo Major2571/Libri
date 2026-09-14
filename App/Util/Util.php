@@ -684,6 +684,14 @@ final class Util
 				$objeto->atalho = $pagina->nome_modelo;
 
 				break;
+
+			default:
+
+				//Definindo o objeto
+				$objeto->titulo = 'Libri';
+				$objeto->atalho = $pagina->nome_modelo;
+
+				break;
 		}
 
 		//Retornando
