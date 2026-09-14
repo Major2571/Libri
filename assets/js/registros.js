@@ -109,6 +109,39 @@
     }
   }
 
+  async function editarRegistroModal(formulario, aoSucesso) {
+    const controle = formulario.querySelector('[type="submit"]');
+    const modal = formulario.closest('.modal');
+    controle.disabled = true;
+
+    try {
+      const resposta = await fetch(formulario.action, {
+        method: formulario.method || 'POST',
+        body: new FormData(formulario),
+        headers: { Accept: 'application/json' }
+      });
+      const retorno = await resposta.json();
+
+      if (!resposta.ok || retorno.tipo !== 'sucesso') {
+        throw new Error(retorno.mensagem || 'Não foi possível atualizar o registro.');
+      }
+
+      if (aoSucesso) {
+        await aoSucesso(retorno);
+      }
+
+      if (modal && typeof bootstrap !== 'undefined') {
+        bootstrap.Modal.getOrCreateInstance(modal).hide();
+      }
+
+      await mostrarMensagem(retorno, true);
+    } catch (error) {
+      await mostrarMensagem({ mensagem: error.message }, false);
+    } finally {
+      controle.disabled = false;
+    }
+  }
+
   function salvarRegistro(formulario) {
     return executar(formulario, true);
   }
@@ -136,6 +169,7 @@
 
   window.salvarRegistro = salvarRegistro;
   window.editarRegistro = editarRegistro;
+  window.editarRegistroModal = editarRegistroModal;
   window.excluirRegistro = excluirRegistro;
 
   document.addEventListener('submit', function (event) {

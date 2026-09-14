@@ -34,8 +34,16 @@ try {
 
         foreach ($generos as $genero) {
             $template->GENERO = $genero;
+            $template->GENERO_NOME_EDITAR = $genero->nome;
+            $template->GENERO_DESCRICAO_EDITAR = $genero->descricao;
+            $template->GENERO_PAI_EDITAR = $genero->genero_pai?->id ?? '';
             $template->block('BLOCO_GENEROS');
+            
+            if (!is_null($genero->genero_pai))
+                continue;
+            
             $template->block('BLOCO_GENEROS_MODAL');
+            $template->block('BLOCO_GENEROS_EDITAR_MODAL');
         }
 
     }

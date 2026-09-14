@@ -66,11 +66,15 @@
                                             </td>
                                             <td>
                                                 <div class="text-end">
-                                                    <a href="{URL}/generos/editar/{GENERO->ID}"
+                                                    <button type="button" data-bs-toggle="modal" data-bs-target="#modalEditar"
+                                                        data-url="{URL}/editar/Genero/{GENERO->ID}"
+                                                        data-nome="{GENERO_NOME_EDITAR}"
+                                                        data-descricao="{GENERO_DESCRICAO_EDITAR}"
+                                                        data-genero-pai="{GENERO_PAI_EDITAR}"
                                                         class="btn btn-icon btn-label-primary rounded-pill"
                                                         title="Editar gênero">
                                                         <i class="bx bx-edit-alt"></i>
-                                                    </a>
+                                                    </button>
                                                     <a id="excluir-{GENERO->ID}"
                                                         data-url="{URL}/excluir/Genero/{GENERO->ID}"
                                                         href="{URL}/excluir/Genero/{GENERO->ID}"
@@ -163,16 +167,45 @@
             </div>
         </div>
 
-        {INCLUDE_JAVASCRIPT}
+        <div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="modalEditarTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalEditarTitle">Editar gênero</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editar-modal" method="POST">
+                            <div class="mb-3">
+                                <label class="form-label" for="editar-genero-pai">Gênero principal</label>
+                                <select class="form-select" id="editar-genero-pai" name="genero_pai">
+                                    <option value="">Sem gênero principal</option>
+                                    <!-- BEGIN BLOCO_GENEROS_EDITAR_MODAL -->
+                                    <option value="{GENERO->ID}">{GENERO->NOME}</option>
+                                    <!-- END BLOCO_GENEROS_EDITAR_MODAL -->
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="editar-nome">Nome</label>
+                                <input type="text" id="editar-nome" class="form-control" name="nome" required />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="editar-descricao">Descrição</label>
+                                <textarea id="editar-descricao" class="form-control" name="descricao" required></textarea>
+                            </div>
+                            <input type="hidden" name="csrf-token" value="{CSRF_TOKEN}" />
+                            <div class="d-flex justify-content-end gap-2">
+                                <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">Salvar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <script>
-            document.getElementById('busca-generos')?.addEventListener('input', function (e) {
-                const termo = e.target.value.toLowerCase();
-                document.querySelectorAll('#tabela-generos tbody tr').forEach(function (tr) {
-                    tr.style.display = tr.textContent.toLowerCase().includes(termo) ? '' : 'none';
-                });
-            });
-        </script>
+        {INCLUDE_JAVASCRIPT}
+        <script src="{URL_JS}/generos.js"></script>
 
     </div>
 
