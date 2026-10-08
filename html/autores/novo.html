@@ -32,27 +32,39 @@
                                     <div class="card-body">
                                         <form id="inserir" action="{URL}/Autor/salvar" method="POST"
                                             enctype="multipart/form-data">
+                                            <div class="autor-api mb-4" data-autor-api>
+                                                <label class="form-label" for="busca-autor-api">Buscar autor ou livro</label>
+                                                <div class="input-group input-group-merge">
+                                                    <span class="input-group-text"><i class="bx bx-search"></i></span>
+                                                    <input type="search" id="busca-autor-api" class="form-control"
+                                                        placeholder="Digite pelo menos 3 letras" autocomplete="off"
+                                                        data-autor-busca aria-label="Buscar autor ou livro" />
+                                                </div>
+                                                <div class="autor-api__resultados" data-autor-resultados hidden></div>
+                                                <div class="autor-api__obras-container" data-autor-obras hidden></div>
+                                            </div>
                                             <div class="row">
                                                 <div class="mb-3">
                                                     <label class="form-label" for="genero">Gênero(s)
                                                         Associado(s)</label>
-                                                    <div class="autor-generos" id="autor-generos">
+                                                    <div class="autor-generos" id="autor-generos" data-multi-select data-placeholder="Escolha um ou mais gêneros">
                                                         <div class="input-group input-group-merge autor-generos__control"
+                                                            data-multi-select-control
                                                             role="button" tabindex="0"
                                                             aria-controls="autor-generos-menu" aria-expanded="false">
-                                                            <div class="autor-generos__chips" id="autor-generos-chips">
+                                                            <div class="autor-generos__chips" data-multi-select-chips>
                                                                 <span class="autor-generos__placeholder">Escolha um ou
                                                                     mais gêneros</span>
                                                             </div>
                                                         </div>
                                                         <select class="form-select required autor-generos-select"
-                                                            id="genero" name="genero[]" aria-label="Gêneros associados"
+                                                            id="genero" name="generos[]" aria-label="Gêneros associados"
                                                             multiple>
                                                             <!-- BEGIN BLOCO_GENEROS -->
                                                             <option value="{GENERO->ID}">{GENERO->NOME}</option>
                                                             <!-- END BLOCO_GENEROS -->
                                                         </select>
-                                                        <div class="autor-generos__menu" id="autor-generos-menu"
+                                                        <div class="autor-generos__menu" data-multi-select-menu
                                                             role="listbox" aria-multiselectable="true"></div>
                                                     </div>
                                                     <div class="form-text">Selecione todos os gêneros associados ao
@@ -144,9 +156,9 @@
                                             <!-- Foto -->
                                             <div class="mb-4">
                                                 <label class="form-label" for="imagem">Foto do autor</label>
-                                                <div class="autor-imagem-dropzone" id="autor-imagem-dropzone"
+                                                    <div class="autor-imagem-dropzone" id="autor-imagem-dropzone" data-dropzone
                                                     role="button" tabindex="0" aria-label="Escolher foto do autor">
-                                                    <img id="preview-imagem" src="{URL_IMG}/avatars/profile.png"
+                                                        <img id="preview-imagem" data-dropzone-preview src="{URL_IMG}/avatars/profile.png"
                                                         alt="Pré-visualização da foto do autor"
                                                         class="autor-imagem-dropzone__preview" />
                                                     <div class="autor-imagem-dropzone__content">
@@ -155,7 +167,7 @@
                                                         <div class="autor-imagem-dropzone__hint">PNG, JPG ou WEBP. Deixe
                                                             em branco para usar um avatar padrão.</div>
                                                     </div>
-                                                    <button type="button" class="autor-imagem-dropzone__remove"
+                                                        <button type="button" class="autor-imagem-dropzone__remove" data-dropzone-remove
                                                         id="remover-imagem" aria-label="Remover foto">&times;</button>
                                                     <input type="file" id="imagem" class="d-none" name="imagem"
                                                         accept="image/png, image/jpeg, image/webp"
@@ -181,7 +193,9 @@
 
         {INCLUDE_JAVASCRIPT}
 
+        <script src="{URL_JS}/form-controls.js"></script>
         <script src="{URL_JS}/autores.js"></script>
+        <script src="{URL_JS}/autor-api.js"></script>
 
     </div>
 

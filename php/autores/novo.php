@@ -25,32 +25,13 @@ try {
 
 try {
 
-    $generos = Fachada::instancia('Genero')->configurar(excecao: false)->listarOrdenado('nome');
+    $generos = Fachada::instancia('Genero\Genero')->configurar(excecao: false)->listarOrdenado('nome');
 
     if ($generos) {
 
         foreach ($generos as $genero) {
             $template->GENERO = $genero;
             $template->block('BLOCO_GENEROS');
-        }
-
-    }
-
-}catch (Exception $e) {
-}
-
-try {
-
-    $ultimosRegistros = Fachada::instancia('Genero')->configurar(excecao: false)->listarOrdenado('data-criacao-desc');
-
-    if ($ultimosRegistros) {
-
-        $ultimos = array_slice($ultimosRegistros, 0, 5);
-
-        foreach ($ultimos as $item) {
-
-            $template->LISTAGEM = $item;
-            $template->block('BLOCO_LISTAGEM');
         }
 
     }

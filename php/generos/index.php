@@ -19,13 +19,14 @@ try {
 
     $template->generos_ativo = 'active open';
     $template->ver_todos_genero_ativo = 'active';
+    $template->MODELO = $pagina->modelo_formatado;
 
 } catch (Exception $e) {
 }
 
 try {
 
-    $generos = Fachada::instancia('Genero')->configurar(excecao: false)->listarOrdenado();
+    $generos = Fachada::instancia('Genero\Genero')->configurar(excecao: false)->listarOrdenado();
 
     if ($generos) {
 

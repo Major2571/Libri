@@ -19,13 +19,14 @@ try {
 
     $template->generos_ativo = 'active open';
     $template->ver_todos_genero_ativo = 'active';
+    $template->MODELO = $pagina->modelo_formatado;
 
 } catch (Exception $e) {
 }
 
 try {
 
-    $fachadaGenero = Fachada::instancia('Genero')->configurar(complemento: false);
+    $fachadaGenero = Fachada::instancia('Genero\Genero')->configurar(complemento: false);
 
     $genero = $fachadaGenero->procurarPorIdentificador($pagina->id);
 

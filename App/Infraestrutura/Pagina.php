@@ -48,8 +48,10 @@ final class Pagina extends Base
 	];
 
 	private const MODULOS = [
-		'Genero' => 'generos',
+		'Genero\Genero' => 'generos',
 		'Autor' => 'autores',
+		'Livro' => 'livros',
+		'Usuario' => 'usuarios',
 	];
 
 	/**
@@ -243,12 +245,14 @@ final class Pagina extends Base
 		$modelo = array_search($diretorio, self::MODULOS) ?? null;
 
 		if (!empty($modelo)) {
+			$modeloChave = $modelo;
 
 			$objeto = (new Fabrica($modelo))->repositorio;
 
 			$modelo = $objeto->propriedades['modelo'] ?? null;
 
 			$this->nome_modelo = $modelo->configuracao['nome'];
+			$this->modelo_formatado = str_replace('\\', '-', $modeloChave);
 
 		}
 

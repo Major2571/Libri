@@ -6,6 +6,7 @@
 //Definindo as classes
 use App\Infraestrutura\Template;
 use App\Infraestrutura\Configuracao;
+use App\Infraestrutura\Enum\Status\Status;
 use App\Infraestrutura\Fachada;
 
 // Definindo a página
@@ -17,31 +18,46 @@ try {
     // Incluindo as variáveis
     require_once(Configuracao::get('dir.include') . '/variaveis.php');
 
-    $template->generos_ativo = 'active open';
-    $template->ver_todos_genero_ativo = 'active';
+    $template->autores_ativo = 'active open';
+    $template->ver_todos_autores_ativo = 'active';
+    $template->MODELO = $pagina->modelo_formatado;
 
 } catch (Exception $e) {
 }
 
 try {
 
-    $fachadaGenero = Fachada::instancia('Genero')->configurar(excecao: false, complemento: false);
+    $fachadaAutor = Fachada::instancia('Autor')->configurar();
 
-    $genero = $fachadaGenero->procurarPorIdentificador($pagina->id);
+    $autor = $fachadaAutor->procurarPorIdentificador($pagina->id);
 
-    $template->GENERO = $genero;
+    $generosSelecionados = array_map('intval', $autor->generos ?? []);
 
-    $generos = $fachadaGenero->listarOrdenado('nome');
+    $template->AUTOR = $autor;
+
+    $template->ATIVO = ((int) $autor->status === Status::ATIVO->value) ? 'selected' : '';
+    $template->INATIVO = ((int) $autor->status === Status::INATIVO->value) ? 'selected' : '';
+
+    $template->IMAGEM_AUTOR = $autor->imagem ?
+        $pagina->config('url.repositorio') . '/autores/' . $autor->imagem :
+        $pagina->config('url.imagem') . '/avatars/profile.png';
+
+    $generos = Fachada::instancia('Genero\Genero')->listarOrdenado('nome');
 
     if ($generos) {
         foreach ($generos as $gen) {
-            $template->GENERO_SELECT = $gen;
-            $template->genero_selecionado = ($gen->id == $genero->genero_pai) ? 'selected' : '';
+            $template->GENERO = $gen;
+            $template->genero_selecionado = in_array((int) $gen->id, $generosSelecionados, true) ? 'selected' : '';
             $template->block('BLOCO_GENEROS');
         }
     }
 
 } catch (Exception $e) {
+
+    $pagina->definir404();
+    require_once $pagina->caminho;
+    exit;
+    
 }
 
 //Exibindo o template

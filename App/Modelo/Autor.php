@@ -33,9 +33,10 @@ final class Autor extends Modelo
 		],
 		'relacionamento' => [
 			[
-				'classe' => 'Autor',
-				'campo' => 'Autor'
-			]
+				'classe' => 'Genero\Autor\Genero',
+				'campo' => 'GenerosRelacionados'
+			],
+			
 		]
 
 	];

@@ -26,7 +26,7 @@ class Controlador extends ControladorPrincipal
      */
     public function aplicarComplemento(mixed $conteudos, ?array $controladores = []): mixed
     {
-
+        
         // Definindo os controladores para remoção
         $controladoresRemover = array_keys($controladores);
 
@@ -92,47 +92,12 @@ class Controlador extends ControladorPrincipal
             $controlador = $conteudo->{$propControlador};
 
             // Verificando o nome do controlador para obter os dados do conteúdo
-            if ($nomeControlador === 'Agenda' || $nomeControlador === 'CampoAdicional') {
+            if ($nomeControlador == 'GenerosRelacionados') {
 
                 $conteudo->{$campoBanco} = $controlador
                     ->configurar(excecao: false, complemento: false)
-                    ->evento($conteudo->id)
-                    ->listarPorEvento();
-
-                continue;
-
-            }
-
-            // Verificando o nome do controlador para obter os dados do conteúdo
-            if ($nomeControlador === 'BeneficioUsuario') {
-
-                $conteudo->{$campoBanco} = $controlador
-                    ->usuario($conteudo->id)
-                    ->listarPorUsuario();
-
-                continue;
-
-            }
-
-            // Verificando o nome do controlador para obter os dados do conteúdo
-            if ($nomeControlador === 'Loja') {
-
-                $conteudo->lojas = $conteudo->controladorLoja
-                    ->configurar(excecao: false, complemento: false)
-                    ->beneficio($conteudo->id)
-                    ->listarPorBeneficio();
-
-                continue;
-
-            }
-
-            // Verificando o nome do controlador para obter os dados do conteúdo
-            if ($nomeControlador === 'Categoria') {
-
-                $conteudo->categoria = $conteudo->controladorCategoria
-                    ->configurar(excecao: false, complemento: false)
-                    ->id($conteudo->categoria)
-                    ->procurarPorIdentificador();
+                    ->autor($conteudo->id)
+                    ->listarPorAutor();
 
                 continue;
 
@@ -155,13 +120,13 @@ class Controlador extends ControladorPrincipal
      * @uses App\Repositorio\BDR\Repositorio::listar() Lista os conteúdos
      * @return mixed
      */
-    public function listarPorUsuario(): mixed
+    public function listarPorAutor(): mixed
     {
 
         return $this->complemento(
             $this->repositorio
-                ->usuario($this->usuario)
-                ->listarPorUsuario(),
+                ->autor($this->autor)
+                ->listarPorAutor(),
             $this->complemento
         );
 

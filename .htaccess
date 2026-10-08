@@ -13,6 +13,9 @@ RewriteRule ^([a-z_-]+)\/(editar)\/([0-9]+)\/?$ requisicao/index.php?acao=$2&dir
 #Salvando registros
 RewriteRule ^([a-z_-]+)\/salvar\/?$ requisicao/index.php?modelo=$1&acao=novo&diretorio-tratamento=acoes&tipo=tratamento [NC,L]
 
+#Editando o status de registros
+RewriteRule ^editar-status/([a-z_-]+)/([0-9]+)/?$ requisicao/index.php?modelo=$1&id=$2&acao=editar-status&diretorio-tratamento=acoes&tipo=tratamento [NC,L,QSA]
+
 #Excluindo e editando registros
 RewriteRule ^(editar|excluir)/([a-z_-]+)/([0-9]+)/?$ requisicao/index.php?modelo=$2&id=$3&acao=$1&diretorio-tratamento=acoes&tipo=tratamento [NC,L]
 

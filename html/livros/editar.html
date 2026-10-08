@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+<head>
+    {INCLUDE_CABECALHO}
+    <link rel="stylesheet" href="{URL_VENDOR}/css/autores.css" />
+</head>
+<body>
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            {INCLUDE_TOPO}
+            <div class="layout-page">
+                {INCLUDE_NAVBAR}
+                <div class="content-wrapper">
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        {INCLUDE_ATALHO}
+                        <div class="card mb-4">
+                            <div class="card-header"><h5 class="mb-0">Edite o livro</h5></div>
+                            <div class="card-body">
+                                <form id="editar" action="{URL}/editar/{MODELO}/{LIVRO->ID}" method="POST" enctype="multipart/form-data">
+                                    <div class="autor-api mb-4" data-livro-api>
+                                        <label class="form-label" for="busca-livro-api">Buscar livro</label>
+                                        <div class="input-group input-group-merge">
+                                            <span class="input-group-text"><i class="bx bx-search"></i></span>
+                                            <input type="search" id="busca-livro-api" class="form-control" placeholder="Digite título, ISBN ou autor" autocomplete="off" data-livro-busca aria-label="Buscar livro" />
+                                        </div>
+                                        <div class="autor-api__resultados" data-livro-resultados hidden></div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-8 mb-3">
+                                            <label class="form-label required" for="titulo">Título *</label>
+                                            <input type="text" id="titulo" class="form-control" name="titulo" value="{LIVRO->TITULO}" required />
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label" for="isbn">ISBN</label>
+                                            <input type="text" id="isbn" class="form-control" name="isbn" value="{LIVRO->ISBN}" maxlength="20" />
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label" for="ano_publicacao">Ano de publicação</label>
+                                            <input type="date" id="ano_publicacao" class="form-control" name="ano_publicacao" value="{LIVRO->ANO_PUBLICACAO}" />
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label required" for="quantidade_disponivel">Quantidade disponível *</label>
+                                            <input type="number" id="quantidade_disponivel" class="form-control" name="quantidade_disponivel" min="0" value="{LIVRO->QUANTIDADE_DISPONIVEL}" required />
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label required" for="status">Status *</label>
+                                            <select class="form-select" id="status" name="status" required>
+                                                <option value="1" {ATIVO}>Ativo</option>
+                                                <option value="0" {INATIVO}>Inativo</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="genero">Gêneros associados</label>
+                                            <div class="autor-generos" data-multi-select data-placeholder="Escolha um ou mais gêneros">
+                                                <div class="input-group input-group-merge autor-generos__control" data-multi-select-control role="button" tabindex="0" aria-expanded="false">
+                                                    <div class="autor-generos__chips" data-multi-select-chips><span class="autor-generos__placeholder">Escolha um ou mais gêneros</span></div>
+                                                </div>
+                                                <select class="form-select autor-generos-select" id="genero" name="generos[]" multiple>
+                                                    <!-- BEGIN BLOCO_GENEROS -->
+                                                    <option value="{GENERO->ID}" {genero_selecionado}>{GENERO->NOME}</option>
+                                                    <!-- END BLOCO_GENEROS -->
+                                                </select>
+                                                <div class="autor-generos__menu" data-multi-select-menu role="listbox" aria-multiselectable="true"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <label class="form-label mb-0" for="autor">Autores associados</label>
+                                                <button type="button" class="btn btn-sm btn-label-primary" data-bs-toggle="modal" data-bs-target="#modalNovoAutor" title="Adicionar autor"><i class="bx bx-plus"></i></button>
+                                            </div>
+                                            <div class="autor-generos" data-multi-select data-placeholder="Escolha um ou mais autores">
+                                                <div class="input-group input-group-merge autor-generos__control" data-multi-select-control role="button" tabindex="0" aria-expanded="false">
+                                                    <div class="autor-generos__chips" data-multi-select-chips><span class="autor-generos__placeholder">Escolha um ou mais autores</span></div>
+                                                </div>
+                                                <select class="form-select autor-generos-select" id="autor" name="autores[]" multiple>
+                                                    <!-- BEGIN BLOCO_AUTORES -->
+                                                    <option value="{AUTOR->ID}" {autor_selecionado}>{AUTOR->NOME}</option>
+                                                    <!-- END BLOCO_AUTORES -->
+                                                </select>
+                                                <div class="autor-generos__menu" data-multi-select-menu role="listbox" aria-multiselectable="true"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label class="form-label" for="imagem">Capa do livro</label>
+                                        <div class="autor-imagem-dropzone" id="livro-imagem-dropzone" data-dropzone role="button" tabindex="0" aria-label="Escolher capa do livro">
+                                            <img data-dropzone-preview src="{IMAGEM_LIVRO}" alt="Pré-visualização da capa do livro" class="autor-imagem-dropzone__preview" />
+                                            <div class="autor-imagem-dropzone__content">
+                                                <div class="autor-imagem-dropzone__title">Arraste uma capa aqui ou clique para selecionar</div>
+                                                <div class="autor-imagem-dropzone__hint">PNG, JPG ou WEBP.</div>
+                                            </div>
+                                            <button type="button" class="autor-imagem-dropzone__remove" data-dropzone-remove aria-label="Remover capa">&times;</button>
+                                            <input type="file" id="imagem" class="d-none" name="imagem" accept="image/png, image/jpeg, image/webp" />
+                                        </div>
+                                    </div>
+
+                                    <input type="hidden" name="csrf-token" value="{CSRF_TOKEN}" />
+                                    <button type="submit" class="btn btn-primary">Salvar</button>
+                                    <a href="{URL}/livros" class="btn btn-label-secondary">Cancelar</a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {INCLUDE_RODAPE}
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modalNovoAutor" data-novo-autor-modal tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header"><h5 class="modal-title">Adicionar autor</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button></div>
+                    <form data-novo-autor-form action="{URL}/Autor/salvar" method="POST">
+                        <div class="modal-body">
+                            <label class="form-label required" for="novo-autor-nome">Nome *</label>
+                            <input type="text" class="form-control" id="novo-autor-nome" name="nome" required />
+                            <input type="hidden" name="csrf-token" value="{CSRF_TOKEN}" />
+                        </div>
+                        <div class="modal-footer"><button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-primary">Salvar autor</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {INCLUDE_JAVASCRIPT}
+        <script src="{URL_JS}/form-controls.js"></script>
+        <script src="{URL_JS}/livros-api.js"></script>
+    </div>
+</body>
+</html>

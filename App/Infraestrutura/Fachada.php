@@ -173,6 +173,18 @@ final class Fachada extends Base
 
 	}
 
+	public function editarStatus(int $id, int $status): void
+	{
+		try {
+			$this->conexao->beginTransaction();
+			$this->controlador->editarStatus($id, $status);
+			$this->conexao->commit();
+		} catch (Exception $e) {
+			$this->conexao->rollback();
+			throw $e;
+		}
+	}
+
 
 	/**
 	 * REMOVER

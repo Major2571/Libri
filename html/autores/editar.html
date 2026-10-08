@@ -3,6 +3,8 @@
 
 <head>
     {INCLUDE_CABECALHO}
+    <link rel="stylesheet" href="{URL_VENDOR}/css/autores.css" />
+
 </head>
 
 <body>
@@ -19,7 +21,7 @@
                 <div class="content-wrapper">
 
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        
+
                         {INCLUDE_ATALHO}
 
                         <div class="card mb-4">
@@ -27,60 +29,176 @@
                                 <h5 class="mb-0">Edite o gênero</h5>
                             </div>
                             <div class="card-body">
-
-                                <form id="editar" action="{URL}/editar/Genero/{GENERO->ID}" method="POST">
-
-                                    <div class="mb-3">
-                                        <label class="form-label" for="genero_pai">Genero Principal</label>
+                                <form id="editar" action="{URL}/editar/{MODELO}/{AUTOR->ID}" method="POST"
+                                    enctype="multipart/form-data">
+                                    <div class="autor-api mb-4" data-autor-api>
+                                        <label class="form-label" for="busca-autor-api">Buscar autor ou livro</label>
                                         <div class="input-group input-group-merge">
-                                            <select class="form-select required" id="genero_pai" name="genero_pai" aria-label="Select genero pai">
-                                                <option value="" disabled>Escolha o gênero principal</option>
-                                                <!-- BEGIN BLOCO_GENEROS -->
-                                                <option value="{GENERO_SELECT->ID}" {genero_selecionado}>{GENERO_SELECT->NOME}</option>
-                                                <!-- END BLOCO_GENEROS -->
-                                            </select>
+                                            <span class="input-group-text"><i class="bx bx-search"></i></span>
+                                            <input type="search" id="busca-autor-api" class="form-control"
+                                                placeholder="Digite pelo menos 3 letras" autocomplete="off"
+                                                data-autor-busca aria-label="Buscar autor ou livro" />
+                                        </div>
+                                        <div class="autor-api__resultados" data-autor-resultados hidden></div>
+                                        <div class="autor-api__obras-container" data-autor-obras hidden></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="genero">Gênero(s)
+                                                Associado(s)</label>
+                                            <div class="autor-generos" id="autor-generos" data-multi-select data-placeholder="Escolha um ou mais gêneros">
+                                                <div class="input-group input-group-merge autor-generos__control"
+                                                    data-multi-select-control
+                                                    role="button" tabindex="0" aria-controls="autor-generos-menu"
+                                                    aria-expanded="false">
+                                                    <div class="autor-generos__chips" data-multi-select-chips>
+                                                        <span class="autor-generos__placeholder">Escolha um ou
+                                                            mais gêneros</span>
+                                                    </div>
+                                                </div>
+                                                <select class="form-select required autor-generos-select" id="genero"
+                                                       name="generos[]" aria-label="Gêneros associados" multiple>
+                                                    <!-- BEGIN BLOCO_GENEROS -->
+                                                    <option value="{GENERO->ID}" {genero_selecionado}>{GENERO->NOME}</option>
+                                                    <!-- END BLOCO_GENEROS -->
+                                                </select>
+                                                <div class="autor-generos__menu" data-multi-select-menu role="listbox"
+                                                    aria-multiselectable="true">
+                                                </div>
+                                            </div>
+                                            <div class="form-text">Selecione todos os gêneros associados ao
+                                                autor.
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7 mb-3">
+                                            <label class="form-label required" for="nome">Nome *</label>
+                                            <div class="input-group input-group-merge">
+                                                <span id="nome2" class="input-group-text"><i
+                                                        class="bx bx-user"></i></span>
+                                                <input type="text" id="nome" class="form-control"
+                                                    placeholder="Nome completo do autor" name="nome"
+                                                    value="{AUTOR->NOME}" aria-label="Nome completo do autor"
+                                                    aria-describedby="nome2" required />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 mb-3">
+                                            <label class="form-label" for="pseudonimo">Pseudônimo</label>
+                                            <div class="input-group input-group-merge">
+                                                <span id="pseudonimo2" class="input-group-text"><i
+                                                        class="bx bx-id-card"></i></span>
+                                                <input type="text" id="pseudonimo" class="form-control"
+                                                    placeholder="Nome artístico" name="pseudonimo"
+                                                    aria-label="Pseudônimo" aria-describedby="pseudonimo2"
+                                                    value="{AUTOR->PSEUDONIMO}" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="data_nascimento">Data de
+                                                nascimento</label>
+                                            <div class="input-group input-group-merge">
+                                                <span id="data_nascimento2" class="input-group-text"><i
+                                                        class="bx bx-calendar"></i></span>
+                                                <input type="date" id="data_nascimento" class="form-control"
+                                                    name="data_nascimento" aria-label="Data de nascimento"
+                                                    aria-describedby="data_nascimento2"
+                                                    value="{AUTOR->DATA_NASCIMENTO}" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="data_falecimento">Data de
+                                                falecimento</label>
+                                            <div class="input-group input-group-merge">
+                                                <span id="data_falecimento2" class="input-group-text"><i
+                                                        class="bx bx-calendar-x"></i></span>
+                                                <input type="date" id="data_falecimento" class="form-control"
+                                                    name="data_falecimento" aria-label="Data de falecimento"
+                                                    aria-describedby="data_falecimento2"
+                                                    value="{AUTOR->DATA_FALECIMENTO}" />
+                                            </div>
+                                            <div class="form-text">Deixe em branco se o autor estiver vivo.
+                                            </div>
                                         </div>
                                     </div>
 
                                     <div class="mb-3">
-                                        <label class="form-label" for="nome">Nome</label>
+                                        <label class="form-label" for="nacionalidade">Nacionalidade</label>
                                         <div class="input-group input-group-merge">
-                                            <span id="nome2" class="input-group-text">
-                                                <i class="bx bx-text"></i>
-                                            </span>
-                                            <input type="text" id="nome" class="form-control"
-                                                placeholder="Digite o nome do gênero"
-                                                name="nome" value="{GENERO->NOME}"
-                                                aria-label="Digite o nome do gênero" aria-describedby="nome2" required />
+                                            <span id="nacionalidade2" class="input-group-text"><i
+                                                    class="bx bx-flag"></i></span>
+                                            <input type="text" id="nacionalidade" class="form-control"
+                                                placeholder="Ex.: Brasileira" name="nacionalidade"
+                                                aria-label="Nacionalidade" aria-describedby="nacionalidade2"
+                                                value="{AUTOR->NACIONALIDADE}" />
                                         </div>
                                     </div>
 
                                     <div class="mb-3">
-                                        <label class="form-label" for="basic-icon-default-message">Descrição</label>
+                                        <label class="form-label" for="biografia">Biografia</label>
                                         <div class="input-group input-group-merge">
-                                            <span id="basic-icon-default-message2" class="input-group-text"><i
-                                                    class="bx bx-comment"></i></span>
-                                            <textarea id="basic-icon-default-message" class="form-control"
-                                                placeholder="Digite a descrição do gênero"
-                                                aria-label="Digite a descrição do gênero" name="descricao"
-                                                aria-describedby="basic-icon-default-message2" required>{GENERO->DESCRICAO}</textarea>
+                                            <span id="biografia2" class="input-group-text"><i
+                                                    class="bx bx-book-content"></i></span>
+                                            <textarea id="biografia" class="form-control" rows="4"
+                                                placeholder="Um breve resumo sobre o autor" name="biografia"
+                                                aria-label="Biografia" aria-describedby="biografia2">
+                                                {AUTOR->BIOGRAFIA}
+                                            </textarea>
                                         </div>
                                     </div>
+
+                                    <div class="mb-4">
+                                        <label class="form-label required" for="status">Status *</label>
+                                        <select class="form-select required" id="status" name="status"
+                                            aria-label="Status" required>
+                                            <option value="" disabled selected>Selecione o status</option>
+                                            <option value="1" {ATIVO}>Ativo</option>
+                                            <option value="0" {INATIVO}>Inativo</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Foto -->
+                                    <div class="mb-4">
+                                        <label class="form-label" for="imagem">Foto do autor</label>
+                                        <div class="autor-imagem-dropzone" id="autor-imagem-dropzone" role="button" data-dropzone
+                                            tabindex="0" aria-label="Escolher foto do autor">
+                                            <img id="preview-imagem" data-dropzone-preview src="{IMAGEM_AUTOR}"
+                                                alt="Pré-visualização da foto do autor"
+                                                class="autor-imagem-dropzone__preview" />
+                                            <div class="autor-imagem-dropzone__content">
+                                                <div class="autor-imagem-dropzone__title">Arraste uma imagem
+                                                    aqui ou clique para selecionar</div>
+                                                <div class="autor-imagem-dropzone__hint">PNG, JPG ou WEBP. Deixe
+                                                    em branco para usar um avatar padrão.</div>
+                                            </div>
+                                            <button type="button" class="autor-imagem-dropzone__remove" data-dropzone-remove
+                                                id="remover-imagem" aria-label="Remover foto">&times;</button>
+                                            <input type="file" id="imagem" class="d-none" name="imagem"
+                                                accept="image/png, image/jpeg, image/webp" value="{AUTOR->IMAGEM}"
+                                                aria-label="Foto do autor" />
+                                        </div>
+                                    </div>
+
                                     <input type="hidden" name="csrf-token" value="{CSRF_TOKEN}" />
+
                                     <button type="submit" class="btn btn-primary">Salvar</button>
+                                    <a href="{URL}/autores" class="btn btn-label-secondary">Cancelar</a>
                                 </form>
                             </div>
                         </div>
                     </div>
 
                     {INCLUDE_RODAPE}
-                    
+
                 </div>
             </div>
         </div>
-
         {INCLUDE_JAVASCRIPT}
 
+        <script src="{URL_JS}/form-controls.js"></script>
+        <script src="{URL_JS}/autores.js"></script>
+        <script src="{URL_JS}/autor-api.js"></script>
     </div>
 
 </body>

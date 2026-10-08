@@ -41,6 +41,10 @@
       dados.append('id', id);
     }
 
+    if (!formulario && elemento.dataset.status !== undefined) {
+      dados.append('status', elemento.dataset.status);
+    }
+
     if (!formulario) {
       const token = document.querySelector('meta[name="csrf-token"]')?.content;
 
@@ -75,7 +79,7 @@
 
     await mensagem;
 
-    if (sucesso && (limparFormulario || elemento.id.startsWith('excluir'))) {
+    if (sucesso && (limparFormulario || elemento.id.startsWith('excluir') || elemento.dataset.status !== undefined)) {
       window.location.reload();
     }
   }
@@ -150,6 +154,10 @@
     return executar(formulario, false);
   }
 
+  function editarStatusRegistro(botao) {
+    return executar(botao, false);
+  }
+
   async function excluirRegistro(botao) {
     const confirmacao = await Swal.fire({
       title: 'Excluir registro?',
@@ -169,6 +177,7 @@
 
   window.salvarRegistro = salvarRegistro;
   window.editarRegistro = editarRegistro;
+  window.editarStatusRegistro = editarStatusRegistro;
   window.editarRegistroModal = editarRegistroModal;
   window.excluirRegistro = excluirRegistro;
 
@@ -183,12 +192,14 @@
 
   document.addEventListener('click', function (event) {
     const botao = event.target.closest(
-      'button[id^="editar"], button[id^="excluir"], a[id^="editar"], a[id^="excluir"], [role="button"][id^="editar"], [role="button"][id^="excluir"]'
+      'button[id^="editar"], button[id^="excluir"], a[id^="editar"], a[id^="excluir"], [role="button"][id^="editar"], [role="button"][id^="excluir"], [data-status]'
     );
 
     if (botao && botao.type !== 'submit') {
       event.preventDefault();
-      const operacao = botao.id.startsWith('excluir') ? excluirRegistro : editarRegistro;
+      const operacao = botao.dataset.status !== undefined
+        ? editarStatusRegistro
+        : botao.id.startsWith('excluir') ? excluirRegistro : editarRegistro;
       operacao(botao);
     }
   });

@@ -698,4 +698,22 @@ final class Util
 		return $objeto;
 
 	}
+
+	public static function formatarLabel(string $valor, string $tipo): string
+	{
+
+		//Definindo o label
+		return match ($tipo) {
+
+			'status' => match ((int) $valor) {
+
+				Status::ATIVO->value => '<span class="badge bg-success">Ativo</span>',
+				Status::INATIVO->value => '<span class="badge bg-danger">Inativo</span>',
+				default => '<span class="badge bg-secondary">Desconhecido</span>'
+			},
+
+			default => $valor
+		};
+
+	}
 }

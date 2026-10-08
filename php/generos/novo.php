@@ -20,13 +20,14 @@ try {
 
     $template->generos_ativo = 'active open';
     $template->novo_genero_ativo = 'active';
+    $template->MODELO = $pagina->modelo_formatado;
 
 } catch (Exception $e) {
 }
 
 try {
 
-    $generos = Fachada::instancia('Genero')->configurar(excecao: false)->listarOrdenado('nome');
+    $generos = Fachada::instancia('Genero\Genero')->configurar(excecao: false)->listarOrdenado('nome');
 
     if ($generos) {
 
@@ -48,7 +49,7 @@ try {
 
 try {
 
-    $ultimosRegistros = Fachada::instancia('Genero')->configurar(excecao: false)->listarOrdenado('data-criacao-desc');
+    $ultimosRegistros = Fachada::instancia('Genero\Genero')->configurar(excecao: false)->listarOrdenado('data-criacao-desc');
 
     if ($ultimosRegistros) {
 

@@ -194,7 +194,7 @@ class Template extends \raelgc\view\Template{
 
 					for( $i = 1; $i < sizeof( $property ); $i++ ){
 
-						if( !is_null( $pointer ) ){
+						if( is_object( $pointer ) ){
 
 							$obj	= strtolower( $property[ $i ] );
 
@@ -219,7 +219,8 @@ class Template extends \raelgc\view\Template{
 								throw new Exception( "Nenhum método de acesso na classe({$class}) para {$className}->{$property[ $i ]}" );
 
 							}
-						}
+						}else
+							$pointer = null;
 
 					}
 

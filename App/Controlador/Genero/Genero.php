@@ -1,6 +1,6 @@
 <?php
 //Definindo o namespace
-namespace App\Controlador;
+namespace App\Controlador\Genero;
 
 //Definindo as classes usadas
 use App\Controlador\Principal\Controlador as ControladorPrincipal;

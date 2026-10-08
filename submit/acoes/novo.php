@@ -27,6 +27,7 @@ try {
         //Definindo o retorno
         $retorno = [
             'tipo'      => 'sucesso',
+            'id'        => $resposta,
             'resposta'  => Http::OK->codigo(),
             'mensagem'  => 'Registro criado com sucesso!',
         ];

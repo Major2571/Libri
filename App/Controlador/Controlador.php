@@ -228,6 +228,11 @@ abstract class Controlador extends Base
 
 	}
 
+	public function editarStatus(int $id, int $status): void
+	{
+		$this->repositorio->editarStatus($id, $status);
+	}
+
 	public function remover(int $id): void
 	{
 		//Removendo o conteúdo

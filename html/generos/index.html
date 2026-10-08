@@ -67,7 +67,7 @@
                                             <td>
                                                 <div class="text-end">
                                                     <button type="button" data-bs-toggle="modal" data-bs-target="#modalEditar"
-                                                        data-url="{URL}/editar/Genero/{GENERO->ID}"
+                                                        data-url="{URL}/editar/{MODELO}/{GENERO->ID}"
                                                         data-nome="{GENERO_NOME_EDITAR}"
                                                         data-descricao="{GENERO_DESCRICAO_EDITAR}"
                                                         data-genero-pai="{GENERO_PAI_EDITAR}"
@@ -76,8 +76,8 @@
                                                         <i class="bx bx-edit-alt"></i>
                                                     </button>
                                                     <a id="excluir-{GENERO->ID}"
-                                                        data-url="{URL}/excluir/Genero/{GENERO->ID}"
-                                                        href="{URL}/excluir/Genero/{GENERO->ID}"
+                                                        data-url="{URL}/excluir/{MODELO}/{GENERO->ID}"
+                                                        href="{URL}/excluir/{MODELO}/{GENERO->ID}"
                                                         class="btn btn-icon btn-label-danger rounded-pill btn-excluir-genero"
                                                         title="Excluir gênero">
                                                         <i class="bx bx-trash"></i>
@@ -115,10 +115,10 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="inserir" action="{URL}/Genero/salvar" method="POST">
+                        <form id="inserir" action="{URL}/{MODELO}/salvar" method="POST">
 
                             <div class="mb-3">
-                                <label class="form-label" for="genero_pai">Genero Principal</label>
+                                <label class="form-label" for="genero_pai">Gênero Principal</label>
                                 <div class="input-group input-group-merge">
                                     <select class="form-select required" id="genero_pai" name="genero_pai"
                                         aria-label="Escolha o gênero principal" placeholder="Escolha o gênero principal">

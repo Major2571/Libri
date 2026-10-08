@@ -29,7 +29,7 @@ try{
 
     // $template->TOTAL_LIVROS = Fachada::instancia('Livro')->contar();
     $template->TOTAL_AUTORES = Fachada::instancia('Autor')->contar();
-    $template->TOTAL_GENEROS = Fachada::instancia('Genero')->contar();
+    $template->TOTAL_GENEROS = Fachada::instancia('Genero\Genero')->contar();
 
 
 } catch (Exception $e) {

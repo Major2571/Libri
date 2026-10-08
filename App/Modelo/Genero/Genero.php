@@ -1,6 +1,6 @@
 <?php
 //Definindo o namespace
-namespace App\Modelo;
+namespace App\Modelo\Genero;
 
 //Definindo as classes usadas
 use App\Infraestrutura\Enum\Tipo\Campo;
@@ -33,7 +33,7 @@ final class Genero extends Modelo
 		],
 		'relacionamento' => [
 			[
-				'classe' => 'Genero',
+				'classe' => 'Genero\Genero',
 				'campo' => 'Genero'
 			]
 		]
