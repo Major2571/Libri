@@ -1,0 +1,38 @@
+.livro-capa {
+  width: 3em;
+  height: 4.5em;
+}
+
+/* Tabela */
+#tabela-livros {
+  --bs-table-bg: transparent;
+  color: var(--ink);
+}
+
+#tabela-livros thead th {
+  color: var(--ink-soft);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid var(--line-paper);
+}
+#tabela-livros tbody td {
+  padding: 0.9rem 1.25rem;
+  border-bottom: 1px solid var(--line-paper);
+  color: var(--ink);
+  background: transparent;
+}
+#tabela-livros tbody tr:last-child td {
+  border-bottom: 0;
+}
+#tabela-livros tbody tr.livro-linha:hover td {
+  background: #f0f0f065;
+}
+#tabela-livros .text-muted {
+  font-family: 'IBM Plex Mono', monospace;
+  
+}
+
+#tabela-livros tbody tr.livro-linha td.titulo {
+  font-family: 'Fraunces', serif;
+}

@@ -62,8 +62,54 @@ try {
         $atalho = Util::definirAtalho($pagina);
 
         $template->TITULO_DO_ATALHO = $atalho->titulo;
-        $template->DIRETORIO_DO_ATALHO = $atalho->diretorio;
+        $template->DIRETORIO = $atalho->diretorio;
         $template->ATALHO = $atalho->atalho;
+        $template->MODELO = $pagina->modelo_formatado;
+    }
+
+} catch (Exception $e) {
+}
+
+// Menu
+try {
+
+    $diretorio = $pagina->diretorio;
+    $acao = $pagina->acao;
+
+    $itensMenu = [
+        [
+            'diretorio' => 'autores',
+            'titulo'    => 'Autores',
+            'icone'     => 'bx-user'
+        ],
+        [
+            'diretorio' => 'generos',
+            'titulo'    => 'Gêneros',
+            'icone'     => 'bx-bookmark-alt'
+        ],
+        [
+            'diretorio' => 'livros',
+            'titulo'    => 'Livros',
+            'icone' => 'bx-book'
+        ],
+    ];
+
+    $template->dashboard_ativo = ($diretorio == 'dashboard') ? 'active' : '';
+
+    foreach ($itensMenu as $item) {
+
+        $atual = ($item['diretorio'] == $diretorio);
+
+        $menu               = new stdClass();
+        $menu->diretorio    = $item['diretorio'];
+        $menu->titulo       = $item['titulo'];
+        $menu->icone        = $item['icone'];
+        $menu->ativo        = ($atual && in_array($acao, ['index', 'novo', 'editar'])) ? 'active open' : '';
+        $menu->novo_ativo   = ($atual && $acao == 'novo') ? 'active' : '';
+        $menu->todos_ativo  = ($atual && in_array($acao, ['index', 'editar'])) ? 'active' : '';
+
+        $template->MENU = $menu;
+        $template->block("BLOCO_MENU");
 
     }
 

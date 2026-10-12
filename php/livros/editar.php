@@ -18,10 +18,6 @@ try {
     // Incluindo as variáveis
     require_once(Configuracao::get('dir.include') . '/variaveis.php');
 
-    $template->livros_ativo = 'active open';
-    $template->ver_todos_livros_ativo = 'active';
-    $template->MODELO = $pagina->modelo_formatado;
-
 } catch (Exception $e) {
 }
 
@@ -41,7 +37,7 @@ try {
 
     $template->IMAGEM_LIVRO = $livro->imagem ?
         $pagina->config('url.repositorio') . '/livros/' . $livro->imagem :
-        $pagina->config('url.imagem') . '/avatars/profile.png';
+        $pagina->config('url.imagem') . '/books/book.png';
 
     $generos = Fachada::instancia('Genero\Genero')->listarOrdenado('nome');
 

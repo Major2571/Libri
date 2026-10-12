@@ -81,7 +81,7 @@
       const chave = String(autor.key || '').replace(/^\//, '');
       const respostas = await Promise.all([
         fetch('https://openlibrary.org/authors/' + encodeURIComponent(chave) + '.json'),
-        fetch('https://openlibrary.org/authors/' + encodeURIComponent(chave) + '/works.json?limit=12')
+        fetch('https://openlibrary.org/authors/' + encodeURIComponent(chave) + '/works.json?limit=5')
       ]);
       const detalhes = await respostas[0].json();
       const listaObras = await respostas[1].json();
@@ -96,6 +96,8 @@
   }
 
   function renderizarObras(lista) {
+    lista = lista.slice(0, 5);
+
     if (!lista.length) {
       obras.innerHTML = '<div class="autor-api__estado">Nenhum livro encontrado para este autor.</div>';
       return;

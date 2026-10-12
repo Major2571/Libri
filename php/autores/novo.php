@@ -17,9 +17,6 @@ try {
     // Incluindo as variáveis
     require_once(Configuracao::get('dir.include') . '/variaveis.php');
 
-    $template->autores_ativo = 'active open';
-    $template->novo_autor_ativo = 'active';
-
 } catch (Exception $e) {
 }
 

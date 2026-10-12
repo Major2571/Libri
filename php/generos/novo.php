@@ -18,10 +18,6 @@ try {
     // Incluindo as variáveis
     require_once(Configuracao::get('dir.include') . '/variaveis.php');
 
-    $template->generos_ativo = 'active open';
-    $template->novo_genero_ativo = 'active';
-    $template->MODELO = $pagina->modelo_formatado;
-
 } catch (Exception $e) {
 }
 

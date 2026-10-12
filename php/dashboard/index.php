@@ -17,23 +17,23 @@ try {
     // Incluindo as variáveis
     require_once(Configuracao::get('dir.include') . '/variaveis.php');
 
-    //Incluindo a barra de navegação
-    // $template->addFile('INCLUDE_MANUTENCAO', "{$dirHtml}/include/sistema/manutencao.html");
-
-    $template->dashboard_ativo = 'active';
-
 } catch (Exception $e) {
 }
 
 try{
 
-    // $template->TOTAL_LIVROS = Fachada::instancia('Livro')->contar();
+    $template->SECTION_CARDS = '';
+    $template->TOTAL_LIVROS = Fachada::instancia('Livro')->contar();
     $template->TOTAL_AUTORES = Fachada::instancia('Autor')->contar();
     $template->TOTAL_GENEROS = Fachada::instancia('Genero\Genero')->contar();
 
 
 } catch (Exception $e) {
+
+    $template->SECTION_CARDS = 'd-none';
+
     $template->addFile('INCLUDE_MANUTENCAO', "{$dirHtml}/include/sistema/manutencao.html");
+
 }
 
 //Exibindo o template

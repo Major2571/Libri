@@ -32,6 +32,26 @@
     return String(valor || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
   }
 
+  async function preencherCapa(identificador) {
+    const input = formulario.querySelector('input[name="imagem"]');
+    const preview = formulario.querySelector('[data-dropzone-preview]');
+    if (!identificador || !input || !preview) return;
+
+    const url = 'https://covers.openlibrary.org/b/id/' + identificador + '-M.jpg';
+    const resposta = await fetch(url);
+    if (!resposta.ok) throw new Error('Não foi possível baixar a capa do livro.');
+
+    const blob = await resposta.blob();
+    const arquivo = new File([blob], 'capa-' + identificador + '.jpg', {
+      type: blob.type || 'image/jpeg'
+    });
+    const transferencia = new DataTransfer();
+    transferencia.items.add(arquivo);
+    input.files = transferencia.files;
+    preview.src = URL.createObjectURL(arquivo);
+    preview.closest('[data-dropzone]')?.classList.add('has-file');
+  }
+
   async function cadastrarAutor(nome) {
     const dados = new FormData();
     dados.append('nome', nome);
@@ -113,9 +133,7 @@
     preencher('status', 1);
     await selecionarAutores(livro.author_name || []);
 
-    const capa = livro.cover_i;
-    const preview = formulario.querySelector('[data-dropzone-preview]');
-    if (capa && preview) preview.src = 'https://covers.openlibrary.org/b/id/' + capa + '-M.jpg';
+    if (livro.cover_i) await preencherCapa(livro.cover_i);
   }
 
   function exibirResultado(mensagem, sucesso) {

@@ -65,20 +65,20 @@
                                                     class="badge rounded-pill px-3 bg-label-success">{GENERO->GENERO_PAI->NOME}</span>
                                             </td>
                                             <td>
-                                                <div class="text-end">
+                                                <div class="text-end acervo-acoes">
                                                     <button type="button" data-bs-toggle="modal" data-bs-target="#modalEditar"
                                                         data-url="{URL}/editar/{MODELO}/{GENERO->ID}"
                                                         data-nome="{GENERO_NOME_EDITAR}"
                                                         data-descricao="{GENERO_DESCRICAO_EDITAR}"
                                                         data-genero-pai="{GENERO_PAI_EDITAR}"
-                                                        class="btn btn-icon btn-label-primary rounded-pill"
+                                                        class="btn btn-icon btn-label-primary rounded-pill btn-editar"
                                                         title="Editar gênero">
                                                         <i class="bx bx-edit-alt"></i>
                                                     </button>
                                                     <a id="excluir-{GENERO->ID}"
                                                         data-url="{URL}/excluir/{MODELO}/{GENERO->ID}"
                                                         href="{URL}/excluir/{MODELO}/{GENERO->ID}"
-                                                        class="btn btn-icon btn-label-danger rounded-pill btn-excluir-genero"
+                                                        class="btn btn-icon btn-label-danger rounded-pill btn-excluir btn-excluir-genero"
                                                         title="Excluir gênero">
                                                         <i class="bx bx-trash"></i>
                                                     </a>

@@ -17,9 +17,6 @@ try {
     // Incluindo as variáveis
     require_once(Configuracao::get('dir.include') . '/variaveis.php');
 
-    $template->livros_ativo = 'active open';
-    $template->novo_livro_ativo = 'active';
-
 } catch (Exception $e) {
 }
 

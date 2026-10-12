@@ -78,32 +78,38 @@
                                                 {STATUS}
                                             </td>
                                             <td>
-                                                <div class="text-end">
-                                                    <a href="{URL}/autores/editar/{AUTOR->ID}" class="btn btn-icon btn-label-primary rounded-pill"
+                                                <div class="text-end acervo-acoes">
+                                                    <a href="{URL}/{DIRETORIO}/editar/{AUTOR->ID}"
+                                                        class="btn btn-icon btn-label-primary rounded-pill btn-editar"
                                                         title="Editar autor">
                                                         <i class="bx bx-edit-alt"></i>
                                                     </a>
-                            
+
                                                     <!-- BEGIN BLOCO_BTN_INATIVAR -->
-                                                    <a id="status-inativar-{AUTOR->ID}" data-url="{URL}/editar-status/{MODELO}/{AUTOR->ID}" data-status="0"
-                                                        href="{URL}/editar-status/{MODELO}/{AUTOR->ID}"
-                                                        class="btn btn-icon btn-label-warning rounded-pill btn-inativar-autor"
+                                                    <a id="status-inativar-{AUTOR->ID}"
+                                                        data-url="{URL}/editar-status/{MODELO}/{AUTOR->ID}"
+                                                        data-status="0" href="{URL}/editar-status/{MODELO}/{AUTOR->ID}"
+                                                        class="btn btn-icon btn-label-warning rounded-pill btn-inativar btn-inativar-autor"
                                                         title="Inativar autor">
                                                         <i class="bx bx-hide"></i>
                                                     </a>
                                                     <!-- END BLOCO_BTN_INATIVAR -->
-                            
+
                                                     <!-- BEGIN BLOCO_BTN_ATIVAR -->
-                                                    <a id="status-ativar-{AUTOR->ID}" data-url="{URL}/editar-status/{MODELO}/{AUTOR->ID}" data-status="1"
-                                                        href="{URL}/editar-status/{MODELO}/{AUTOR->ID}"
-                                                        class="btn btn-icon btn-label-success rounded-pill btn-ativar-autor" title="Ativar autor">
+                                                    <a id="status-ativar-{AUTOR->ID}"
+                                                        data-url="{URL}/editar-status/{MODELO}/{AUTOR->ID}"
+                                                        data-status="1" href="{URL}/editar-status/{MODELO}/{AUTOR->ID}"
+                                                        class="btn btn-icon btn-label-success rounded-pill btn-ativar btn-ativar-autor"
+                                                        title="Ativar autor">
                                                         <i class="bx bx-show"></i>
                                                     </a>
                                                     <!-- END BLOCO_BTN_ATIVAR -->
-                            
-                                                    <a id="excluir-{AUTOR->ID}" data-url="{URL}/excluir/Autor/{AUTOR->ID}"
-                                                        href="{URL}/excluir/Autor/{AUTOR->ID}"
-                                                        class="btn btn-icon btn-label-danger rounded-pill btn-excluir-genero" title="Excluir autor">
+
+                                                    <a id="excluir-{AUTOR->ID}"
+                                                        data-url="{URL}/excluir/{MODELO}/{AUTOR->ID}"
+                                                        href="{URL}/excluir/{MODELO}/{AUTOR->ID}"
+                                                        class="btn btn-icon btn-label-danger rounded-pill btn-excluir btn-excluir-genero"
+                                                        title="Excluir autor">
                                                         <i class="bx bx-trash"></i>
                                                     </a>
                                                 </div>
@@ -114,7 +120,8 @@
                                             <td colspan="4" class="text-center py-5">
                                                 <i class="bx bx-category-alt bx-lg text-muted mb-2 d-block"></i>
                                                 <span class="fw-semibold d-block">Nenhum autor cadastrado</span>
-                                                <span class="text-muted">Comece criando o primeiro autor do acervo.</span>
+                                                <span class="text-muted">Comece criando o primeiro autor do
+                                                    acervo.</span>
                                             </td>
                                         </tr>
                                         <!-- FINALLY BLOCO_AUTORES -->
@@ -145,8 +152,8 @@
                                 <div class="input-group input-group-merge">
                                     <span class="input-group-text"><i class="bx bx-search"></i></span>
                                     <input type="search" id="busca-autor-api" class="form-control"
-                                        placeholder="Digite pelo menos 3 letras" autocomplete="off"
-                                        data-autor-busca aria-label="Buscar autor" />
+                                        placeholder="Digite pelo menos 3 letras" autocomplete="off" data-autor-busca
+                                        aria-label="Buscar autor" />
                                 </div>
                                 <div class="autor-api__resultados" data-autor-resultados hidden></div>
                                 <div class="autor-api__obras-container" data-autor-obras hidden></div>
