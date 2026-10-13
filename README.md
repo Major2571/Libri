@@ -14,8 +14,8 @@ O **Libri** tem como objetivo fornecer uma aplicação web para gerenciamento de
 
 * [x] Cadastro de gêneros
 * [x] Hierarquia entre gêneros através de gênero pai
-* [ ] Cadastro de autores
-* [ ] Cadastro de livros
+* [x] Cadastro de autores
+* [x] Cadastro de livros
 * [ ] Cadastro de usuários
 
 ### Gerenciamento
@@ -23,10 +23,10 @@ O **Libri** tem como objetivo fornecer uma aplicação web para gerenciamento de
 * [x] Listagem de gêneros
 * [x] Edição de gêneros
 * [x] Exclusão de gêneros
-* [ ] Listagem de autores
-* [ ] Edição de autores
-* [ ] Exclusão de autores
-* [ ] Associação de livros a autores e gêneros
+* [x] Listagem de autores
+* [x] Edição de autores
+* [x] Exclusão de autores
+* [x] Associação de livros a autores e gêneros
 * [ ] Controle de disponibilidade dos livros
 
 ### Empréstimos
