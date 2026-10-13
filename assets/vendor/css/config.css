@@ -1,0 +1,124 @@
+
+.acervo-acoes .btn {
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 1.15rem;
+}
+.acervo-acoes .btn-editar:hover {
+  background: rgba(92, 122, 98, 0.2);
+  color: #3d5a43;
+}
+.acervo-acoes .btn-inativar:hover {
+  background: rgba(176, 141, 87, 0.25);
+  color: #7a5a22;
+}
+.acervo-acoes .btn-ativar:hover {
+  background: rgba(92, 122, 98, 0.2);
+  color: #3d5a43;
+}
+.acervo-acoes .btn-excluir:hover {
+  background: rgba(122, 63, 59, 0.15);
+  color: var(--bs-red);
+}
+
+.autor-select {
+  position: relative;
+}
+
+.autor-select__native {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(50%);
+          clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.autor-select__control {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 38px;
+  padding: 0.45rem 0.75rem;
+  color: #566a7f;
+  text-align: left;
+  cursor: pointer;
+  background: #fff;
+  border: 1.5px solid #d9dee3;
+  border-radius: 0.375rem;
+}
+
+.autor-select__control::after {
+  margin-left: auto;
+  content: '▾';
+}
+
+.autor-select.is-open .autor-select__control,
+.autor-select__control:focus {
+  border-color: #B08D57;
+  box-shadow: 0 0 0 0.2rem rgba(176, 141, 87, 0.16);
+  outline: 0;
+}
+
+.autor-select__menu {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + 0.25rem);
+  right: 0;
+  left: 0;
+  display: none;
+  padding: 0.5rem;
+  background: #fff;
+  border: 1px solid #d9dee3;
+  border-radius: 0.375rem;
+  box-shadow: 0 0.25rem 0.75rem rgba(176, 141, 87, 0.16);
+}
+
+.autor-select.is-open .autor-select__menu {
+  display: block;
+}
+
+.autor-select__options {
+  max-height: 220px;
+  margin-top: 0.5rem;
+  overflow-y: auto;
+}
+
+.autor-select__option {
+  display: block;
+  width: 100%;
+  padding: 0.55rem 0.65rem;
+  color: #566a7f;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-radius: 0.25rem;
+}
+
+.autor-select__option:hover {
+  color: #B08D57;
+  background: #5c7a6227;
+}
+
+.autor-select__empty {
+  display: block;
+  padding: 0.55rem 0.65rem;
+  color: #a1acb8;
+  font-size: 0.875rem;
+}
+
+
+.autor-generos__search {
+  margin-bottom: 0.5rem;
+}
+
+.autor-generos__options {
+  max-height: 180px;
+  overflow-y: auto;
+}

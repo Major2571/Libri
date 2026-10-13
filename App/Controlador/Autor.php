@@ -20,7 +20,8 @@ class Autor extends ControladorPrincipal
 {
 	// Definindo os campos relacionados
 	protected const CAMPOS_RELACIONADOS = [
-		'GenerosRelacionados' => 'generos'
+		'GenerosRelacionados' => 'generos',
+		'Nacionalidade' => 'codigo_iso2'
 	];
 
 	/**

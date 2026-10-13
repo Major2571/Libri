@@ -46,20 +46,21 @@
                                         <div class="mb-3">
                                             <label class="form-label" for="genero">Gênero(s)
                                                 Associado(s)</label>
-                                            <div class="autor-generos" id="autor-generos" data-multi-select data-placeholder="Escolha um ou mais gêneros">
+                                            <div class="autor-generos" id="autor-generos" data-multi-select
+                                                data-placeholder="Escolha um ou mais gêneros">
                                                 <div class="input-group input-group-merge autor-generos__control"
-                                                    data-multi-select-control
-                                                    role="button" tabindex="0" aria-controls="autor-generos-menu"
-                                                    aria-expanded="false">
+                                                    data-multi-select-control role="button" tabindex="0"
+                                                    aria-controls="autor-generos-menu" aria-expanded="false">
                                                     <div class="autor-generos__chips" data-multi-select-chips>
                                                         <span class="autor-generos__placeholder">Escolha um ou
                                                             mais gêneros</span>
                                                     </div>
                                                 </div>
                                                 <select class="form-select required autor-generos-select" id="genero"
-                                                       name="generos[]" aria-label="Gêneros associados" multiple>
+                                                    name="generos[]" aria-label="Gêneros associados" multiple>
                                                     <!-- BEGIN BLOCO_GENEROS -->
-                                                    <option value="{GENERO->ID}" {genero_selecionado}>{GENERO->NOME}</option>
+                                                    <option value="{GENERO->ID}" {genero_selecionado}>{GENERO->NOME}
+                                                    </option>
                                                     <!-- END BLOCO_GENEROS -->
                                                 </select>
                                                 <div class="autor-generos__menu" data-multi-select-menu role="listbox"
@@ -123,15 +124,42 @@
                                         </div>
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label class="form-label" for="nacionalidade">Nacionalidade</label>
-                                        <div class="input-group input-group-merge">
-                                            <span id="nacionalidade2" class="input-group-text"><i
-                                                    class="bx bx-flag"></i></span>
-                                            <input type="text" id="nacionalidade" class="form-control"
-                                                placeholder="Ex.: Brasileira" name="nacionalidade"
-                                                aria-label="Nacionalidade" aria-describedby="nacionalidade2"
-                                                value="{AUTOR->NACIONALIDADE}" />
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label required" for="status">Status *</label>
+                                            <select class="form-select required" id="status" name="status"
+                                                aria-label="Status" required>
+                                                <option value="" disabled selected>Selecione o status</option>
+                                                <option value="1" {ATIVO}>Ativo</option>
+                                                <option value="0" {INATIVO}>Inativo</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label required" for="nacionalidade">
+                                                Nacionalidade *
+                                            </label>
+                                            <div class="autor-nacionalidade" data-country-select>
+                                                <select class="autor-nacionalidade__select" id="nacionalidade"
+                                                    name="nacionalidade" aria-label="Nacionalidade" required>
+                                                    <option value="" disabled>Selecione a nacionalidade</option>
+                                                    <!-- BEGIN BLOCO_NACIONALIDADES -->
+                                                    <option value="{NACIONALIDADE->CODIGO_ISO2}"
+                                                        {nacionalidade_selecionada}>{NACIONALIDADE->PAIS_PT}
+                                                    </option>
+                                                    <!-- END BLOCO_NACIONALIDADES -->
+                                                </select>
+                                                <button type="button" class="autor-nacionalidade__control"
+                                                    data-country-control aria-haspopup="listbox" aria-expanded="false">
+                                                    <span data-country-value>Selecione a nacionalidade</span>
+                                                </button>
+                                                <div class="autor-nacionalidade__menu" data-country-menu>
+                                                    <input type="search" class="form-control" data-country-search
+                                                        placeholder="Buscar país..." autocomplete="off"
+                                                        aria-label="Buscar país" />
+                                                    <div class="autor-nacionalidade__options" data-country-options
+                                                        role="listbox"></div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -148,21 +176,11 @@
                                         </div>
                                     </div>
 
-                                    <div class="mb-4">
-                                        <label class="form-label required" for="status">Status *</label>
-                                        <select class="form-select required" id="status" name="status"
-                                            aria-label="Status" required>
-                                            <option value="" disabled selected>Selecione o status</option>
-                                            <option value="1" {ATIVO}>Ativo</option>
-                                            <option value="0" {INATIVO}>Inativo</option>
-                                        </select>
-                                    </div>
-
                                     <!-- Foto -->
                                     <div class="mb-4">
                                         <label class="form-label" for="imagem">Foto do autor</label>
-                                        <div class="autor-imagem-dropzone" id="autor-imagem-dropzone" role="button" data-dropzone
-                                            tabindex="0" aria-label="Escolher foto do autor">
+                                        <div class="autor-imagem-dropzone" id="autor-imagem-dropzone" role="button"
+                                            data-dropzone tabindex="0" aria-label="Escolher foto do autor">
                                             <img id="preview-imagem" data-dropzone-preview src="{IMAGEM_AUTOR}"
                                                 alt="Pré-visualização da foto do autor"
                                                 class="autor-imagem-dropzone__preview" />
@@ -172,8 +190,9 @@
                                                 <div class="autor-imagem-dropzone__hint">PNG, JPG ou WEBP. Deixe
                                                     em branco para usar um avatar padrão.</div>
                                             </div>
-                                            <button type="button" class="autor-imagem-dropzone__remove" data-dropzone-remove
-                                                id="remover-imagem" aria-label="Remover foto">&times;</button>
+                                            <button type="button" class="autor-imagem-dropzone__remove"
+                                                data-dropzone-remove id="remover-imagem"
+                                                aria-label="Remover foto">&times;</button>
                                             <input type="file" id="imagem" class="d-none" name="imagem"
                                                 accept="image/png, image/jpeg, image/webp" value="{AUTOR->IMAGEM}"
                                                 aria-label="Foto do autor" />

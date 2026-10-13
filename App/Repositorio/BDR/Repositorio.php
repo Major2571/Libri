@@ -232,6 +232,15 @@ abstract class Repositorio extends RepositorioPrincipal{
 
 	}
 
+	private function condicaoIdentificador(): string
+	{
+		$modelo = new $this->modelo();
+
+		return array_key_exists( 'id', $modelo->atributos )
+			? 'id IS NOT NULL'
+			: '1=1';
+	}
+
 	/**
 	 * Definindo a quantidade de conteúdos para os métodos
 	 *
@@ -434,7 +443,7 @@ abstract class Repositorio extends RepositorioPrincipal{
 		try{
 
 			//Executando a consulta
-			$this->executar( "SELECT {$this->configuracao->campos} FROM {$this->configuracao->tabela} WHERE id IS NOT NULL {$this->complemento}" );
+			$this->executar( "SELECT {$this->configuracao->campos} FROM {$this->configuracao->tabela} WHERE {$this->condicaoIdentificador()} {$this->complemento}" );
 
 			//Limpando os parâmetros e complemento
 			$this->limparComplementosParametros();
@@ -479,8 +488,10 @@ abstract class Repositorio extends RepositorioPrincipal{
 
 		try{
 
+			$sql = "SELECT {$this->configuracao->campos} FROM {$this->configuracao->tabela} WHERE {$this->condicaoIdentificador()} {$this->complemento}";
+
 			//Executando a consulta
-			$this->executar( "SELECT {$this->configuracao->campos} FROM {$this->configuracao->tabela} WHERE id IS NOT NULL {$this->complemento}" );
+			$this->executar( $sql );
 
 			//Limpando os parâmetros e complemento
 			$this->limparComplementosParametros();
@@ -525,7 +536,7 @@ abstract class Repositorio extends RepositorioPrincipal{
 		try{
 
 			//Executando a consulta
-			$this->executar( "SELECT COUNT(*) FROM {$this->configuracao->tabela} WHERE id IS NOT NULL {$this->complemento}" );
+			$this->executar( "SELECT COUNT(*) FROM {$this->configuracao->tabela} WHERE {$this->condicaoIdentificador()} {$this->complemento}" );
 
 			//Limpando os parâmetros e complemento
 			$this->limparComplementosParametros();

@@ -110,6 +110,109 @@
   content: '✓';
 }
 
+.autor-generos__option[hidden] {
+  display: none;
+}
+
+.autor-nacionalidade {
+  position: relative;
+}
+
+.autor-nacionalidade__select {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(50%);
+          clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.autor-nacionalidade__control {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 38px;
+  padding: 0.45rem 0.75rem;
+  color: #566a7f;
+  text-align: left;
+  cursor: pointer;
+  background: #fff;
+  border: 1.5px solid #d9dee3;
+  border-radius: 0.375rem;
+}
+
+.autor-nacionalidade__control::after {
+  margin-left: auto;
+  content: '▾';
+}
+
+.autor-nacionalidade.is-open .autor-nacionalidade__control,
+.autor-nacionalidade__control:focus {
+  border-color: #B08D57;
+  box-shadow: 0 0 0 0.2rem rgba(176, 141, 87, 0.16);
+  outline: 0;
+}
+
+.autor-nacionalidade__menu {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + 0.25rem);
+  right: 0;
+  left: 0;
+  display: none;
+  padding: 0.5rem;
+  background: #fff;
+  border: 1px solid #d9dee3;
+  border-radius: 0.375rem;
+  box-shadow: 0 0.25rem 0.75rem rgba(176, 141, 87, 0.16);
+}
+
+.autor-nacionalidade.is-open .autor-nacionalidade__menu {
+  display: block;
+}
+
+.autor-nacionalidade__options {
+  max-height: 220px;
+  margin-top: 0.5rem;
+  overflow-y: auto;
+}
+
+.autor-nacionalidade__option {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  width: 100%;
+  padding: 0.55rem 0.65rem;
+  color: #566a7f;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-radius: 0.25rem;
+}
+
+.autor-nacionalidade__option:hover {
+  color: #B08D57;
+  background: #5c7a6227;
+}
+
+.autor-nacionalidade__flag {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 15px;
+  object-fit: cover;
+  border-radius: 1px;
+}
+
+.autor-nacionalidade__empty {
+  display: block;
+  padding: 0.55rem 0.65rem;
+  color: #a1acb8;
+  font-size: 0.875rem;
+}
+
+
 .autor-imagem-dropzone {
   position: relative;
   display: flex;

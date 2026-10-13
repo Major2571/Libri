@@ -36,5 +36,22 @@ try {
 }catch (Exception $e) {
 }
 
+try {
+
+    $nacionalidades = Fachada::instancia('Nacionalidade')->configurar(excecao: false)->listarOrdenado('gentilico_pt');
+
+    if ($nacionalidades) {
+
+        foreach ($nacionalidades as $nacionalidade) {
+            $template->NACIONALIDADE = $nacionalidade;
+            $template->block('BLOCO_NACIONALIDADES');
+        }
+
+    }
+
+}catch (Exception $e) {
+    print_r($e->getMessage());
+}
+
 //Exibindo o template
 $template->show();

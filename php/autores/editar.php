@@ -48,6 +48,16 @@ try {
         }
     }
 
+    $nacionalidades = Fachada::instancia('Nacionalidade')->configurar(excecao: false)->listarOrdenado('gentilico_pt');
+
+    if ($nacionalidades) {
+        foreach ($nacionalidades as $nacionalidade) {
+            $template->NACIONALIDADE = $nacionalidade;
+            $template->nacionalidade_selecionada = $autor->nacionalidade === $nacionalidade->codigo_iso2 ? 'selected' : '';
+            $template->block('BLOCO_NACIONALIDADES');
+        }
+    }
+
 } catch (Exception $e) {
 
     $pagina->definir404();

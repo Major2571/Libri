@@ -317,6 +317,7 @@ final class Util
 			'dia' => 'dia',
 			//Randômico
 			'randômico' => 'RAND()',
+			'gentilico_pt' => 'gentilico_pt',
 			//Data de publicação DESC
 			'data-publicação-desc' => 'data_publicacao DESC',
 			'data-criacao-desc' => 'data_criacao DESC',

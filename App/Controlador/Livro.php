@@ -164,10 +164,15 @@ class Livro extends ControladorPrincipal
         }
 
         $nomeArquivo = Util::formatarNomeArquivo($arquivo['imagem']['name']);
+
         Validacao::verificarImagem($arquivo['imagem']);
+
         $caminhoArquivo = Configuracao::get('dir.repositorio') . "/livros/{$nomeArquivo}";
+
         move_uploaded_file($arquivo['imagem']['tmp_name'], $caminhoArquivo);
+
         $campos['imagem'] = $nomeArquivo;
+        
     }
 
 }

@@ -67,6 +67,30 @@
     });
   }
 
+  async function preencherCapa(identificador) {
+    const input = formulario.querySelector('input[name="imagem"]');
+    const preview = formulario.querySelector('[data-dropzone-preview]');
+    if (!identificador || !input || !preview) return;
+
+    const url = 'https://covers.openlibrary.org/a/id/' + identificador + '.jpg?default=false';
+    const resposta = await fetch(url);
+    if (!resposta.ok) throw new Error('Não foi possível baixar a foto do autor.');
+
+    const blob = await resposta.blob();
+    if (!blob.size || !blob.type.startsWith('image/')) {
+      throw new Error('A API não retornou uma foto válida.');
+    }
+
+    const arquivo = new File([blob], 'capa-' + identificador + '.jpg', {
+      type: blob.type || 'image/jpeg'
+    });
+    const transferencia = new DataTransfer();
+    transferencia.items.add(arquivo);
+    input.files = transferencia.files;
+    preview.src = URL.createObjectURL(arquivo);
+    preview.closest('[data-dropzone]')?.classList.add('has-file');
+  }
+
   async function selecionarAutor(autor) {
     busca.value = autor.name || '';
     resultados.hidden = true;
@@ -74,6 +98,7 @@
     obras.hidden = false;
 
     preencherCampo('nome', autor.name);
+    preencherCampo('pseudonimo', autor.alternate_names?.[0]);
     preencherCampo('data_nascimento', normalizarData(autor.birth_date));
     preencherCampo('data_falecimento', normalizarData(autor.death_date));
 
@@ -81,11 +106,25 @@
       const chave = String(autor.key || '').replace(/^\//, '');
       const respostas = await Promise.all([
         fetch('https://openlibrary.org/authors/' + encodeURIComponent(chave) + '.json'),
-        fetch('https://openlibrary.org/authors/' + encodeURIComponent(chave) + '/works.json?limit=5')
+        fetch('https://openlibrary.org/authors/' + encodeURIComponent(chave) + '/works.json?limit=6')
       ]);
       const detalhes = await respostas[0].json();
       const listaObras = await respostas[1].json();
       const biografia = typeof detalhes.bio === 'string' ? detalhes.bio : detalhes.bio?.value;
+      const foto = (detalhes.photos || []).find(function (identificador) {
+        return Number(identificador) > 0;
+      });
+
+      if (foto) {
+        try {
+          await preencherCapa(foto);
+        } catch (erro) {
+          const preview = formulario.querySelector('[data-dropzone-preview]');
+          if (preview) {
+            preview.src = 'https://covers.openlibrary.org/a/id/' + foto + '.jpg?default=false';
+          }
+        }
+      }
 
       preencherCampo('biografia', biografia);
       preencherCampo('descricao', biografia);
@@ -96,7 +135,7 @@
   }
 
   function renderizarObras(lista) {
-    lista = lista.slice(0, 5);
+    lista = lista.slice(0, 6);
 
     if (!lista.length) {
       obras.innerHTML = '<div class="autor-api__estado">Nenhum livro encontrado para este autor.</div>';
@@ -105,7 +144,7 @@
 
     obras.innerHTML = '<div class="autor-api__obras">' + lista.map(function (livro) {
       const capa = livro.covers?.[0];
-      const imagem = capa ? 'https://covers.openlibrary.org/b/id/' + capa + '-M.jpg' : '';
+      const imagem = capa ? 'https://covers.openlibrary.org/b/id/' + capa + '.jpg' : '';
       const assuntos = (livro.subjects || []).slice(0, 3).join(', ');
       return '<article class="autor-api__livro">'
         + (imagem ? '<img src="' + imagem + '" alt="" loading="lazy">' : '<span class="autor-api__sem-capa"><i class="bx bx-book"></i></span>')
