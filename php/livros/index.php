@@ -28,8 +28,8 @@ try {
 
     if ($livros) {
 
-        $template->TOTAL_LIVROS = count($livros);
-        $template->block('EXIBIR_TOTAL_LIVROS');
+        $template->TOTAL = count($livros);
+        $template->block('EXIBIR_TOTAL');
 
         foreach ($livros as $livro) {
 
@@ -40,6 +40,7 @@ try {
                 $pagina->config('url.imagem') . '/books/book.png';
 
             $template->STATUS = Util::formatarLabel($livro->status, 'status');
+            
 
             if ((int) $livro->status === Status::ATIVO->value) {
                 $template->block('BLOCO_BTN_INATIVAR');

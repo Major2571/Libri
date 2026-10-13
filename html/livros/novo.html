@@ -42,7 +42,7 @@
                                     <div class="row">
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label" for="ano_publicacao">Ano de publicação</label>
-                                            <input type="date" id="ano_publicacao" class="form-control" name="ano_publicacao" />
+                                            <input type="text" id="ano_publicacao" class="form-control" name="ano_publicacao" maxlength="4" placeholder="Digite o ano de publicação" />
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label required" for="quantidade_disponivel">Quantidade disponível *</label>
@@ -62,7 +62,11 @@
                                             <label class="form-label" for="genero">Gêneros associados</label>
                                             <div class="autor-generos" data-multi-select data-placeholder="Escolha um ou mais gêneros">
                                                 <div class="input-group input-group-merge autor-generos__control" data-multi-select-control role="button" tabindex="0" aria-expanded="false">
-                                                    <div class="autor-generos__chips" data-multi-select-chips><span class="autor-generos__placeholder">Escolha um ou mais gêneros</span></div>
+                                                    <div class="autor-generos__chips" data-multi-select-chips>
+                                                        <span class="autor-generos__placeholder">
+                                                            Escolha um ou mais gêneros
+                                                        </span>
+                                                    </div>
                                                 </div>
                                                 <select class="form-select autor-generos-select" id="genero" name="generos[]" multiple>
                                                     <!-- BEGIN BLOCO_GENEROS -->

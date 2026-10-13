@@ -153,4 +153,85 @@ class Repositorio extends RepositorioAbstrato
 
         }
     }
+    
+    public function listarAutoresPorLivro()
+    {
+
+        try {
+
+            // Definindo a consulta
+            $sql = "SELECT autor
+                    FROM livro_autor AG
+                    INNER JOIN livro A ON (AG.livro = A.id)
+                    WHERE AG.autor IS NOT NULL {$this->complemento}";
+
+            //Preparando a consulta
+            $this->executar($sql);
+
+            //Definindo os registros
+            $conteudos = $this->pdo->fetchAll();
+
+            //Verificando
+            if (count($conteudos) > 0)
+                return $autores = array_map(function ($autor) {
+                    return $autor['autor'];
+                }, $conteudos);
+            else
+                //Retornando
+                return null;
+
+
+        } catch (PDOException $e) {
+
+            //Lançando a exceção
+            throw new BancoDeDadosException(MensagemRepositorio::LISTAR->texto(), $e, resposta: Http::BAD_REQUEST->codigo());
+
+        } finally {
+
+            //Limpando os parâmetros e complemento
+            $this->limparComplementosParametros();
+
+        }
+    }
+    
+    public function listarGenerosPorLivro()
+    {
+
+        try {
+
+            // Definindo a consulta
+            $sql = "SELECT genero
+                    FROM livro_genero AG
+                    INNER JOIN livro A ON (AG.livro = A.id)
+                    WHERE AG.genero IS NOT NULL {$this->complemento}";
+
+            //Preparando a consulta
+            $this->executar($sql);
+
+            //Definindo os registros
+            $conteudos = $this->pdo->fetchAll();
+
+            //Verificando
+            if (count($conteudos) > 0)
+                return $generos = array_map(function ($genero) {
+                    return $genero['genero'];
+                }, $conteudos);
+            else
+                //Retornando
+                return null;
+
+
+        } catch (PDOException $e) {
+
+            //Lançando a exceção
+            throw new BancoDeDadosException(MensagemRepositorio::LISTAR->texto(), $e, resposta: Http::BAD_REQUEST->codigo());
+
+        } finally {
+
+            //Limpando os parâmetros e complemento
+            $this->limparComplementosParametros();
+
+        }
+    }
+    
 }

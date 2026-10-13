@@ -19,15 +19,7 @@
 
                     <div class="container-xxl flex-grow-1 container-p-y">
 
-                        <div class="d-flex justify-content-between align-items-end flex-wrap gap-2 py-3 mb-4">
-                            <div>
-                                {INCLUDE_ATALHO}
-                                <!-- BEGIN EXIBIR_TOTAL_AUTORES -->
-                                <p class="text-muted fst-italic fs-6 mb-0">{TOTAL_AUTORES} autores cadastrados no acervo
-                                </p>
-                                <!-- END EXIBIR_TOTAL_AUTORES -->
-                            </div>
-                        </div>
+                        {INCLUDE_ATALHO}
 
                         <div class="card py-3">
 
@@ -40,13 +32,11 @@
                                         placeholder="Buscar por nome…" aria-label="Buscar..."
                                         aria-describedby="basic-addon-search31" />
                                 </div>
-
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#modalCenter"
-                                    class="btn rounded-pill btn-primary d-inline-flex align-items-center">
-                                    <i class="bx bx-plus me-1"></i>
-                                    Novo Autor
-                                </button>
-
+                                <a href="{URL}/autores/novo" class="btn rounded-pill btn-primary">
+                                    <i class="bx bx-plus me-1">
+                                    </i>
+                                    Novo autor
+                                </a>
                             </div>
 
                             <div class="table-responsive text-nowrap">

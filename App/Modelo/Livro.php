@@ -70,7 +70,7 @@ final class Livro extends Modelo
 		'ano_publicacao' => [
 			'nome' => 'Ano de Publicação',
 			'obrigatorio' => false,
-			'tipo' => Campo::DATA,
+			'tipo' => Campo::INTEIRO,
 			'formatar' => false
 		],
 

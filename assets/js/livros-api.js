@@ -128,7 +128,7 @@
 
     preencher('titulo', livro.title);
     preencher('isbn', (livro.isbn || [])[0]);
-    preencher('ano_publicacao', livro.first_publish_year ? livro.first_publish_year + '-01-01' : '');
+    preencher('ano_publicacao', livro.first_publish_year ? livro.first_publish_year : '');
     preencher('quantidade_disponivel', 1);
     preencher('status', 1);
     await selecionarAutores(livro.author_name || []);

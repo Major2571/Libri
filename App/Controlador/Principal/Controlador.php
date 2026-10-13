@@ -132,6 +132,45 @@ class Controlador extends ControladorPrincipal
 
     }
 
+
+    /**
+     * Listando os conteúdos por usuário
+     *
+     * @uses App\Repositorio\Repositorio::usuario() Definindo o usuário para os métodos(chamada via _call)
+     * @uses App\Repositorio\BDR\Repositorio::listar() Lista os conteúdos
+     * @return mixed
+     */
+    public function listarGenerosPorLivro(): mixed
+    {
+
+        return $this->complemento(
+            $this->repositorio
+                ->livro($this->livro)
+                ->listarGenerosPorLivro(),
+            $this->complemento
+        );
+
+    }
+
+    /**
+     * Listando os conteúdos por usuário
+     *
+     * @uses App\Repositorio\Repositorio::usuario() Definindo o usuário para os métodos(chamada via _call)
+     * @uses App\Repositorio\BDR\Repositorio::listar() Lista os conteúdos
+     * @return mixed
+     */
+    public function listarAutoresPorLivro(): mixed
+    {
+
+        return $this->complemento(
+            $this->repositorio
+                ->livro($this->livro)
+                ->listarAutoresPorLivro(),
+            $this->complemento
+        );
+
+    }
+    
     /**
      * Listando os conteúdos por evento
      *
