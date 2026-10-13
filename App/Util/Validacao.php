@@ -573,13 +573,13 @@ final class Validacao{
 
 		//Configurações padrões
 		$padrao	= [
-			'tamanho_maximo'		=> 1024 * 1024,
+			'tamanho_maximo'		=> 2000 * 2000,
 			'tipo_suportado'  		=> [ 'image/jpeg', 'image/png' ],
 			'extensao_suportada'	=> [ 'jpg', 'jpeg', 'png' ],
-			'largura_minima'      	=> 170,
-			'altura_minima'     	=> 170,
-			'largura_maxima'      	=> 800,
-			'altura_maxima'     	=> 800 ];
+			'largura_minima'      	=> 100,
+			'altura_minima'     	=> 100,
+			'largura_maxima'      	=> 2000,
+			'altura_maxima'     	=> 2000 ];
 
 		//Unindo as configurações
 		$configuracao	= array_merge( $padrao, $configuracao );
