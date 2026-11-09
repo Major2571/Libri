@@ -26,6 +26,12 @@ try {
 
     $autores = Fachada::instancia('Autor')->configurar(excecao: false)->listarOrdenado();
 
+    $totaisDeObrasPorAutor = array_column(
+        Fachada::instancia('Livro')->configurar(excecao: false)->contarObrasPorAutor(),
+        'total_obras',
+        'id'
+    );
+
     if ($autores) {
 
         $template->TOTAL = count($autores);
@@ -40,6 +46,8 @@ try {
                 $pagina->config('url.imagem') . '/avatars/profile.png';
 
             $template->STATUS = Util::formatarLabel($autor->status, 'status');
+
+            $template->TOTAL_OBRAS = $totaisDeObrasPorAutor[$autor->id] ?? 0;
 
             if ((int) $autor->status === Status::ATIVO->value) {
                 $template->block('BLOCO_BTN_INATIVAR');

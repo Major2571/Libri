@@ -259,5 +259,13 @@ final class Fachada extends Base
 
 	}
 
+	public function contarObrasPorAutor(): array
+	{
+
+		//Retornando a contagem
+		return $this->controlador->contarObrasPorAutor();
+
+	}
+
 
 }

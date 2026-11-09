@@ -35,10 +35,6 @@ final class Autor extends Modelo
 			[
 				'classe' => 'Genero\Autor\Genero',
 				'campo' => 'GenerosRelacionados'
-			],
-			[
-				'classe' => 'Nacionalidade',
-				'campo' => 'codigo_iso2'
 			]
 		]
 

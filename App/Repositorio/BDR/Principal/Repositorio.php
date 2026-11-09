@@ -153,16 +153,18 @@ class Repositorio extends RepositorioAbstrato
 
         }
     }
-    
+
     public function listarAutoresPorLivro()
     {
 
         try {
 
             // Definindo a consulta
-            $sql = "SELECT autor
+
+            $sql = "SELECT B.id, B.nome
                     FROM livro_autor AG
-                    INNER JOIN livro A ON (AG.livro = A.id)
+                    INNER JOIN livro A ON AG.livro = A.id
+                    INNER JOIN autor B ON AG.autor = B.id
                     WHERE AG.autor IS NOT NULL {$this->complemento}";
 
             //Preparando a consulta
@@ -173,8 +175,8 @@ class Repositorio extends RepositorioAbstrato
 
             //Verificando
             if (count($conteudos) > 0)
-                return $autores = array_map(function ($autor) {
-                    return $autor['autor'];
+                return array_map(function ($autor) {
+                    return $autor;
                 }, $conteudos);
             else
                 //Retornando
@@ -193,7 +195,7 @@ class Repositorio extends RepositorioAbstrato
 
         }
     }
-    
+
     public function listarGenerosPorLivro()
     {
 
@@ -233,5 +235,50 @@ class Repositorio extends RepositorioAbstrato
 
         }
     }
-    
+
+    public function contarObrasPorAutor(): array
+    {
+
+        try {
+
+            // Definindo a consulta
+            $sql = "SELECT A.id, A.nome, COUNT(L.id) AS total_obras
+                    FROM autor A
+                    LEFT JOIN livro_autor LA ON A.id = LA.autor
+                    LEFT JOIN livro L ON LA.livro = L.id
+                    GROUP BY A.id, A.nome";
+
+            //Preparando a consulta
+            $this->executar($sql);
+
+            //Definindo os registros
+            $conteudos = $this->pdo->fetchAll();
+
+            //Verificando
+            if (count($conteudos) > 0)
+                return array_map(function ($autor) {
+                    return [
+                        'id' => $autor['id'],
+                        'nome' => $autor['nome'],
+                        'total_obras' => (int) $autor['total_obras']
+                    ];
+                }, $conteudos);
+            else
+                //Retornando
+                return [];
+
+        } catch (PDOException $e) {
+
+            //Lançando a exceção
+            throw new BancoDeDadosException(MensagemRepositorio::LISTAR->texto(), $e, resposta: Http::BAD_REQUEST->codigo());
+
+        } finally {
+
+            //Limpando os parâmetros e complemento
+            $this->limparComplementosParametros();
+
+        }
+
+    }
+
 }

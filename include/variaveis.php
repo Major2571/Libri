@@ -77,43 +77,74 @@ try {
     $acao = $pagina->acao;
 
     $itensMenu = [
-        [
-            'diretorio' => 'autores',
-            'titulo'    => 'Autores',
-            'icone'     => 'bx-user'
+        'Institucional' => [
+            [
+                'diretorio' => 'autores',
+                'titulo' => 'Autores',
+                'icone' => 'bx-user'
+            ],
+            [
+                'diretorio' => 'generos',
+                'titulo' => 'Gêneros',
+                'icone' => 'bx-bookmark-alt'
+            ],
+            [
+                'diretorio' => 'livros',
+                'titulo' => 'Livros',
+                'icone' => 'bx-book'
+            ]
         ],
-        [
-            'diretorio' => 'generos',
-            'titulo'    => 'Gêneros',
-            'icone'     => 'bx-bookmark-alt'
-        ],
-        [
-            'diretorio' => 'livros',
-            'titulo'    => 'Livros',
-            'icone' => 'bx-book'
-        ],
+        'Empréstimos' => [
+            [
+                'diretorio' => 'emprestimos',
+                'titulo' => 'Empréstimos',
+                'icone' => 'bx-transfer'
+            ],
+            [
+                'diretorio' => 'devolucoes',
+                'titulo' => 'Devoluções',
+                'icone' => 'bx-transfer-alt'
+            ],
+            [
+                'diretorio' => 'usuarios',
+                'titulo' => 'Leitores',
+                'icone' => 'bx-group'
+            ]
+        ]
     ];
 
     $template->dashboard_ativo = ($diretorio == 'dashboard') ? 'active' : '';
 
-    foreach ($itensMenu as $item) {
+    foreach ($itensMenu as $grupo => $itens) {
 
-        $atual = ($item['diretorio'] == $diretorio);
+        $template->GRUPO = $grupo;
 
-        $menu               = new stdClass();
-        $menu->diretorio    = $item['diretorio'];
-        $menu->titulo       = $item['titulo'];
-        $menu->icone        = $item['icone'];
-        $menu->ativo        = ($atual && in_array($acao, ['index', 'novo', 'editar'])) ? 'active open' : '';
-        $menu->novo_ativo   = ($atual && $acao == 'novo') ? 'active' : '';
-        $menu->todos_ativo  = ($atual && in_array($acao, ['index', 'editar'])) ? 'active' : '';
+        foreach ($itens as $item) {
 
-        $template->MENU = $menu;
-        $template->block("BLOCO_MENU");
+            $atual = ($item['diretorio'] == $diretorio);
 
+            $menu = new stdClass();
+
+            $menu->diretorio = $item['diretorio'];
+            $menu->titulo = $item['titulo'];
+            $menu->icone = $item['icone'];
+
+            $menu->ativo = ($atual && in_array($acao, ['index', 'novo', 'editar'])) ? 'active open' : '';
+
+            $menu->novo_ativo = ($atual && $acao == 'novo') ? 'active' : '';
+
+            $menu->todos_ativo = ($atual && in_array($acao, ['index', 'editar'])) ? 'active' : '';
+
+            $template->MENU = $menu;
+
+            $template->block('BLOCO_MENU');
+        }
+
+        $template->block('BLOCO_GRUPO');
     }
 
 } catch (Exception $e) {
+    print_r($e);
 }
 
 //Definindo algumas variáveis

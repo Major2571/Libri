@@ -198,7 +198,7 @@ final class Util
 				default => "dd/MM/yyyy à's' HH'h'mm"
 			};
 
-			$formatacao = new IntlDateFormatter('pt_BR', IntlDateFormatter::FULL, IntlDateFormatter::NONE, 'America/Recife', IntlDateFormatter::GREGORIAN, $formato);
+			$formatacao = new IntlDateFormatter('pt_BR', IntlDateFormatter::FULL, IntlDateFormatter::NONE, 'America/Sao_Paulo', IntlDateFormatter::GREGORIAN, $formato);
 
 			//Retornando
 			return str_replace([' - 00:00:00', ' - 00:00'], '', $formatacao->format(new DateTime(str_replace('/', '-', str_replace('-', '', $data)))));

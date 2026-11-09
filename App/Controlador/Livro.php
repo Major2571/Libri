@@ -77,8 +77,6 @@ class Livro extends ControladorPrincipal
 
         $this->processarImagem($campos, $arquivo);
 
-        $campos['ano_publicacao'] = Util::formatarData($campos['ano_publicacao'], 'Y-m-d');
-
         //Definindo o modelo
         $modelo = new $this->modelo($campos);
 
@@ -106,8 +104,6 @@ class Livro extends ControladorPrincipal
 
     public function editar(array $campos = [], array $arquivo = []): void
     {
-
-        $campos['ano_publicacao'] = (int) $campos['ano_publicacao'];
 
         $this->processarImagem($campos, $arquivo);
 
@@ -175,4 +171,12 @@ class Livro extends ControladorPrincipal
         
     }
 
+    public function contarObrasPorAutor(): array
+    {
+
+        //Retornando a contagem
+        return $this->repositorio->contarObrasPorAutor();
+
+    }
+    
 }

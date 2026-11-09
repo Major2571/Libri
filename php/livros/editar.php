@@ -28,7 +28,7 @@ try {
     $livro = $fachadaLivro->procurarPorIdentificador($pagina->id);
 
     $generosSelecionados = array_map('intval', $livro->generos ?? []);
-    $autoresSelecionados = array_map('intval', $livro->autores ?? []);
+    $autoresSelecionados = array_map('intval', array_column($livro->autores ?? [], 'id'));
 
     $template->LIVRO = $livro;
 

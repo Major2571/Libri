@@ -47,13 +47,13 @@
                                         <!-- BEGIN BLOCO_LIVROS -->
                                         <tr class="livro-linha">
                                             <td class="titulo">
-                                                <a href="{URL}/livros/editar/{LIVRO->ID}"
-                                                    class="d-flex align-items-center gap-3 link-primary text-body">
-                                                    <div class="avatar livro-capa"><img src="{IMAGEM}"
-                                                            alt="{LIVRO->TITULO}" class="rounded"
+                                                <a href="{URL}/livros/editar/{LIVRO->ID}" class="d-flex align-items-center gap-3 link-primary text-body">
+                                                    <div class="avatar livro-capa"><img src="{IMAGEM}" alt="{LIVRO->TITULO}" class="rounded"
                                                             style="object-fit: cover;"></div>
-                                                    <strong>{LIVRO->TITULO}</strong>
-                                                    <i>{AUTORES}</i>
+                                                    <div class="d-flex flex-column">
+                                                        <strong>{LIVRO->TITULO}</strong>
+                                                        <i class="text-muted" style="font-size: 12px;">{AUTORES}</i>
+                                                    </div>
                                                 </a>
                                             </td>
                                             <td class="text-muted">

@@ -40,8 +40,9 @@ try {
                 $pagina->config('url.imagem') . '/books/book.png';
 
             $template->STATUS = Util::formatarLabel($livro->status, 'status');
-            
 
+            $template->AUTORES = implode(', ', array_map(fn($autor) => $autor['nome'], $livro->autores ?? []));
+            
             if ((int) $livro->status === Status::ATIVO->value) {
                 $template->block('BLOCO_BTN_INATIVAR');
             } else {
